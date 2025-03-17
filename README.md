@@ -9,3 +9,6 @@ Este repositorio es una recolección de apuntes de algunas asignaturas de la car
 
 ## Contenido
 La colección de asignaturas recogidas se encuentra en el archivo **Estructura.txt**.
+
+## Permisos de Difusión
+Se permite la difusión y el uso de estos apuntes con fines educativos y sin ánimo de lucro. Si compartes este material, agradeceríamos que cites a los autores y enlaces a este repositorio.
