@@ -3,6 +3,7 @@
 **Elaborados por:**  
 [Adrián Teixeira de Uña](https://github.com/AdriTeixeHax)  
 [Bogurad Barañski Barañska](https://github.com/Vegely)  
+[Matías Gabriel Polo Reyes](https://github.com/matiaspolo)  
 
 ## Descripción
 Este repositorio es una recolección de apuntes de algunas asignaturas de la carrera durante los cursos 2020-2025. Algunos están hechos a mano y otros están hechos a ordenador.
