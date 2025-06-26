@@ -1,0 +1,46 @@
+\babel@toc {spanish}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Sobretensiones. a) Temporal derivada de un cortocircuito fase-tierra. b) Transitoria de frente rápido provocada por un rayo.}}{4}{figure.caption.6}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Cortocircuito fase-tierra con neutro aislado.}}{5}{figure.caption.7}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Formas de onda de las sobretensiones transitorias de la energización de una instalación por la maniobra de un interruptor trifásico.}}{5}{figure.caption.8}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Modelo de un transformador de potencia. a) Capacidades distribuidas de sus arrollamientos. b) Circuito equivalente de una fase a alta frecuencia}}{6}{figure.caption.9}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Caídas de rayo (sucesos independientes): a) Sobre el conductor activo. b) Sobre el cable de guarda. c) Sobre el apoyo. d) Sobre el terreno próximo.}}{7}{figure.caption.10}%
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Impulsos de tensión tipo rayo cortados en el frente, en la cresta o después de la cresta, por el cebado de sus cadenas de aisladores.}}{8}{figure.caption.11}%
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Función densidad de probabilidad normalizada de una distribución normal ($U_{50\!\text {\%}}=1$).}}{15}{figure.caption.16}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Corriente de cortocircuito de un cortocircuito alejado de un alternador con componente de corriente alterna constante.}}{19}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Símbolo de una red de potencia.}}{21}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Circuito equivalente de una red de potencia.}}{21}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Símbolo de un transformador de dos devanados.}}{21}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Circuito equivalente de un transformador de dos devanados.}}{21}{figure.caption.26}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Símbolo de un transformador de tres devanados.}}{22}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Circuito equivalente de un transformador de tres devanados.}}{22}{figure.caption.29}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Símbolo de una línea o cable de alta tensión.}}{23}{figure.caption.31}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Circuito equivalente de una línea o cable de alta tensión.}}{23}{figure.caption.32}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Símbolo de un generador síncrono.}}{23}{figure.caption.34}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Circuito equivalente de un generador síncrono.}}{23}{figure.caption.35}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Símbolo de un motor asíncrono.}}{23}{figure.caption.37}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Circuito equivalente de un motor asíncrono.}}{23}{figure.caption.38}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Centro de transformación.}}{26}{figure.caption.39}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Circuito equivalente para el caso de falta en F1.}}{28}{figure.caption.41}%
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Circuito equivalente para el caso de falta en F2.}}{28}{figure.caption.42}%
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Circuito equivalente para el caso de falta en F2.}}{29}{figure.caption.43}%
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Red de media tensión.}}{30}{figure.caption.44}%
+\contentsline {figure}{\numberline {2.19}{\ignorespaces Circuito equivalente para la falta en interruptor CB3.}}{31}{figure.caption.45}%
+\contentsline {figure}{\numberline {2.20}{\ignorespaces Sistema con neutro aislado equilibrado.}}{32}{figure.caption.46}%
+\contentsline {figure}{\numberline {2.21}{\ignorespaces Sistema con neutro aislado con defecto a tierra en la fase T.}}{33}{figure.caption.47}%
+\contentsline {figure}{\numberline {2.22}{\ignorespaces Falta a tierra en la fase T en un esquema con neutro aislado.}}{33}{figure.caption.48}%
+\contentsline {figure}{\numberline {2.23}{\ignorespaces Falta a tierra en la fase T en un esquema con neutro puesto a tierra a través de una bobina Petersen.}}{34}{figure.caption.49}%
+\contentsline {figure}{\numberline {2.24}{\ignorespaces Falta a tierra en la fase T en un esquema con neutro puesto a tierra a través de una bobina Petersen, considerando efectos resistivos.}}{34}{figure.caption.50}%
+\contentsline {figure}{\numberline {2.25}{\ignorespaces Familias de curvas desintonización-amortiguamiento para diferentes corrientes de falta a tierra capacitiva. Aplicable a redes compensadas de $20\textit { kV}$.}}{36}{figure.caption.51}%
+\contentsline {figure}{\numberline {2.26}{\ignorespaces Familias de curvas desintonización-amortiguamiento para diferentes corrientes de falta a tierra capacitiva. Aplicable a redes compensadas de $110\textit { kV}$.}}{37}{figure.caption.52}%
+\contentsline {figure}{\numberline {2.27}{\ignorespaces Familias de curvas desintonización-amortiguamiento para diferentes corrientes de falta a tierra capacitiva. Aplicable a redes compensadas de $20\textit { kV}$, considerando que el valor límite de corriente de extinción de la falta depende de la extensión de la red.}}{37}{figure.caption.53}%
+\contentsline {figure}{\numberline {2.28}{\ignorespaces Límite de la TTR admisible en función de la corriente de falta capacitiva para redes de $20\textit { kV}$ (aproximado).}}{38}{figure.caption.54}%
+\contentsline {figure}{\numberline {2.29}{\ignorespaces Familias de curvas desintonización-amortiguamiento para diferentes corrientes de falta a tierra capacitiva. Aplicable a redes compensadas de $20\textit { kV}$, considerando que el valor límite de corriente de extinción de la falta depende de la extensión de la red y la influencia de la máxima pendiente de la TTR.}}{39}{figure.caption.55}%
+\contentsline {figure}{\numberline {2.30}{\ignorespaces Circuito equivalente para una red con neutro a tierra mediante bobina Petersen.}}{40}{figure.caption.56}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
