@@ -50,6 +50,7 @@
 - Sistemas Electrónicos Digitales
 - Sistemas Informáticos Industriales
 - Ingeniería de Control 
+- Oficina Técnica
 
 8 Cuatri (2023/24):
 ---------------------------
