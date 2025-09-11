@@ -44,6 +44,7 @@
 - Automatización Industrial
 - Electrónica de Potencia 
 - Instrumentación Electrónica 
+- Informática Industrial
 
 7 Cuatri (2023/24):
 ---------------------------
