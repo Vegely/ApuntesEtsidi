@@ -60,6 +60,7 @@
 - Medidas Eléctricas
 - Robótica 
 - Cálculo y Diseño de Máquinas Eléctricas
+- Líneas Aéreas
 
 9 Cuatri (2024/25):
 ---------------------------
