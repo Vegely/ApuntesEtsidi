@@ -15,3 +15,5 @@ La colección de asignaturas recogidas se encuentra en el archivo **Estructura.t
 Se permite la difusión y el uso de estos apuntes con fines educativos y sin ánimo de lucro. Si compartes este material, agradeceríamos que cites a los autores y enlaces a este repositorio.
 
 License: CC BY-NC 4.0
+
+Prohibido usar este contenido para entrenar modelos de IA de propósito general, LLMs, o datasets destinados a entornos comerciales o servicios online.
