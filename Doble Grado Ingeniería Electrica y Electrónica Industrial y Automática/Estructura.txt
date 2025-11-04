@@ -44,23 +44,23 @@
 - Automatización Industrial
 - Electrónica de Potencia 
 - Instrumentación Electrónica 
-- Informática Industrial
+- Informática Industrial (2024/25)
 
 7 Cuatri (2023/24):
 ---------------------------
 - Sistemas Electrónicos Digitales
 - Sistemas Informáticos Industriales
 - Ingeniería de Control 
-- Oficina Técnica
+- Oficina Técnica (2024/25)
 
 8 Cuatri (2023/24):
 ---------------------------
 - Diseño de Centrales Eléctricas
 - Mecánica de Fluidos
-- Medidas Eléctricas
+- Medidas Eléctricas (2024/25)
 - Robótica 
-- Cálculo y Diseño de Máquinas Eléctricas
-- Líneas Aéreas
+- Cálculo y Diseño de Máquinas Eléctricas (2024/25)
+- Líneas Aéreas (2024/25)
 
 9 Cuatri (2024/25):
 ---------------------------
