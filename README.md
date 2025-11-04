@@ -13,3 +13,5 @@ La colección de asignaturas recogidas se encuentra en el archivo **Estructura.t
 
 ## Permisos de Difusión
 Se permite la difusión y el uso de estos apuntes con fines educativos y sin ánimo de lucro. Si compartes este material, agradeceríamos que cites a los autores y enlaces a este repositorio.
+
+License: CC BY-NC 4.0
