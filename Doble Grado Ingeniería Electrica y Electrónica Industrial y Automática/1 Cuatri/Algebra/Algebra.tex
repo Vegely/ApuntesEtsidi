@@ -193,7 +193,7 @@
 	\end{itemize}
 	
 	\begin{figure}[H]
-
+	\begin{minipage}{0.6\linewidth}
 	\begin{tikzpicture}[>=Stealth, auto, node distance=2cm]
 		
 		% 1. The Matrix
@@ -204,16 +204,16 @@
 		};
 		
 		% Title
-		\node [above=0.8cm of M, text=black!80!black] {\large Matriz Escalonada};
+		\node [above=0.8cm of M, text=black!80!black] {\large Matriz escalonada};
 		
 		% 2. Annotation: "cualquier valor" (Any value)
-		\node [ right=0.8cm of val, text=blue!80!black] (anyval) {cualquier valor};
+		\node [ below left=0.1cm of val, text=blue!80!black] (anyval) {Cualquier valor};
 		\draw [->, thick, blue] (val) to (anyval);
 		
 		% 3. Annotation: "filas de ceros" (Rows of zeros)
 		% We draw a green ellipse around the zeros
 		\node [fit=(z1)(z2)(z3)(z4), draw=green!60!black, ellipse, inner sep=2pt, rotate=-5] (zeros) {};
-		\node [below=0.5cm of zeros, text=blue!80!black] (zerolabel) {filas de ceros};
+		\node [below=0.5cm of zeros, text=blue!80!black] (zerolabel) {Filas de ceros};
 		\draw [->, thick, gray] (zerolabel) -- (zeros);
 		
 		% 4. Annotation: "entrada principal / pivotes"
@@ -224,22 +224,45 @@
 		\draw [->, thick, blue!80!black] (mainlabel.south) to (p1);
 		
 	\end{tikzpicture}
+	\end{minipage}%
+	\begin{minipage}{0.4\linewidth}
+	\begin{tikzpicture}[>=Stealth, auto, node distance=1.5cm]
+		
+		% 1. The Matrix (Reduced Row Echelon Form structure)
+		% We use '1' for pivots and '0' explicitly where shown
+		\matrix (M) [matrix of math nodes, left delimiter=(, right delimiter=), row sep=6mm, column sep=6mm] {
+			|(p1)| \mathbf{1} & 0 & 0 & \dots \\
+			|(z1)| 0 & |(p2)| \mathbf{1} & 0 & \dots \\
+			|(z2)| 0 & 0 & |(p3)| \mathbf{1} & |(z_end)| 0 \\
+		};
+		
+		% 2. Title "reducida"
+		\node [above=0.8cm of M, text=black!80!black, font=\large] {Matriz escalonada reducida};
+		
+		% 3. Circling the zeros below the first 1
+		% The 'fit' library creates a shape around the specified nodes (z1 and z2)
 
-\end{figure}
+		
+		% 4. Bottom Annotation: "entrada principal = 1"
+		\node [below=1cm of M, text=blue!80!black, font=\normalsize] (main_label) {Entrada principal $= 1$};
+		
+	\end{tikzpicture}
+	\end{minipage}
+	\end{figure}
 \begin{itemize}
 	\item El rango de una matriz escalonada es el número de filas no nulas.
 \end{itemize}
 \newpage
 	\textbf{Transformaciones elementales:} 
 	\begin{enumerate}
-		\item Intercambio de líneas o permutaciones $F_{ij} \quad C_{ij}$
+		\item Intercambio de líneas o permutaciones $F_{ij}, C_{ij} \rightarrow (i,j) \text{ Elementos que cambian}$
 		\item Multiplicar por escalar $\lambda \ne 0 \quad F_i(\lambda) \quad C_i(\lambda)$ 
-		\item Suma de dos líneas del mismo tipo y multiplicada por escalar
-		$$F_{ij}(\lambda) \quad C_{ij}(\lambda)$$
-		$$F_i + F_j(\lambda) \quad C_i + C_j(\lambda)$$
+		\item Suma de dos líneas del mismo tipo y multiplicadas por escalar
+		$$F_{ij}(\lambda), C_{ij}(\lambda)$$
+		$$F_i + F_j(\lambda), C_i + C_j(\lambda)$$
 	\end{enumerate}
 	
-	Si se realizan trasformaciones elementales en fila equivale a multiplicar por esa matriz 
+	Si se realizan trasformaciones elementales por fila \(F\) o columna \(C\) equivale a multiplicar la matriz identidad por dichas transformaciones:
 	$B \sim F \cdot A$ 
 	T. Filas (pre-multiplicación)  
 	T. Columnas (post-multiplicación)  
