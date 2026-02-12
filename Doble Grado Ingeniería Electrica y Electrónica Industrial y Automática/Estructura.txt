@@ -64,4 +64,5 @@
 9 Cuatri (2024/25):
 ---------------------------
 - Protecciones Eléctricas
+- Subestaciones eléctricas (WIP)
 - Sistemas Eléctricos de Potencia (WIP)
