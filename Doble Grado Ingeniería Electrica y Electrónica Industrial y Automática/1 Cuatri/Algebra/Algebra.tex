@@ -1,104 +1,219 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
+\documentclass{book}
+\usepackage[gen]{eurosym}
 \usepackage[spanish]{babel}
 \usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{tikz}
 \usepackage{graphicx}
-\usepackage{caption}
-\usepackage{tabularray}
-\usepackage{float}
+\usepackage{subfigure}
+\usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{matrix, shapes, arrows.meta, positioning, fit, calc}
 \usetikzlibrary{shapes,arrows,positioning,babel}
-\title{Apuntes de Álgebra Lineal}
-\author{}
-\date{}
+\usepackage{circuitikz}
+\usetikzlibrary{babel}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{tabularray}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{colormaps}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{groupplots}
+\usepackage{pdflscape}
+\usepackage{amssymb}
+\usepackage{subcaption}
+\usepackage{adjustbox}
 
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{pgf-pie}
+\usepackage{pgffor}
+\usetikzlibrary{arrows}
+\usepackage{titlesec}
+\usepackage[T1]{fontenc}
+\usepackage{tgpagella}
+\usepackage{amsmath}
+\usepackage{steinmetz}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tocloft}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=3cm, right=3cm, marginparwidth = 1.75cm]{geometry}
+
+\title{Apuntes de Álgebra Lineal}
+\date{Curso 2020/21}
 \begin{document}
 	
+	\frontmatter	
+	\mainmatter	
 	\maketitle
+	\tableofcontents
+	\addcontentsline{toc}{chapter}{Índice}
 	
-	\section{Tema 1: Sistemas de ecuacions lineales y cálculo} 
-	
-	Matrices pertenecen a un cuerpo $\mathbb{K}$ con estructura algebraica. 
-	\begin{figure}[H]
-		\begin{minipage}{0.6\linewidth}
-			\begin{itemize}
-				\item Se lee de izquierda a derecha.
-				\item Notación: orden \(n\times m\)
-				\begin{itemize}
-					\item $n$ filas
-					\item $m$ Colunas
-				\end{itemize}
-			\end{itemize}
-		\end{minipage}%
-		\begin{minipage}{0.4\linewidth}
-			\centering
-			\includegraphics[width=0.8\linewidth]{figuras/1}
+	\chapter{Tema 1: Sistemas de ecuacions lineales y cálculo} 
+\section{Matrices: Conceptos Preliminares}
 
-			\label{fig:1}
-		\end{minipage}
+Las matrices son elementos que pertenecen a un cuerpo $\mathbb{K}$ con estructura algebraica.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.55\linewidth}
+		\textbf{Lectura y Notación:}
+		\begin{itemize}
+			\item Se lee de izquierda a derecha y de arriba a abajo.
+			\item Notación: orden \(n \times m\)
+			\begin{itemize}
+				\item $n$ Filas (índice $i$)
+				\item $m$ Columnas (índice $j$)
+			\end{itemize}
+		\end{itemize}
+	\end{minipage}%
+	\begin{minipage}{0.4\linewidth}
+		\centering
+		% Reemplazo de imagen externa por TikZ para portabilidad
+		\begin{tikzpicture}[scale=0.7]
+			\draw[thick] (0,0) rectangle (4,3);
+			\foreach \x in {1,2,3} \draw[gray!50] (\x,0) -- (\x,3);
+			\foreach \y in {1,2} \draw[gray!50] (0,\y) -- (4,\y);
+			\draw[<->, blue, thick] (-0.3,0) -- (-0.3,3) node[midway, left] {$n$};
+			\draw[<->, red, thick] (0,3.3) -- (4,3.3) node[midway, above] {$m$};
+			\node at (2,1.5) {$A_{n \times m}$};
+		\end{tikzpicture}
+		\captionof{figure}{Esquema de dimensión}
+		\label{fig:dimension_matriz}
+	\end{minipage}
+\end{figure}
+
+\textbf{Definición formal:}
+Una matriz es una aplicación que asigna a cada par de índices un elemento del cuerpo:
+\begin{align*}
+	A: I \times J & \longrightarrow \mathbb{K} \\
+	(i, j) & \longmapsto a_{ij}
+\end{align*}
+Donde $I=\{1, \dots, n\}$ y $J=\{1, \dots, m\}$.
+
+\[
+A = (a_{ij})_{n,m} \quad \text{ó} \quad A \in M_{n \times m}(\mathbb{K})
+\]
+
+\textbf{Forma general:}
+\[
+A = \begin{pmatrix}
+	a_{11} & a_{12} & \cdots & a_{1m} \\
+	a_{21} & a_{22} & \cdots & a_{2m} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	a_{n1} & a_{n2} & \cdots & a_{nm}
+\end{pmatrix}
+\]
+
+\subsection{Elementos destacados}
+\begin{itemize}
+	\item \textbf{Diagonal principal:} Elementos donde el índice de fila y columna coinciden ($i=j$).
+	\[ 
+	\{ a_{pp} \} \quad \text{donde } p = 1, \dots, \min(n, m) 
+	\]
+	
+	\item \textbf{Traza:} Es la suma de los elementos de la diagonal principal (generalmente usada en matrices cuadradas).
+	\[
+	\text{tr}(A) = \sum_{k=1}^{\min(n,m)} a_{kk}
+	\]
+	
+	\item \textbf{Submatriz:} Matriz obtenida al eliminar filas o columnas de una matriz original.
+	\begin{itemize}
+		\item \textbf{Bloque (o caja):} Si las filas/columnas seleccionadas son consecutivas.
+		\item \textbf{Fila/Columna:} Casos particulares donde $n=1$ o $m=1$.
+	\end{itemize}
+\end{itemize}
+	\section{Suma de Matrices}
+	Es una operación interna que requiere dos matrices de la misma dimensión ($A, B \in M_{n \times m}$). Se define como:
+	\[ C = A + B \implies c_{ij} = a_{ij} + b_{ij} \]
+	
+	\textbf{Propiedades:}
+	\begin{itemize}
+		\item \textbf{Conmutativa:} $A + B = B + A$
+		\item \textbf{Asociativa:} $(A + B) + C = A + (B + C)$
+		\item \textbf{Elemento Neutro:} Existe la matriz nula $0$ tal que $A + 0 = A$.
+		\item \textbf{Elemento Opuesto:} Para toda matriz $A$ existe $-A$ tal que $A + (-A) = 0$.
+	\end{itemize}
+	
+	\section{Multiplicación}
+	
+	\subsection{Producto por un escalar}
+	Dada una matriz $A$ y un escalar $\lambda \in \mathbb{K}$:
+	\[
+	B = \lambda A \implies b_{ij} = \lambda \cdot a_{ij}
+	\]
+	
+	\subsection{Producto Matricial}
+	Dadas $A \in M_{n \times m}$ y $B \in M_{m \times p}$, el producto $C = A \cdot B$ resulta en una matriz $n \times p$ donde cada elemento es el producto escalar de la fila de $A$ por la columna de $B$:
+	
+	\[
+	c_{ij} = \sum_{k=1}^{m} a_{ik} \cdot b_{kj}
+	\]
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[>=Stealth, scale=0.8]
+			% Matriz A
+			\matrix (A) [matrix of math nodes, left delimiter=(, right delimiter=), nodes={minimum width=1.5em}] at (0,0)
+			{
+				a_{11} & \dots & a_{1m} \\
+				\vdots & \ddots & \vdots \\
+				|(row)| a_{i1} & \dots & a_{im} \\
+				\vdots & \ddots & \vdots \\
+				a_{n1} & \dots & a_{nm} \\
+			};
+			\node[above=0.1cm of A] {$A_{n \times m}$};
+			
+			\node at (2.5,0) {$\cdot$};
+			
+			% Matriz B
+			\matrix (B) [matrix of math nodes, left delimiter=(, right delimiter=), nodes={minimum width=1.5em}] at (5,0)
+			{
+				b_{11} & \dots & |(col)| b_{1j} & \dots & b_{1p} \\
+				\vdots & \ddots & \vdots & \ddots & \vdots \\
+				b_{m1} & \dots & b_{mj} & \dots & b_{mp} \\
+			};
+			\node[above=0.1cm of B] {$B_{m \times p}$};
+			
+			\node at (8,0) {$=$};
+			
+			% Matriz C
+			\matrix (C) [matrix of math nodes, left delimiter=(, right delimiter=), nodes={minimum width=1.5em}] at (10.5,0)
+			{
+				c_{11} & \dots & \dots & c_{1p} \\
+				\vdots & \ddots & \vdots & \vdots \\
+				\dots & \dots & |(res)| c_{ij} & \dots \\
+				\vdots & \vdots & \vdots & \ddots \\
+				c_{n1} & \dots & \dots & c_{np} \\
+			};
+			\node[above=0.1cm of C] {$C_{n \times p}$};
+			
+			% Rectángulos y flechas para visualizar fila x columna
+			\draw[blue, thick, rounded corners] (row.north west) rectangle (row.south east -| A-3-3.east);
+			\draw[red, thick, rounded corners] (col.north west) rectangle (col.south east |- B-3-3.south);
+			\draw[green, thick, ->] (row.south) to[out=-10,in=180] (res.west);
+			\draw[purple, thick, ->] (col.south) to[out=270,in=90] (res.north);
+			
+		\end{tikzpicture}
+		\caption{Visualización del producto fila por columna}
 	\end{figure}
 	
+	\section{Traspuesta}
+	La traspuesta de una matriz $A$ se obtiene intercambiando sus filas por columnas. 
+	\[ A = (a_{ij}) \implies A^t = (a_{ji}) \]
 	
+	\textbf{Propiedades:}
 	\begin{align*}
-		A: I \times J& \rightarrow \mathbb{K}\\
-		(i, j)& \rightarrow a_{ij}
+		(A^t)^t &= A & \text{(Involutiva)} \\
+		(A + B)^t &= A^t + B^t & \text{(Linealidad en la suma)} \\
+		(\lambda A)^t &= \lambda A^t & \text{(Homogeneidad)} \\
+		(A \cdot B)^t &= B^t \cdot A^t & \text{(Inversión del orden en producto)}
 	\end{align*}
-	$$A = (a_{ij})_{n,m}$$ 
-	$$A(n,m) = A_{n \times m}$$ 
 	
-	\begin{itemize}
-		\item Diagonal principal elementos $i=j \rightarrow a_{pp} \quad p = \min(n, m)$
-	\end{itemize}
-	
-	$$A = \begin{pmatrix}
-		a_{11} & \cdots & a_{1m} \\
-		\vdots & a_{ij} & \vdots \\
-		a_{n1} & \cdots & a_{nm}
-		\end{pmatrix} $$
-	
-	\begin{itemize}
-		\item Traza: suma de la diagonal principal
-		\[
-			tr(A)=\sum_{i=1}^p a_{ii}
-		\]
-		\item Submatriz quitar filas o columnas a una matriz de mayor tamaño
-		\begin{itemize}
-			\item Caja o bloque si son consecutivas
-			\item Fila
-			\item Columna
-		\end{itemize}
-
-	\end{itemize}
-	\subsection*{Suma} 
-	Es un operador binario que requiere dos matrices de la misma dimensión. Tiene las propiedades:
-	\begin{itemize}
-		\item Conmutativa y asociativa
-		\item Elemento Nulo
-		\item Elemento opuesto 
-	\end{itemize}
-	\subsection*{Multiplicación} 
-	\begin{itemize}
-		\item Escalar: multiplicar cada elemento de A por una constante $\lambda$
-		\[
-		B = \lambda A \rightarrow b_{ij} = \lambda a_{ij}, \quad \lambda \in \mathbb{K}
-		\]
-		\item Matricial: multiplicar cada fila de A por una columna de B y sumarlas.
-		$$C_{n \times p} = A_{n \times m} \cdot B_{m \times p} \rightarrow c_{ij} = \sum_{k=1}^{m} a_{ik} \cdot b_{kj}$$ 
-		
-	\end{itemize}
-	
-	\subsection*{Traspuesta} 
-	$$A \rightarrow A^{t} \Rightarrow a_{ij} \rightarrow a_{ji}$$
-	$$(A+B)^{t} = A^{t} + B^{t}$$ 
-	$$(\lambda A)^{t} = \lambda A^{t} $$ 
-	$$(A \cdot B)^{t} = B^{t} \cdot A^{t}$$ 
-	
-	\newpage
-	\subsection*{Matrices cuadradas} 
+	\section{Matrices cuadradas} 
 	Son aquellas que tienen el mismo número de filas que de columnas. Las más relevantes son: 
 	
 	\begin{itemize}
@@ -118,7 +233,7 @@
 			\item Triangular inferior: los elementos por encima de la diagonal principal son nulos. 
 			$$a_{ij}=0 \forall i<j, \quad A=\begin{pmatrix}a_{11}&0&0\\ \vdots&\ddots&0\\ a_{n1}&\dots&a_{nn}\end{pmatrix}$$ 
 		\end{itemize}
-		\newpage
+		
 		
 		\item \textbf{Regular:} cuando existe una matriz B del mismo orden tal que $A \cdot B = B \cdot A = I.$ La matriz B es el elemento simétrico de A para producto de matrices, se denomina inversa de A y se denota por $A^{-1}$. 
 		\item \textbf{Singular:} matriz cuadrada que no es regular, es decir, no tiene inversa.
@@ -131,16 +246,29 @@
 		\item \textbf{Idempotente} $A^2 = A$ 
 	\end{itemize}
 	
-	\subsection*{Propiedades inversa} 
+	\section{Propiedades de la Matriz Inversa}
+	
+	Sea $A$ una matriz cuadrada regular ($|A| \neq 0$). Se cumplen las siguientes propiedades fundamentales:
+	
 	\begin{itemize}
-		\item $A \cdot A^{-1} = A^{-1} \cdot A = I$
-		\item Si $A^{-1}$ es regular $\rightarrow (A^{-1})^{-1} = A$ 
-		\item Si es $A^t$ regular si $A$ es regular $(A^t)^{-1} = (A^{-1})^t$ 
-		\item Si A y B son regulares $\rightarrow (AB)^{-1} = B^{-1} A^{-1}$ 
+		\item \textbf{Definición:} El producto de una matriz por su inversa es conmutativo e igual a la identidad.
+		\[ A \cdot A^{-1} = A^{-1} \cdot A = I \]
+		
+		\item \textbf{Involutiva (Inversa de la inversa):} La inversa de la inversa es la matriz original.
+		\[ (A^{-1})^{-1} = A \]
+		
+		\item \textbf{Inversa de la Traspuesta:} Las operaciones de trasponer e invertir conmutan.
+		\[ (A^t)^{-1} = (A^{-1})^t \]
+		
+		\item \textbf{Inversa del Producto:} La inversa de un producto es el producto de las inversas en \textbf{orden inverso} (conocida como la propiedad del "calcetín-zapato"). Sean $A$ y $B$ regulares:
+		\[ (A \cdot B)^{-1} = B^{-1} \cdot A^{-1} \]
+		
+		\item \textbf{Inversa de un escalar:} Si $\lambda \neq 0$ es un escalar:
+		\[ (\lambda A)^{-1} = \frac{1}{\lambda} A^{-1} \]
 	\end{itemize}
 	
 
-	\subsection*{Sistemas de ecuacions} 
+	\section{Sistemas de ecuacions} 
 	\[
 	A\bar{x} = b = \begin{pmatrix}
 		a_{11} &a_{12} & \dots & a_{1m}\\
@@ -165,8 +293,9 @@
 	\]
 
 	$$A^* : (A|B) \in M_{n \times m+1} \text{ (Matriz ampliada)}$$ 
-	\newpage
-	\textbf{Teorema de Rouche}: Sirve para determinar la relación entre la representación matricial y los sistemas de ecuaciones mediante el operador rango (Rg).
+	
+	\subsection{Teorema de Rouche}
+	 Sirve para determinar la relación entre la representación matricial y los sistemas de ecuaciones mediante el operador rango (Rg).
 	\begin{itemize}
 		\item El sistema de ecuaciones es compatible $\leftrightarrow$ $Rg(A) = Rg(A|B)$  
 		\begin{itemize}
@@ -186,7 +315,7 @@
 		\end{itemize}
 	\end{itemize}
 	
-	\subsection*{Forma escalonada reducida}
+	\section{Forma escalonada reducida}
 	\begin{itemize}
 		\item Se llega de la matriz \(A^*\) a la matriz \(B^*\) mediante reducciones
 		\item Los sistemas de ecuaciones \(C\bar{x}=d\sim A\bar{x}=b\) son equivalentes si tienen las mismas soluciones.
@@ -252,326 +381,858 @@
 \begin{itemize}
 	\item El rango de una matriz escalonada es el número de filas no nulas.
 \end{itemize}
-\newpage
-	\textbf{Transformaciones elementales:} 
-	\begin{enumerate}
-		\item Intercambio de líneas o permutaciones $F_{ij}, C_{ij} \rightarrow (i,j) \text{ Elementos que cambian}$
-		\item Multiplicar por escalar $\lambda \ne 0 \quad F_i(\lambda) \quad C_i(\lambda)$ 
-		\item Suma de dos líneas del mismo tipo y multiplicadas por escalar
-		$$F_{ij}(\lambda), C_{ij}(\lambda)$$
-		$$F_i + F_j(\lambda), C_i + C_j(\lambda)$$
-	\end{enumerate}
+
+\section{Transformaciones Elementales}
+
+Son operaciones que modifican la matriz sin alterar su rango. Existen tres tipos, válidos tanto para filas ($F$) como para columnas ($C$):
+
+\begin{enumerate}
+	\item \textbf{Permutación (Intercambio):} Intercambiar la posición de dos líneas $i$ y $j$.
+	\[ F_i \leftrightarrow F_j \quad \text{ó} \quad C_i \leftrightarrow C_j \]
 	
-	Si se realizan trasformaciones elementales por fila \(F\) o columna \(C\) equivale a multiplicar la matriz identidad por dichas transformaciones:
-	$B \sim F \cdot A$ 
-	T. Filas (pre-multiplicación)  
-	T. Columnas (post-multiplicación)  
+	\item \textbf{Escalado:} Multiplicar una línea $i$ por un escalar no nulo $\lambda \neq 0$.
+	\[ F_i \to \lambda F_i \quad \text{ó} \quad C_i \to \lambda C_i \]
 	
-	$$A \xrightarrow{F, C} B \quad B = P \cdot A \cdot Q \quad P, Q \text{ regulares}$$  
-	Dos matrices son equivalentes si una se puede obtener a partir de la otra con trasformaciones elementales. 
+	\item \textbf{Reemplazo (Suma):} Sumar a la línea $i$ la línea $j$ multiplicada por un escalar $\lambda$.
+	\[ F_i \to F_i + \lambda F_j \quad \text{ó} \quad C_i \to C_i + \lambda C_j \]
+\end{enumerate}
+
+\subsection{Equivalencia Matricial}
+Si una matriz $B$ se obtiene de $A$ mediante transformaciones elementales, se dice que son equivalentes ($A \sim B$). Esto equivale a multiplicar por matrices elementales:
+
+\begin{itemize}
+	\item Transformaciones por \textbf{Fila} $\Rightarrow$ Pre-multiplicación (Izquierda).
+	\item Transformaciones por \textbf{Columna} $\Rightarrow$ Post-multiplicación (Derecha).
+\end{itemize}
+
+\[
+B = \underbrace{P}_{\text{Filas}} \cdot A \cdot \underbrace{Q}_{\text{Columas}}
+\]
+Donde $P$ y $Q$ son matrices regulares (invertibles).
+
+\section{Relaciones de Equivalencia}
+Sean $A, B \in M_{n \times m}$ matrices del mismo tamaño.
+
+\begin{enumerate}
+	\item \textbf{Equivalencia General:} Mismo rango.
+	\[ B = P \cdot A \cdot Q \quad (P, Q \text{ regulares}) \]
 	
-	\textbf{Propiedades:} B, A mismo tamaño y rango  
-	\begin{enumerate}
-		\item Reflexiva: toda matriz es equivalente a si misma  
-		\item Simétrica: Si $A \sim B \rightarrow B \sim A$  
-		\item Transitiva: Si $A \sim B$ y $B \sim C \rightarrow A \sim C$  
-	\end{enumerate}
+	\item \textbf{Semejanza (Matrices Cuadradas):} Representan el mismo endomorfismo en distintas bases.
+	\[ B = P^{-1} \cdot A \cdot P \quad (\text{Mismo determinante y traza}) \]
 	
+	\item \textbf{Congruencia (Matrices Cuadradas/Simétricas):} Relacionadas con formas bilineales.
+	\[ B = P^t \cdot A \cdot P \]
+\end{enumerate}
+
+\section{Cálculo de Matrices de Paso (Método de Gauss)}
+
+Para obtener las matrices $P$ (filas) y $Q$ (columnas) que satisfacen $B = P \cdot A \cdot Q$, utilizamos el método de la matriz ampliada o de bloques.
+
+\textbf{Esquema General:}
+\[
+\left( \begin{array}{c|c|c}
+	I_n & A & I_m
+\end{array} \right)
+\xrightarrow[\text{Reducción}]{\text{Gauss}}
+\left( \begin{array}{c|c|c}
+	P & B & Q
+\end{array} \right)
+\]
+
+\textbf{Reglas de operación:}
+\begin{itemize}
+	\item Las operaciones fila realizadas para reducir $A$ se aplican simultáneamente a $I_n$ (izquierda).
+	\item Las operaciones columna realizadas para reducir $A$ se aplican simultáneamente a $I_m$ (derecha).
+	\item Al final, la matriz central $B$ será la forma normal o escalonada de $A$.
+\end{itemize}
+	
+	\section{Forma normal} 
+	$\forall A \in M_{n \times m}$ se puede llegar a una expresión mediante transformaciones elementales del tipo:
+	\[
+	A \sim (I_r); \quad
+	\begin{pmatrix} I_r \\ 0 \end{pmatrix}; \quad
+	\left( I_r \mid 0 \right); \quad
+	\left(\begin{array}{c|c} I_r & 0 \\ \hline 0 & 0 \end{array}\right)
+	\]
+	Donde $rg(A) = r \rightarrow I_r = I$ de orden $r$ (El tamaño es el rango de $A$).
+	
+	\subsection*{Algoritmo de reducción}
+	
+	\textbf{Conceptos previos:}
 	\begin{itemize}
-		\item A y B Semejante P regular
-		$$B = P^{-1} A P$$  
-		\item A y B Congruente P regular
-		$$B = P^t A P$$  
+		\item \textbf{Pivote:} entrada principal.
+		\item \textbf{Columna pivote:} la que tiene pivote ($\exists$ pivote).
 	\end{itemize}
 	
-	\subsection*{Cálculo matrices de paso}  
-	$$P = F_m \cdot F_{m-1} \cdots F_1$$
-	$$Q = C_1 \cdot C_2 \cdots C_s$$ 
-	$$B = P \cdot A \cdot Q \rightarrow A \in M_{n \times m}$$  
-	$$(A | I_n)$$
-	$$\frac{I_m}{P} | \frac{C}{Q}$$
-	Transformaciones en A se replican en I 
-	Si es fila en $I_n$
-	Si es colma en $I_m$ 
-	
-	\textbf{Forma normal} 
-	$\forall A \in M_{n \times m}$ se puede llegar a una expresión mediante transformaciones elementales del tipo $\begin{pmatrix} I_r & 0 \\ 0 & 0 \end{pmatrix}$  
-	$r = rg A$
-	
-	\textbf{Algoritmo de reducción}  
-	Pivote = entrada principal
-	Columna pivote = tiene pivote
+	\textbf{Pasos:}
 	\begin{enumerate}
-		\item Buscando columa lo más a la izquierda y pivote lo más alto posible 
-		\item Debajo del pivote se hacen ceros 
-		\item Se pasa a la siguiente cadena ignorando la primera fila y se repite  
-	\end{enumerate}
-	(Si quedan ceros debajo se repite al reves para hacer 0 sobre los pivotes) 
-	
-	\subsection*{Cálculo inversas} 
-	Filas $(A | I_n) \rightarrow (I_n | A^{-1})$ 
-	Columnas $\left(\frac{A}{I_m}\right) \rightarrow \left(\frac{I_m}{A^{-1}}\right)$
-	
-	\subsection*{Determinantes} 
-	\textbf{Propiedades:}  
-	\begin{enumerate}
-		\item $det(A) = det(A^t)$
-		\item $det(kA) = k^n det(A)$
-		\item $det(A \cdot B) = det(A) det(B)$  
-		\item $det(A^{-1}) = det(A)^{-1}$
-		\item Al intercambiar lineas cambia el signo  
-		\item Si se multiplica una fila/columa por $\lambda$: $|A'| = \lambda |A|$  
-		\item Si se suma una linea a otra paralela multiplicada por escalar no varia  
-		\item Si los elementos entre línea son proporcionales $|A|=0$  
+		\item Buscando columna $\neq 0$ más a la izquierda y pivote lo más alto posible.
+		\item Debajo del pivote se hacen ceros.
+		\item Se pasa a la siguiente columna ignorando la primera fila y se repite el proceso.
+		\item (Gauss-Jordan) Tras hacer todo ceros abajo, se repite al revés para hacer ceros sobre los pivotes.
 	\end{enumerate}
 	
-	Adjunto: $\beta_{ij} = Adj(A) = ((-1)^{i+j} \alpha_{ij})$ (cofactores)  
-	$$A^{-1} = \frac{Adj(A^t)}{|A|} = \frac{Adj(A)^t}{|A|}$$
+\section{Cálculo de la Matriz Inversa}
+
+El método más común es el de Gauss-Jordan, utilizando la matriz ampliada. El objetivo es transformar la matriz original en la identidad mediante operaciones elementales.
+
+\subsection{Método por Filas (Gauss)}
+Se coloca la matriz identidad a la derecha. Tras aplicar Gauss-Jordan:
+\[
+\left( \begin{array}{c|c}
+	A & I_n
+\end{array} \right)
+\xrightarrow{\text{Reducción}}
+\left( \begin{array}{c|c}
+	I_n & A^{-1}
+\end{array} \right)
+\]
+
+\subsection{Método por Columnas}
+Se coloca la matriz identidad abajo.
+\[
+\left( \begin{array}{c}
+	A \\ \hline I_m
+\end{array} \right)
+\xrightarrow{\text{Reducción}}
+\left( \begin{array}{c}
+	I_m \\ \hline A^{-1}
+\end{array} \right)
+\]
+
+\section{Determinantes}
+
+El determinante es una función que asigna un escalar a una matriz cuadrada.
+
+\subsection{Propiedades Fundamentales}
+Sea $A \in M_{n \times n}(\mathbb{K})$ y $\lambda \in \mathbb{K}$:
+
+\begin{enumerate}
+	\item \textbf{Traspuesta:} El determinante no varía al trasponer.
+	\[ \det(A) = \det(A^t) \]
 	
-	\textbf{Adjunta}  
-	$Adj(A) = (\alpha_{ij})$ donde $\alpha_{ij} = (-1)^{i+j} M_{ij}$
+	\item \textbf{Homogeneidad (Escalar en matriz):} Si se multiplica toda la matriz por $\lambda$:
+	\[ \det(\lambda A) = \lambda^n \det(A) \]
+	\textit{(El escalar sale elevado al orden de la matriz).}
 	
-	\textbf{Cálculo de determinantes} 
-	(1) Sarrus en 2x2  
-	$$|\begin{matrix}a_{11}&a_{12}\\ a_{21}&a_{22}\end{matrix}|=a_{11}\cdot a_{22}-a_{12}\cdot a_{21}$$  
-	Sarrus en 3x3 (regla de diagonales)
+	\item \textbf{Producto:} El determinante del producto es el producto de determinantes.
+	\[ \det(A \cdot B) = \det(A) \cdot \det(B) \]
 	
-	(2) Adjuntos  
-	$$|A| = a_{i1} Adj_{i1} + \dots + a_{in} Adj_{in}$$
-	$$= \sum_{j=1}^{n} a_{ij} Adj_{ij} \text{ (desarrollo por fila i)}$$  
+	\item \textbf{Inversa:} Si $A$ es regular ($\det(A) \neq 0$):
+	\[ \det(A^{-1}) = \frac{1}{\det(A)} = (\det(A))^{-1} \]
 	
-	(3) Hacer ceros por adjuntos pero una fila o columa hecha ceros  
+	\item \textbf{Permutación de líneas:} Si se intercambian dos filas o dos columnas, el determinante cambia de signo.
+	\[ F_i \leftrightarrow F_j \implies \det(A') = -\det(A) \]
 	
-	(4) Triangulación  
-	Transformaciones que cambian det a triangular  
-	$$|A| = \prod a_{ii} \text{ (diag principal)}$$  
+	\item \textbf{Multilinealidad (Escalar en línea):} Si se multiplica \textbf{solo una} fila (o columna) por $\lambda$, el determinante queda multiplicado por $\lambda$.
+	\[ F_i \to \lambda F_i \implies \det(A') = \lambda \det(A) \]
 	
-	\section{Tema 2: Espacios vectoriales} 
+	\item \textbf{Invariancia (Combinación lineal):} Si a una fila (o columna) se le suma una combinación lineal de las otras paralelas, el determinante \textbf{no varía}.
+	\[ F_i \to F_i + \lambda F_j \implies \det(A') = \det(A) \]
 	
-	\textbf{Estructura} Conjunto con operaciones y propiedades 
-	Conjunto: colección de objetos $\mathbb{N}, \mathbb{R}$ 
-	
-	Espacio vectorial si se cumplen operaciones:
-	
-	\textbf{1) Interna} 
-	$E \times E \rightarrow E$ 
-	$(x, y) \rightarrow x+y$ 
-	\begin{enumerate}
-		\item $x+y = y+x$ (conmutativa)  
-		\item $(m+n)+q = m+(n+q)$ (asociativa)  
-		\item $\exists 0 \in E$ neutro $\rightarrow x+0=x$  
-		\item opuesto $\forall x \exists -x$ tal que $x+(-x)=0$  
-	\end{enumerate}
-	
-	\textbf{2) Externa}  
-	$\mathbb{R} \times E \rightarrow E$  
-	$(\lambda, x) \rightarrow \lambda \cdot x$  
-	\begin{enumerate}
-		\item Distrivativa suma escalar $(\lambda+\mu)x = \lambda x + \mu x$  
-		\item Distrivativa suma de vect $\lambda(x+y) = \lambda x + \lambda y$  
-		\item Asociativa respecto a escalar $\lambda(\mu x) = (\lambda \mu) x$
-		\item $1 \cdot x = x$ 
-	\end{enumerate}
-	
-	Ejemplos:
-	Vector $\mathbb{R}$ 
-	Matrices $M_{n \times m}$  
-	Polimonio $R_n[x]$  
-	
-	\textbf{Propiedades}  
+	\item \textbf{Determinante Nulo:} El determinante es 0 si:
 	\begin{itemize}
-		\item $0 \cdot \vec{x} = \vec{0}$  
-		\item $\lambda \vec{0} = \vec{0}$  
-		\item $(-\lambda) x = - (\lambda x) = \lambda (-x)$
+		\item Una línea es nula ($0$).
+		\item Dos líneas paralelas son iguales o proporcionales.
+		\item Una línea es combinación lineal de las otras (Sistema Ligado).
+	\end{itemize}
+\end{enumerate}
+	
+
+	
+	\subsection{Matriz Adjunta}
+	
+	Dada una matriz cuadrada $A$, definimos sus elementos adjuntos a partir de los menores complementarios.
+	
+	\begin{itemize}
+		\item \textbf{Menor complementario ($M_{ij}$):} Es el determinante de la submatriz que resulta de eliminar la fila $i$ y la columna $j$ de $A$.
+		\item \textbf{Cofactor o Adjunto ($\alpha_{ij}$):} Es el valor del menor complementario acompañado de un signo que depende de su posición (suma de fila y columna).
+		\[
+		\alpha_{ij} = (-1)^{i+j} M_{ij}
+		\]
+		\item \textbf{Matriz Adjunta ($Adj(A)$):} Es la matriz formada por estos cofactores.
+		\[
+		Adj(A) = (\alpha_{ij})
+		\]
 	\end{itemize}
 	
-	\textbf{Sistema de vectores} 
-	$S = \{x_1, ..., x_i, ..., x_n\}$  
-	$S = \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 1 \\ -1 \end{pmatrix}, \begin{pmatrix} 1 \\ 3 \end{pmatrix} \}$ cardinal 3 (tres) 
+	\textbf{Signos de los cofactores:}
+	Siguen un patrón alternado similar a un tablero de ajedrez:
+	\[
+	\begin{pmatrix}
+		+ & - & + & \dots \\
+		- & + & - & \dots \\
+		+ & - & + & \dots \\
+		\vdots & \vdots & \vdots & \ddots
+	\end{pmatrix}
+	\]
 	
-	\textbf{Conbinación lineal}  
-	Sistema cuando escalares $\lambda_1, \lambda_2, ... \lambda_n \in \mathbb{R}$
-	$C.L. = \lambda_1 x_1 + \lambda_2 x_2 + ... + \lambda_n x_n$ 
-	Los escalares son coeficientes de la C.L  
+	\textbf{Cálculo de la Matriz Inversa:}
+	La matriz inversa se puede obtener trasponiendo la matriz adjunta y dividiendo por el determinante:
+	$$A^{-1} = \frac{Adj(A)^t}{|A|} = \frac{Adj(A^t)}{|A|}$$
 	
-	\textbf{Sistema libre o ligado} 
-	Un sistema es libre o linealmente independiente si  
-	$\lambda_1 x_1 + ... + \lambda_n x_n = 0 \Rightarrow \lambda_1 = \lambda_2 = ... = \lambda_n = 0$  
-	En caso contrario los $k$ son linealmente dependientes  
-	Se halla triangulando. Si solución única es libre. 
-	
-	\textbf{Propiedades:} 
-	1) Si $S$ es libre $\rightarrow$ todo subconjunto de $S$ es libre.  
-	3) Si todo sistema con el vector 0 es ligado.  
-	4) Si $S$ es ligado, todo sistema que lo contiene también (SCS).  
-	5) Si un sistema es ligado, un vector es C.L de los demas.  
-	6) Si $S$ es libre y $S \cup \{x\}$ es ligado $\rightarrow x$ es C.L de $S$.  
-	
-	\textbf{$L(S)$ Conjunto generado por un sistema de vectores}  
-	Es el conjunto de vectores que son C.L de S.
-	Ejemplo: $S = \{ \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} \}$ 
-	$L(S) = \{ \alpha \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix} + \beta \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} \forall \alpha, \beta \in \mathbb{R} \}$  
-	
-	\textbf{Equivalencia:}  
-	Dos sistemas son equivalentes $L(S_1) \equiv L(S_2)$ y se pueden obtener mediante transformaciones elementales de fila.  
-	Dim (S) = nº parámetros 
-	Dim (E) = nº parámetros + nº ecs independientes  
-	
-	\textbf{Base:}  
-	Una base es un sistema generador cuyos vectores son libres.  
-	
-	\textbf{Subespacio vectorial:} 
-	Sea E un espacio vectorial. Todo subespacio $V \subset E$ es un espacio y tiene las mismas leyes. 
-	$\forall x, y \in V, \forall \lambda, \mu \in \mathbb{R} \Rightarrow \lambda x + \mu y \in V$  
-	$\vec{0} \in V$  
-	Generalmente, si se trabaja en implícitas es subespacio con ecuaciones lineales homogéneas.  
-	
-	\textbf{Intersección de subespacios} 
-	$V_1 \cap V_2 := \{ x \in E / x \in V_1 \text{ y } x \in V_2 \}$ subespacio vec.  
-	Para hallar intersección se juntan ecuaciones implícitas de ambos.  
-	Si la intersección es solo el $\vec{0}$ los espacios son disjuntos $V_1 \cap V_2 = \{0\}$.  
-	
-	\textbf{Suma de subespacios}  
-	$V_1 + V_2 = \{ x \in E / x = x_1 + x_2 \text{ con } x_1 \in V_1 \text{ y } x_2 \in V_2 \}$ 
-	
-	\textbf{Fórmula de las dimensiones (Grassmann)}  
-	$dim(V+W) = dim(V) + dim(W) - dim(V \cap W)$ 
-	
-	\textbf{Suma directa:}  
-	Dos subespacios son suma directa si son disjuntos  
-	$V_1 + V_2 \Rightarrow V_1 \oplus V_2 \Leftrightarrow V_1 \cap V_2 = \{0\}$  
-	Dos subespacios son suplementarios si son todo el conjunto $V_1 \oplus V_2 = E$.  
-	
-	En implícitas: nº ecuaciones linealmente independientes = Dim(espacio) - Dim(subespacio).  
-	Nº parámetros = dimensión(subespacio) = nº vectores base.  
-	
-	\textbf{Coordenadas de un vector en una base:}  
-	Dada una base $B = \{e_1, e_2, ..., e_n\}$. De $\forall x \in E$
-	$x = x_1 e_1 + x_2 e_2 + ... + x_n e_n$ (coordenadas únicas)  
-	
-	\textbf{Cambio de base:}  
-	Dadas dos Bases $B = \{u_1, ..., u_n\}$ y $B' = \{v_1, ..., v_n\}$  
-	Conocida la expresión de los vectores de una base en función de los de la otra:  
-	$v_i = a_{1i} u_1 + ... + a_{ni} u_n$  
-	La expresión de cambio de base queda:
-	$\bar{x}_B = M_B^{B'} \bar{x}_{B'}$ ($M_B^{B'}$ matriz de cambio de base de B' a B)  
-	En resumen: $(M_B^{B'})^{-1} = M_{B'}^B$
-	El cambio de base es una aplicación lineal identidad  
-	
-	Si las matrices no están en base canónica:
-	$M_{B_2}^{B_1} = (M_{C}^{B_2})^{-1} M_{C}^{B_1}$  
-	
-	\textbf{Espacio Nulo, de Filas y Columnas}  
-	\begin{itemize}
-		\item $Nul(A) = \{\bar{x} \in \mathbb{R}^m / A\bar{x} = \bar{0}\} \subset \mathbb{R}^m$ (Kernel)  
-		dim Nul(A) = m - rg(A)
-		\item Espacio de filas, $Fil(A)$  
-		$Fil(A) = L\{\bar{f}_1, ..., \bar{f}_n\}$
-		dim $Fil(A) = rg(A)$  
-		\item Espacio de columnas, $Col(A)$ 
-		Columnas pivote (son linealmente independientes) Base de Col(A)  
-		$dim(col(A)) = rg(A)$  
-	\end{itemize}
-	$dim[Nul(A)] + dim[Col(A)] = m$ (Teorema rango-nulidad)  
-	
-	\textbf{Aplicaciones lineales}  
-	Dado un conjunto E, definición:  
-	1) $f(x+y) = f(x) + f(y) \quad \forall x, y \in E$ 
-	2) $f(\lambda x) = \lambda f(x) \quad \forall \lambda \in \mathbb{K}, \forall x \in E$  
-	3) $f(0) = \bar{0}$  
-	
-	\textbf{Tipos de aplicaciones:} 
-	\begin{itemize}
-		\item Inyectiva: $f(x)=f(y) \implies x=y$ (Elementos distintos se relacionan con elementos distintos).  
-		\item Sobreyectiva: $\forall y \in F \exists x \in E / f(x)=y$ (Todos los de F tienen preimagen).  
-		\item Endomorfismo: $E \rightarrow E$ (no cambia el subespacio).  
-		\item Biyectiva: Inyectiva y Sobreyectiva (Isomorfismo).  
-	\end{itemize}
-	
-	\vspace{2cm}
-	\begin{tikzpicture}[node distance=2cm, auto]
-		% Simple representation of the kernel/image diagram
-		\draw (0,0) ellipse (1cm and 2cm) node[above=2.2cm] {$E$};
-		\draw (4,0) ellipse (1cm and 2cm) node[above=2.2cm] {$F$};
-		\draw[->] (1,1) -- (3,1) node[midway, above] {$f$};
-		\draw[fill=blue!20] (0,0) ellipse (0.5cm and 0.5cm) node {$Ker$};
-		\draw[->] (0.5,0) -- (4,0);
+\subsection{Cálculo de determinantes}
+
+Existen varios métodos para calcular el valor del determinante dependiendo del orden de la matriz.
+
+\subsubsection*{1. Regla de Sarrus (Orden 2 y 3)}
+
+\textbf{Para matrices $2 \times 2$:}
+Se multiplican los elementos de la diagonal principal y se restan los de la secundaria.
+\[
+\begin{vmatrix}
+	a_{11} & a_{12}\\ 
+	a_{21} & a_{22}
+\end{vmatrix} = a_{11} \cdot a_{22} - a_{12} \cdot a_{21}
+\]
+
+\textbf{Para matrices $3 \times 3$:}
+Se utiliza el esquema de diagonales (productos sumados menos productos restados).
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=Stealth]
+		\matrix (M) [matrix of math nodes, column sep=1em, row sep=1em]
+		{
+			a_{11} & a_{12} & a_{13} & a_{11} & a_{12} \\
+			a_{21} & a_{22} & a_{23} & a_{21} & a_{22} \\
+			a_{31} & a_{32} & a_{33} & a_{31} & a_{32} \\
+		};
+		
+		% Diagonales positivas (Azul)
+		\draw[blue, thick, ->, opacity=0.7] (M-1-1.north west) -- (M-3-3.south east);
+		\draw[blue, thick, ->, opacity=0.7] (M-1-2.north west) -- (M-3-4.south east);
+		\draw[blue, thick, ->, opacity=0.7] (M-1-3.north west) -- (M-3-5.south east);
+		\node[right of=M, xshift=5cm, yshift=0.5cm, text=blue] {$(+)$ Sumar productos};
+		
+		% Diagonales negativas (Rojo)
+		\draw[red, dashed, thick, ->, opacity=0.7] (M-3-1.south west) -- (M-1-3.north east);
+		\draw[red, dashed, thick, ->, opacity=0.7] (M-3-2.south west) -- (M-1-4.north east);
+		\draw[red, dashed, thick, ->, opacity=0.7] (M-3-3.south west) -- (M-1-5.north east);
+		\node[right of=M, xshift=5cm, yshift=-0.5cm, text=red] {$(-)$ Restar productos};
 	\end{tikzpicture}
+	\caption{Regla de Sarrus extendida}
+\end{figure}
+
+\subsubsection*{2. Desarrollo por Adjuntos (Laplace)}
+Es útil para matrices de orden $n > 3$. Consiste en reducir el cálculo a determinantes de orden menor.
+\[
+|A| = \sum_{j=1}^{n} a_{ij} \cdot \text{Adj}_{ij} \quad \text{(Desarrollo por la fila } i\text{)}
+\]
+\[
+|A| = \sum_{i=1}^{n} a_{ij} \cdot \text{Adj}_{ij} \quad \text{(Desarrollo por la columna } j\text{)}
+\]
+Donde $\text{Adj}_{ij} = (-1)^{i+j} \alpha_{ij}$ (Cofactor).
+
+\subsubsection*{3. Método de Chio (Hacer ceros)}
+Consiste en utilizar las propiedades de los determinantes para simplificar la matriz antes de aplicar adjuntos.
+\begin{itemize}
+	\item Se escoge una línea (fila o columna).
+	\item Se hacen combinaciones lineales para convertir todos los elementos de esa línea en ceros, excepto uno (el pivote).
+	\item Se desarrolla por adjuntos esa línea, quedando un único término:
+	\[ |A| = a_{pik} \cdot (-1)^{p+k} \cdot |M_{pk}| \]
+\end{itemize}
+
+\subsubsection*{4. Triangulación (Gauss)}
+Consiste en aplicar transformaciones elementales hasta convertir $A$ en una matriz triangular (superior o inferior).
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		% Matriz Triangular
+		\matrix (T) [matrix of math nodes, left delimiter=(, right delimiter=)] {
+			a_{11} & a_{12} & \dots & a_{1n} \\
+			0 & a_{22} & \dots & a_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \dots & a_{nn} \\
+		};
+		% Resaltar diagonal
+		\draw[red, thick, rounded corners, opacity=0.3, fill=red!10] 
+		(T-1-1.north west) -- (T-1-1.north east) -- (T-4-4.south east) -- (T-4-4.south west) -- cycle;
+		
+		\node[right=0.5cm of T] {$\Rightarrow |A| = \displaystyle\prod_{i=1}^{n} a_{ii}$};
+	\end{tikzpicture}
+	\caption{Determinante de matriz triangular}
+\end{figure}
+
+\textbf{Nota sobre transformaciones:} Al triangular, hay que ajustar el determinante final según las operaciones usadas:
+\begin{itemize}
+	\item $F_i \leftrightarrow F_j$: Multiplicar por $(-1)$.
+	\item $F_i \to k F_i$: Dividir el resultado por $k$.
+	\item $F_i \to F_i + k F_j$: El determinante no cambia.
+\end{itemize}
 	
-	\textbf{Núcleo} $Ker(f) = \{\bar{x} \in E / f(\bar{x}) = \bar{0} \in F\}$ subespacio vectorial.  
-	\textbf{Imágen} $Im(f) = f(E)$. Imagen directa del espacio de entrada.  
+	% ======================================================================================
+	% CAPÍTULO 2
+	% ======================================================================================
 	
-	$dim(Ker(f)) + dim(Im(f)) = dim(E)$ 
-	Si $Ker(f) = 0 \rightarrow f$ es inyectiva.  
+	\chapter{Tema 2: Espacios Vectoriales}
 	
-	\textbf{Matriz de una aplicación lineal} 
-	$f: E \rightarrow F$, $A \bar{x} = \bar{y}$ 
-	$A$ contiene en columnas las transformadas de los vectores de la base en función de la nueva base. 
+	\section{Estructura de Espacio Vectorial}
+	Un conjunto $E$ es un espacio vectorial sobre un cuerpo $\mathbb{K}$ (generalmente $\mathbb{R}$) si dispone de dos operaciones que cumplen ciertas propiedades:
 	
-	\textbf{Operadores con aplicaciones lineales}  
+	\begin{enumerate}
+		\item \textbf{Interna (Suma):}
+		
+		 $E \times E \rightarrow E\\
+		 (x,y)\rightarrow x+y$
+		\begin{itemize}
+			\item Asociativa: $(u+v)+w = u+(v+w)$.
+			\item Conmutativa: $u+v = v+u$.
+			\item Elemento neutro: Existe $0_E$ tal que $u+0 = u$.
+			\item Elemento opuesto: Para todo $u$ existe $-u$ tal que $u+(-u) = 0$.
+		\end{itemize}
+		\item \textbf{Externa (Producto por escalar):}
+		
+		 $\mathbb{K} \times E \rightarrow E\\
+		 (\lambda,x)\rightarrow\lambda \cdot x$
+		\begin{itemize}
+			\item Distributiva respecto a la suma de vectores: $\lambda(u+v) = \lambda u + \lambda v$.
+			\item Distributiva respecto a la suma de escalares: $(\lambda + \mu)u = \lambda u + \mu u$.
+			\item Asociativa mixta: $\lambda(\mu u) = (\lambda \mu)u$.
+			\item Elemento unidad: $1 \cdot u = u$.
+		\end{itemize}
+	\end{enumerate}
+	
+	\subsection{Propiedades básicas}
+	Se verifican para todo vector $\vec{x} \in E$ y todo escalar $\lambda \in \mathbb{K}$:
+	
+	\begin{enumerate}
+		\item \textbf{Producto por el escalar cero:} El escalar 0 anula cualquier vector.
+		\[ 0 \cdot \vec{x} = \vec{0} \]
+		
+		\item \textbf{Producto por el vector nulo:} Cualquier escalar por el vector nulo da el vector nulo.
+		\[ \lambda \cdot \vec{0} = \vec{0} \]
+		
+		\item \textbf{Propiedad de anulación:} Si un producto es nulo, alguno de los factores es cero.
+		\[ \lambda \cdot \vec{x} = \vec{0} \implies \lambda = 0 \quad \text{ó} \quad \vec{x} = \vec{0} \]
+		
+		\item \textbf{Relación con el opuesto:} El signo menos se puede mover libremente.
+		\[ (-\lambda) \cdot \vec{x} = -(\lambda \cdot \vec{x}) = \lambda \cdot (-\vec{x}) \]
+	\end{enumerate}
+	
+\subsection{Sistema de vectores}
+Se define un sistema de vectores como un conjunto finito de vectores pertenecientes al espacio vectorial:
+\[ S = \{ x_1, x_2, \dots, x_n \} \]
+
+\textbf{Ejemplo:}
+Sea el siguiente sistema de matrices $2 \times 2$:
+\[
+S = \left\{ 
+\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}, 
+\begin{pmatrix} 1 & 0 \\ -1 & 2 \end{pmatrix}, 
+\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} 
+\right\}
+\]
+
+El \textbf{cardinal} de este sistema es 3 (contiene tres elementos o vectores).
+	\subsection{Conceptos Clave}
 	\begin{itemize}
-		\item Suma: $f(\bar{x}) + g(\bar{x}) = (f+g)(\bar{x})$  
-		\item Multiplicación por escalar: $\lambda f(x) = (\lambda f)(x)$  
-		\item Composición: $(g \circ f)(\bar{x}) = \bar{y} \rightarrow B \cdot A \cdot \bar{x} = \bar{y}$ 
-		Orden depende de cual apliques primero (derecha).  
+		\item \textbf{Combinación Lineal (C.L.):} Un vector $v$ es C.L. de $S$ si existen escalares $\lambda_i$ tales que:
+		\[ v = \lambda_1 x_1 + \dots + \lambda_n x_n \]
+		\item \textbf{Sistema Generador ($L(S)$):} Es el conjunto de todas las combinaciones lineales de $S$. También llamado \textbf{Envolvente}.
+		\[ L(S) = \{ \alpha x_1 + \dots + \lambda x_n \mid \alpha, \dots, \lambda \in \mathbb{R} \} \]
+		\item \textbf{Dependencia Lineal:}
+		\begin{itemize}
+			\item \textbf{Libre (Linealmente Independiente - L.I.):} La única forma de obtener el vector $\vec{0}$ es que todos los escalares sean cero.
+			\[ \lambda_1 x_1 + \dots + \lambda_n x_n = \vec{0} \implies \lambda_i = 0 \quad \forall i \]
+			\item \textbf{Ligado (Linealmente Dependiente - L.D.):} Existe alguna combinación no trivial que da $\vec{0}$.
+		\end{itemize}
 	\end{itemize}
 	
-	\textbf{Invariantes:}  
-	Subespacio de vectores invariantes $f(\bar{x}) = \bar{x}$.  
-	$(A - I)\bar{x} = \bar{0} \rightarrow Nul(A-I)$.  
-	\section{Tema 3: Semejanza y diagonalización de matrices}  
+	\textbf{Propiedades de la Dependencia Lineal:}
+	\begin{enumerate}
+		\item Si $x \neq \vec{0}$, el sistema $S=\{x\}$ es libre.
+		\item Si $S$ es libre, todo subconjunto de $S$ ($S'' \subset S$) es también libre.
+		\item Todo sistema que contenga el vector nulo ($\vec{0}$) es ligado.
+		\item Si $S$ es ligado, cualquier sistema que lo contenga ($S \subset S'$) es también ligado.
+		\item Si un sistema es ligado, al menos un vector es C.L. de los demás.
+		\item Si $S$ es libre y $S \cup \{x\}$ es ligado $\implies x$ es C.L. de $S$.
+	\end{enumerate}
 	
-	\textbf{Semejanza}
-	i) A y B son semejantes si $B = P^{-1} A P$  
-	ii) Propiedades: Si A y B son semejantes:
-	1) $|A| = |B|$  
-	3) $tr(A) = tr(B)$  
-	5) Mismo polimonio característico.  
+	\subsection{Equivalencia de Sistemas}
+	Dos sistemas de vectores $S_1$ y $S_2$ son equivalentes si generan el mismo subespacio vectoral:
+	\[ S_1 \sim S_2 \iff L(S_1) = L(S_2) \]
+	Se pueden obtener uno a partir del otro mediante transformaciones elementales de fila.
+	\newline
 	
-	\textbf{Autovalores y autovectores}  
-	$f: E \rightarrow E$
-	Autovalor $\lambda$
-	Autovector $v \neq 0$
-	Cálculo de autovalores: $|F - \lambda I| = 0$ (Polinomio característico).  
-	Cálculo de autovectores: $N_{\lambda} = Ker(F - \lambda I)$. 
+	\subsection{Obtención de ecuaciones}
+	Para caracterizar un subespacio generado por un sistema de vectores $S$, el procedimiento estándar consiste en pasar de los generadores a las ecuaciones implícitas siguiendo este esquema:
+	\[ 
+	\text{Generadores} \xrightarrow{\text{Gauss}} \text{Paramétricas} \xrightarrow{\text{Eliminar Parámetros}} \text{Implícitas} 
+	\]
 	
-	\textbf{Diagonalización}  
-	Obtención matriz de Jordan.
-	Matriz $F$ es diagonalizable si mult algebraica = mult geométrica. [cite: 552]
-	Mult geométrica: $Dim[Ker(F - \lambda I)]$. 
-	Fórmula polinomio característico 3x3:
-	$P(\lambda) = -\lambda^3 + Tr(A)\lambda^2 - (Adj(11)+Adj(22)+Adj(33))\lambda + |A|$  
+	\textbf{Ejemplo práctico:}
+	Sea el sistema $S = \{ (1,1,0), (1,0,-1) \}$.
 	
-	\section{Tema 4: Espacio Vectorial Euclídeo}  
+	\begin{enumerate}
+		\item \textbf{Reducción por Gauss:} Colocamos los vectores en una matriz y la escalonamos para encontrar una base simplificada.
+		\[
+		\begin{pmatrix} 1 & 1 & 0 \\ 1 & 0 & -1 \end{pmatrix} \xrightarrow{F_2 - F_1} 
+		\begin{pmatrix} 1 & 1 & 0 \\ 0 & -1 & -1 \end{pmatrix} \xrightarrow{F_1 + F_2} 
+		\begin{pmatrix} 1 & 0 & -1 \\ 0 & -1 & -1 \end{pmatrix} \sim 
+		\begin{pmatrix} 1 & 0 & -1 \\ 0 & 1 & 1 \end{pmatrix}
+		\]
+		Los vectores base obtenidos son $\vec{u}=(1,0,-1)$ y $\vec{v}=(0,1,1)$.
+		
+		\item \textbf{Ecuaciones Paramétricas:} Expresamos el subespacio $L(S)$ como combinación lineal de la base.
+		\[
+		L(S) = \{ \alpha(1,0,-1) + \beta(0,1,1) \mid \alpha, \beta \in \mathbb{R} \}
+		\]
+		Igualando componentes a un vector genérico $(x,y,z)$:
+		\[
+		\begin{cases}
+			x = \alpha \\
+			y = \beta \\
+			z = -\alpha + \beta
+		\end{cases}
+		\]
+		
+		\item \textbf{Ecuaciones Implícitas:} Eliminamos los parámetros $\alpha$ y $\beta$.
+		Sustituyendo $x$ e $y$ en la tercera ecuación:
+		\[
+		z = -x + y \implies \boxed{x - y + z = 0}
+		\]
+	\end{enumerate}
 	
-	\textbf{Producto escalar:} es una forma $f: E \times E \rightarrow \mathbb{R}$ 
-	$(\bar{x}, \bar{y}) \rightarrow f(\bar{x}, \bar{y}) = \bar{x} \cdot \bar{y}$  
-	1) Bilineal
-	2) Simétrica
-	3) Definida positiva $f(\bar{x}, \bar{x}) > 0 \forall x \neq 0$.  
+	\textbf{Relación de dimensiones:}
+	\begin{itemize}
+		\item $\text{Dim}(S) = \text{nº parámetros libres}$.
+		\item $\text{Nº ec. implícitas} = \text{Dim}(E) - \text{Dim}(S)$.
+	\end{itemize}
 	
-	\textbf{Matriz de Gram}  
-	$G = (g_{ij})$ donde $g_{ij} = u_i \cdot u_j$.  
-	$f(\bar{x}, \bar{y}) = \bar{x}^t \cdot G \cdot \bar{y}$  
-	Si el producto escalar es el usual $G=I$.  
+	\subsection{Base y Dimensión}
+	\begin{itemize}
+		\item \textbf{Base:} Un sistema que es a la vez Generador y Libre. Para obtenerla dados varios vectores simplemente se busca la matriz reducida.
+		\item \textbf{Dimensión:} El número de vectores que forman una base (cardinal de la base).
+		\[ \text{dim}(E) = \text{nº parámetros libres} + \text{nº ec. independientes} \]
+	\end{itemize}
 	
-	\textbf{Norma:} $||\bar{u}|| = \sqrt{\bar{u} \cdot \bar{u}}$ 
-	\textbf{Ángulo:} $\cos \alpha = \frac{\bar{u} \cdot \bar{v}}{||\bar{u}|| ||\bar{v}||}$.  
-	Si $\bar{u} \cdot \bar{v} = 0$ son perpendiculares (ortogonales). 
+	\section{Subespacios Vectoriales}
 	
-	\textbf{Base ortonormal (Gram-Schmidt)}  
-	Hallar vectores que sean perpendiculares entre si y tengan norma 1. 
+	Sea $E$ un espacio vectorial. Un subconjunto $V \subset E$ es un subespacio vectorial si no es vacío y mantiene las mismas leyes de composición que $E$.
 	
-	\textbf{Proyección ortogonal:}  
-	$\bar{v} = P_V(\bar{u}) + P_{V^\perp}(\bar{u})$ 
-	Fórmula: $P_V(\bar{u}) = \sum \frac{\bar{u} \cdot \bar{v}_i}{||\bar{v}_i||^2} \bar{v}_i$ (en base ortogonal).  
+	\textbf{Condiciones:}
+	\begin{enumerate}
+		\item Cerrado para la suma y producto por escalar:
+		\[ \forall x, y \in V; \forall \lambda, \mu \in \mathbb{R} \implies \lambda x + \mu y \in V \]
+		\item Contiene al elemento neutro:
+		\[ \vec{0} \in V \]
+	\end{enumerate}
 	
-	\textbf{Matrices ortogonales:}  
-	A es ortogonal si $A^t = A^{-1}$; $A \cdot A^t = I$. 
-	$|A| = \pm 1$. 
-	Sus columnas forman base ortonormal. 
+	\textbf{Nota:} Generalmente, si se trabaja en implícitas, un subespacio viene definido por ecuaciones lineales homogéneas. También es subespacio si se puede escribir como $L(S)$ (envolvente lineal).
 	
-	\textbf{Isometrias en $\mathbb{R}^3$}  
-	1) Directas ($|A|=1$) (Giros).  
-	2) Inversas ($|A|=-1$) (Simetrías). 
+	\subsection{Intersección de Subespacios}
+	Dados $V_1, V_2 \in E$, la intersección se define como:
+	\[ V_1 \cap V_2 = \{ x \in E \mid x \in V_1 \text{ y } x \in V_2 \} \]
+	La intersección es siempre un \textbf{Subespacio Vectorial}.
+	\newline
+	
+	\textbf{Cálculo (Implícitas):}
+	Si tenemos las ecuaciones implícitas de $V_1$ y $V_2$, la intersección se calcula juntando todas las ecuaciones (se añaden las de ambos).
+	\[ V_1 \cap V_2 \equiv \text{Se añaden ecuaciones implícitas de ambos} \to \text{Paramétricas} \]
+	
+	\textbf{Ejemplo:}
+	\[
+	V_1 = \left\{ (x,y,z) \ / \ \begin{matrix} x+y=0 \\ z-y=0 \end{matrix} \right\}
+	\quad
+	V_2 = \{ (x,y,z) \ / \ y+z=0 \}
+	\]
+	La intersección es el sistema formado por la unión de las ecuaciones:
+	\[
+	V_1 \cap V_2 = \left\{ (x,y,z) \ / \ \begin{matrix} x+y=0 \\ z-y=0 \\ y+z=0 \end{matrix} \right\}
+	\]
+	
+	\begin{itemize}
+		\item Si la intersección es solo el $\vec{0}$ ($V_1 \cap V_2 = \{0\}$), los espacios son \textbf{disjuntos}.
+	\end{itemize}
+	
+	\subsection{Suma de Subespacios}
+	Se define como el conjunto formado por la suma de vectores de cada subespacio:
+	\[ V_1 + V_2 = \{ x \in E \mid x = x_1 + x_2 \text{ con } x_1 \in V_1 \text{ y } x_2 \in V_2 \} \]
+	
+	\textbf{Procedimiento de cálculo:}
+	Para hallar la suma, se unen los sistemas generadores de ambos subespacios.
+	\[
+	\left.
+	\begin{aligned}
+		x_1 & \to \text{paramétricas} \to L\{u_{v1}\} \\
+		x_2 & \to \text{paramétricas} \to L\{u_{v2}\}
+	\end{aligned}
+	\right\} \to L\{ u_{v1} \cup u_{v2} \} \to \text{Reducir (Gauss)} \to \text{Implícitas}
+	\]
+	
+	\subsection{Dimensiones y Tipos de Suma}
+	
+	\textbf{Cardinal:}
+	El número de elementos de cualquier base se llama dimensión del subespacio.
+	
+	\textbf{Fórmula de Grassmann (Fórmula de las dimensiones):}
+	\[ \dim(V+W) = \dim(V) + \dim(W) - \dim(V \cap W) \]
+	
+	\textbf{Suma Directa ($\oplus$):}
+	Dos subespacios son suma directa si son disjuntos.
+	\[ V_1 + V_2 = V_1 \oplus V_2 \iff V_1 \cap V_2 = \{0\} \]
+	
+	\textbf{Suplementarios:}
+	Dos subespacios son suplementarios si su suma directa es todo el conjunto total $E$.
+	\[ V_1 \oplus V_2 = E \iff \begin{cases} V_1 \cap V_2 = \{0\} \\ V_1 + V_2 = E \end{cases} \]
+	
+	\subsection{Relación Ecuaciones - Dimensión}
+	
+	\begin{itemize}
+		\item \textbf{Si el sistema está en implícitas:}
+		\[ \text{nº ecuaciones L.I.} = \dim(\text{Espacio}) - \dim(\text{Subespacio}) \]
+		
+		\item \textbf{Si el sistema está en paramétricas:}
+		\[ \text{nº parámetros} = \dim(\text{Subespacio}) = \text{nº vectores base} \]
+	\end{itemize}
+	\section{Coordenadas y Cambio de Base}
+	\subsection{Coordenadas}
+	Dada una base $B = \{e_1, \dots, e_n\}$, cualquier vector $x$ tiene una representación única:
+	\[ x = x_1 e_1 + \dots + x_n e_n \]
+	
+	Los escalares $(x_1, \dots, x_n)$ son las coordenadas de $x$ en base $B$.
+	
+\subsection{Cambio de base}
+Dadas dos bases $B=\{u_1, \dots, u_n\}$ y $B'=\{v_1, \dots, v_n\}$ de un espacio $E$ con dimensión $n$.
+Sea $\bar{x} \in E$. Sus coordenadas se expresan como:
+\begin{itemize}
+	\item En la base $B$: $\bar{x}_B = x_1 u_1 + \dots + x_n u_n$.
+	\item En la base $B'$: $\bar{x}_{B'} = y_1 v_1 + \dots + y_n v_n$.
+\end{itemize}
+
+\textbf{Construcción de la matriz:}
+Conocida la expresión de los vectores de la nueva base ($B'$) en función de los de la antigua ($B$):
+\[
+\overline{v}_i = a_{1i} \overline{u}_1 + \dots + a_{ni} \overline{u}_n \quad (i = 1, \dots, n)
+\]
+
+La matriz se forma colocando estos coeficientes ($a_{ji}$) por columnas. Es decir, la columna $i$-ésima contiene las coordenadas del vector $\overline{v}_i$ (de la base $B'$) expresadas en la base $B$:
+
+\[
+M = \begin{pmatrix}
+	a_{11} & \dots & a_{1n} \\
+	\vdots & \ddots & \vdots \\
+	a_{n1} & \dots & a_{nn}
+\end{pmatrix}
+\quad \text{\small (Coordenadas vectores } B' \text{ en la base } B)
+\]
+
+\textbf{Expresión del cambio de base:}
+La relación entre las coordenadas de un mismo vector en ambas bases queda definida por:
+\[ \overline{x}_B = M_B^{B'} \cdot \overline{x}_{B'} \]
+Donde $M_B^{B'}$ es la matriz de cambio de base de $B'$ a $B$.
+
+\textbf{Propiedades:}
+\begin{itemize}
+	\item La matriz es \textbf{regular} (invertible).
+	\item La matriz inversa realiza el cambio contrario:
+	\[ (M_B^{B'})^{-1} = M_{B'}^B \]
+	\item El cambio de base es una aplicación lineal identidad.
+\end{itemize}
+
+\subsection{Cambio de base general (Matrices no canónicas)}
+Si queremos hallar la matriz de paso de una base $B_1$ a otra base $B_2$ ($M_{B_2}^{B_1}$), y conocemos sus expresiones respecto a una base común (generalmente la canónica $B$ o $C$):
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[>=Stealth, node distance=3cm]
+		\node (B1) {$B_1$};
+		\node (B2) [below of=B1] {$B_2$};
+		\node (Can) [right of=B1,xshift=2cm, yshift=-1.5cm] {Base $B$ (Canónica)};
+		
+		\draw[->, thick] (B1) -- node[above right] {$M_B^{B_1}$} (Can);
+		\draw[->, thick] (B2) -- node[below right] {$M_B^{B_2}$} (Can);
+		\draw[->, thick, dashed] (B1) -- node[left] {$M_{B_2}^{B_1}$} (B2);
+		
+		% Flecha curva indicando el camino inverso
+	\end{tikzpicture}
+	\caption{Relación entre bases no canónicas}
+\end{figure}
+
+\textbf{Fórmula (Opción 1):}
+Se obtiene componiendo el camino: primero vamos de $B_1$ a $B$, y luego de $B$ a $B_2$ (inversa).
+\[
+M_{B_2}^{B_1} = (M_B^{B_2})^{-1} \cdot M_B^{B_1}
+\]
+
+\textbf{Cálculo por reducción (Opción 2):}
+En lugar de calcular la inversa explícitamente y multiplicar, es más eficiente resolverlo mediante transformaciones elementales por filas (Gauss-Jordan). Se coloca la matriz destino a la izquierda y la origen a la derecha:
+
+\[
+\left( M_B^{B_2} \ \middle| \ M_B^{B_1} \right) \xrightarrow{\text{Filas}} \left( I \ \middle| \ M_{B_2}^{B_1} \right)
+\]
+	
+	\section{Espacio Nulo, de Filas y Columnas}
+	
+	\subsection{Espacio Nulo ($Nul(A)$ o $N(A)$ o $Ker(A)$)}
+	Se define como el conjunto de vectores que hacen cero al sistema homogéneo:
+	\[
+	Nul(A) = \{ \bar{x} \in \mathbb{R}^m \mid A\bar{x} = \bar{0} \} \subset \mathbb{R}^m
+	\]
+	
+	\textbf{Cálculo y Dimensión:}
+	\begin{itemize}
+		\item Las ecuaciones de $Nul(A)$ provienen de resolver $A\bar{x} = 0 \to B\bar{x}=0$ (donde $B$ es la matriz reducida). Las ecuaciones libres en implícitas definen el espacio.
+		\item El número de ecuaciones independientes es el rango, por tanto:
+		\[ \text{nº ecs } Nul(A) = \text{rg}(A) \implies \dim(Nul(A)) = m - \text{rg}(A) \]
+	\end{itemize}
+	
+	\subsection{Espacio de Filas ($Fil(A)$ o $F(A)$)}
+	Es el subespacio generado por las filas de la matriz:
+	\[ Fil(A) = L\langle \bar{f}_1, \dots, \bar{f}_n \rangle \subset \mathbb{R}^m \]
+	
+	\textbf{Cálculo de la Base:}
+	Se realiza mediante reducción por filas:
+	\[ 
+	A \xrightarrow{F} B \quad \text{donde } B = \begin{pmatrix} \Xi \\ 0 \end{pmatrix}
+	\]
+	\begin{itemize}
+		\item La \textbf{Base de Fil(A)} son las filas no nulas de la matriz reducida $B$.
+		\item $\dim(Fil(A)) = \text{rg}(A)$.
+	\end{itemize}
+	
+	\subsection{Espacio de Columnas ($Col(A)$ o $C(A)$)}
+	Es el subespacio generado por las columnas de la matriz:
+	\[ Col(A) = L\langle \bar{c}_1, \dots, \bar{c}_n \rangle \]
+	
+	\textbf{Cálculo de la Base (2 métodos):}
+	\begin{enumerate}
+		\item \textbf{Por trasposición:} Se reduce la traspuesta por filas.
+		\[ A^t \xrightarrow{F} \begin{pmatrix} \Xi \\ 0 \end{pmatrix} \to \text{Base de } Col(A) \text{ (filas no nulas resultantes)}. \]
+		\item \textbf{Por columnas pivote:} Se identifican las columnas pivote en la matriz escalonada (son linealmente independientes).
+		\[ \text{Base de } Col(A) \to \text{Columnas originales de } A \text{ correspondientes a los pivotes.} \]
+	\end{enumerate}
+	
+	\textbf{Propiedades:}
+	\begin{itemize}
+		\item $\dim(Col(A)) = \text{rg}(A)$.
+		\item Relación con filas: $Col(A) = Fil(A^t)$ y $Col(A^t) = Fil(A)$.
+		\item \textbf{Teorema Rango-Nulidad:}
+		\[ \dim(Nul(A)) + \dim(Col(A)) = m \quad (\text{nº columnas}) \]
+	\end{itemize}
+	
+	\section{Aplicaciones Lineales}
+	Una función $f: E \rightarrow F$ es lineal si respeta la estructura de espacio vectorial:
+	\begin{enumerate}
+		\item $f(u+v) = f(u) + f(v)$
+		\item $f(\lambda u) = \lambda f(u)$
+	\end{enumerate}
+	
+	\subsection{Clasificación}
+	\begin{itemize}
+		\item \textbf{Inyectiva:} Elementos distintos tienen imágenes distintas ($\text{Ker}(f) = \{0\}$).
+		\item \textbf{Sobreyectiva:} La imagen coincide con el espacio final ($\text{Im}(f) = F$).
+		\item \textbf{Biyectiva (Isomorfismo):} Inyectiva y sobreyectiva.
+		\item \textbf{Endomorfismo:} Aplicación de un espacio en sí mismo ($E \rightarrow E$).
+	\end{itemize}
+	
+	\subsection{Núcleo e Imagen}
+	\begin{itemize}
+		\item \textbf{Núcleo (Ker):} $ \text{Ker}(f) = \{ x \in E \mid f(x) = 0_F \} $.
+		\item \textbf{Imagen (Im):} $ \text{Im}(f) = \{ y \in F \mid \exists x \in E, f(x) = y \} $.
+	\end{itemize}
+	
+	\textbf{Teorema de la Dimensión:}
+	\[ \text{dim}(E) = \text{dim}(\text{Ker}(f)) + \text{dim}(\text{Im}(f)) \]
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[node distance=2cm, auto]
+			\draw (0,0) ellipse (1.2cm and 2cm) node[above=2.2cm] {$E$};
+			\draw (5,0) ellipse (1.2cm and 2cm) node[above=2.2cm] {$F$};
+			\draw[->, thick] (1.5,1) -- (3.5,1) node[midway, above] {$f$};
+			
+			\draw[fill=blue!20] (0,0) ellipse (0.6cm and 0.6cm) node {\small Ker};
+			\draw[->, dashed] (0.6,0) -- (4,0);
+			\node at (4.2, 0) {$0_F$};
+			
+			\draw[fill=red!20] (5,0) ellipse (0.8cm and 1.2cm) node {\small Im};
+		\end{tikzpicture}
+		\caption{Relación Kernel - Imagen}
+	\end{figure}
+	
+	\section{Matriz de una Aplicación Lineal}
+	Una aplicación lineal queda determinada por las imágenes de una base.
+	Si $B_E = \{e_i\}$ y $B_F$ son bases, la matriz asociada $A$ contiene en sus columnas las coordenadas de $f(e_i)$ en la base $B_F$.
+	\[ Y = A \cdot X \]
+	
+	\subsection{Cambio de Base en Aplicaciones}
+	Si cambiamos las bases en $E$ (matriz $P$) y en $F$ (matriz $Q$), la nueva matriz de la aplicación $M$ es:
+	\[ M = Q^{-1} \cdot A \cdot P \]
+	
+	Si es un endomorfismo ($E=F$) y usamos la misma base:
+	\[ M = P^{-1} \cdot A \cdot P \quad (\text{Matrices semejantes}) \]
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[>=Stealth, node distance=2.5cm, auto]
+			\node (E) {$E_B$};
+			\node (F) [right of=E] {$F_C$};
+			\node (Ep) [below of=E] {$E_{B'}$};
+			\node (Fp) [below of=F] {$F_{C'}$};
+			
+			\draw[->] (E) to node {$A$} (F);
+			\draw[->] (Ep) to node [swap] {$M$} (Fp);
+			\draw[->] (Ep) to node {$P$} (E);
+			\draw[->] (Fp) to node [swap] {$Q$} (F);
+		\end{tikzpicture}
+		\caption{Diagrama de cambio de base}
+	\end{figure}
+	
+	\section{Operaciones y Endomorfismos}
+	\begin{itemize}
+		\item \textbf{Suma y Producto por escalar:} Se traducen en suma y producto de sus matrices asociadas.
+		\item \textbf{Composición:} $(g \circ f)(x) \rightarrow$ Producto de matrices $B \cdot A$ (ojo al orden: primero aplica $f$, luego $g$).
+	\end{itemize}
+	
+	\subsection{Invariantes}
+	En un endomorfismo $f: E \rightarrow E$:
+	\begin{itemize}
+		\item \textbf{Subespacio Invariante:} $f(V) \subseteq V$.
+		\item \textbf{Vector Invariante:} $f(v) = v \iff (A-I)v = 0$.
+		\item \textbf{Autovector:} $f(v) = \lambda v$. El subespacio generado por estos vectores se llama subespacio propio.
+	\end{itemize}
+	
+	% ======================================================================================
+	% CAPÍTULO 3
+	% ======================================================================================
+	
+	\chapter{Semejanza y Diagonalización}
+	
+	\section{Semejanza}
+	Dos matrices $A$ y $B$ son semejantes si existe $P$ regular tal que $B = P^{-1} A P$.
+	Propiedades conservadas: Determinante, Traza, Polinomio Característico.
+	
+	\section{Diagonalización}
+	Una matriz $A$ es diagonalizable si es semejante a una matriz diagonal $D$.
+	\begin{enumerate}
+		\item \textbf{Autovalores ($\lambda$):} Raíces de $|A - \lambda I| = 0$ (Polinomio característico).
+		\item \textbf{Autovectores:} Soluciones de $(A - \lambda I)x = 0$. Forman el subespacio propio $N_\lambda$.
+	\end{enumerate}
+	\textbf{Condición de diagonalización:} Para todo $\lambda$, la multiplicidad algebraica (veces que aparece como raíz) debe ser igual a la multiplicidad geométrica ($\dim(N_\lambda)$).
+	
+	\textbf{Fórmula Polinomio Característico (3x3):}
+	\[ P(\lambda) = -\lambda^3 + \text{Tr}(A)\lambda^2 - (\text{Suma Menores Principales})\lambda + |A| \]
+	
+	% ======================================================================================
+	% CAPÍTULO 4
+	% ======================================================================================
+	
+	\chapter{Espacio Vectorial Euclídeo}
+	
+	\section{Producto Escalar}
+	Aplicación $f: E \times E \rightarrow \mathbb{R}$, denotada $\langle u, v \rangle$ o $u \cdot v$, que es bilineal, simétrica y definida positiva.
+	
+	\subsection{Matriz de Gram ($G$)}
+	Dada una base $B = \{u_1, \dots, u_n\}$, $G_{ij} = u_i \cdot u_j$.
+	\[ u \cdot v = X^t G Y \]
+	En base ortonormal, $G=I$.
+	
+	\subsection{Norma y Ángulo}
+	\begin{itemize}
+		\item Norma: $||u|| = \sqrt{u \cdot u}$.
+		\item Ángulo: $\cos(\alpha) = \frac{u \cdot v}{||u|| \cdot ||v||}$.
+		\item Ortogonalidad: $u \perp v \iff u \cdot v = 0$.
+	\end{itemize}
+	
+	\section{Ortogonalización de Gram-Schmidt}
+	Permite obtener una base ortogonal a partir de una base cualquiera, restando las proyecciones sobre los vectores anteriores.
+	
+	\section{Proyección Ortogonal}
+	Dado un subespacio $V$, todo vector $u$ se descompone como $u = P_V(u) + P_{V^\perp}(u)$.
+	\[ P_V(u) = \sum \frac{u \cdot v_i}{||v_i||^2} v_i \quad \text{(si } \{v_i\} \text{ es base ortogonal de } V) \]
+	
+	\section{Producto Vectorial (en $\mathbb{R}^3$)}
+	Operación exclusiva de $\mathbb{R}^3$ que devuelve un vector perpendicular a los dos dados.
+	\[
+	\vec{w} = \vec{u} \times \vec{v} = \begin{vmatrix}
+		\vec{i} & \vec{j} & \vec{k} \\
+		u_1 & u_2 & u_3 \\
+		v_1 & v_2 & v_3
+	\end{vmatrix}
+	\]
+	
+	\section{Matrices Simétricas y Ortogonales}
+	\begin{itemize}
+		\item \textbf{Matriz Ortogonal ($Q$):} $Q^t = Q^{-1}$. Sus columnas son base ortonormal. Conserva el producto escalar.
+		\item \textbf{Matriz Simétrica ($S$):} $S^t = S$.
+		\begin{itemize}
+			\item Teorema Espectral: Toda matriz simétrica real es diagonalizable y sus autovectores de autovalores distintos son ortogonales.
+			\item Existe $Q$ ortogonal tal que $Q^t S Q = D$.
+		\end{itemize}
+	\end{itemize}
+	
+	\section{Isometrías}
+	Transformaciones que conservan distancias (su matriz asociada en base ortonormal es ortogonal). Se clasifican por su determinante.
+	
+	\subsection{Isometrías en $\mathbb{R}^3$}
+	
+	\subsubsection{Directas ($|A|=1$): Giros}
+	Conservan la orientación.
+	\begin{itemize}
+		\item \textbf{Identidad:} $Tr(A) = 3$.
+		\item \textbf{Giro (Rotación):} Alrededor de un eje $N(1)$.
+		\[ Tr(A) = 1 + 2\cos\alpha \]
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[>=Stealth, scale=0.8]
+			% Eje
+			\draw[thick, ->] (0, -1.5) -- (0, 2.5) node[above] {Eje $N(1)$};
+			% Plano perpendicular
+			\fill[blue!10, opacity=0.8] (-2, -0.5) -- (2, -0.5) -- (2.5, 1) -- (-1.5, 1) -- cycle;
+			\node[right, blue!80] at (2.5, 1) {$N(1)^\perp$};
+			% Vectores
+			\draw[->, thick, red] (0,0) -- (1.5, 0) node[right] {$\vec{v}$};
+			\draw[->, thick, red!70!black] (0,0) -- (1, 1) node[right] {$f(\vec{v})$};
+			\draw[->, orange, thick] (1, 0.1) arc (0:45:1);
+			\node[orange] at (1.2, 0.5) {$\alpha$};
+		\end{tikzpicture}
+		\caption{Giro en $\mathbb{R}^3$}
+	\end{figure}
+	
+	\subsubsection{Inversas ($|A|=-1$): Simetrías}
+	Invierten la orientación.
+	\begin{itemize}
+		\item \textbf{Simetría Central:} $A = -I$, $Tr(A) = -3$.
+		\item \textbf{Simetría Especular (Plano):} Respecto a plano $N(1)$. $Tr(A) = 1$.
+		\item \textbf{Giro-Simetría:} Giro + Reflexión. $Tr(A) = 2\cos\alpha - 1$.
+	\end{itemize}
+	
+	\subsection{Isometrías en $\mathbb{R}^2$}
+	\begin{enumerate}
+		\item \textbf{Giro (Origen):} $|A|=1$, $Tr(A)=2\cos\alpha$. Matriz $\begin{pmatrix} \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha \end{pmatrix}$.
+		\item \textbf{Simetría Axial (Recta):} $|A|=-1$, $Tr(A)=0$. Matriz $\begin{pmatrix} \cos\alpha & \sin\alpha \\ \sin\alpha & -\cos\alpha \end{pmatrix}$.
+	\end{enumerate}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.45\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=1]
+				\draw[->] (-1.5,0) -- (1.5,0);
+				\draw[->] (0,-1.5) -- (0,1.5);
+				\draw[thick, blue] (-1,-1) -- (1,1) node[right] {Eje};
+				\fill[red] (1,-0.5) circle (2pt) node[right] {$v$};
+				\fill[red] (-0.5,1) circle (2pt) node[left] {$f(v)$};
+				\draw[dashed] (1,-0.5) -- (-0.5,1);
+			\end{tikzpicture}
+			\caption{Simetría Axial ($\mathbb{R}^2$)}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=1]
+				\draw[->] (-1.5,0) -- (1.5,0);
+				\draw[->] (0,-1.5) -- (0,1.5);
+				\draw[->, thick, red] (0,0) -- (1,0);
+				\draw[->, thick, red] (0,0) -- (0.7,0.7);
+				\draw[->, orange] (0.5,0) arc (0:45:0.5);
+			\end{tikzpicture}
+			\caption{Giro ($\mathbb{R}^2$)}
+		\end{minipage}
+	\end{figure}
 \end{document}

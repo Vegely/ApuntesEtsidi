@@ -1,43 +1,42 @@
 1 Cuatri (2020/21):
 ---------------------------
-- Álgebra
-- Cálculo
+- Álgebra  (WIP - Legacy)
+- Cálculo  (WIP - Legacy)
 - Física I
 - Expresión Gráfica parte 3D
-- Química
+- Química  (WIP - Legacy)
 
 2 Cuatri (2020/21):
 ---------------------------
-- Ampliación de Matemáticas
+- Ampliación de Matemáticas  (WIP - Legacy)
 - Informática
-- Estadística
-- Métodos Numéricos
+- Estadística  (WIP - Legacy)
+- Métodos Numéricos  (WIP - Legacy)
 - Física II
 
 3 Cuatri (2021/22):
 ---------------------------
-- Ciencia de Materiales
-- Economía
+- Ciencia de Materiales  (WIP - Legacy)
 - Glosario - Inglés
-- Resistencia de Materiales
-- Teoría de Circuitos I
+- Resistencia de Materiales  (WIP - Legacy)
+- Teoría de Circuitos I 
 - Termodinámica
 
 4 Cuatri (2021/22):
 ---------------------------
-- Automática
+- Automática  (WIP - Legacy)
 - Transmisión del Calor
 - Electrónica
 - Tecnologías de Fabricación
-- Máquinas eléctricas
-- Medio Ambiente
+- Máquinas eléctricas (WIP - Legacy)
+- Medio Ambiente (WIP - Legacy)
 - Teoría de circuitos II
 
 5 Cuatri (2022/23):
 ---------------------------
 - Electrónica Analógica
 - Electrónica Digital (sin microprocesadores)
-- Regulación Automática 
+- Regulación Automática  (WIP - Legacy)
 
 6 Cuatri (2022/23):
 ---------------------------
@@ -50,7 +49,7 @@
 ---------------------------
 - Sistemas Electrónicos Digitales
 - Sistemas Informáticos Industriales
-- Ingeniería de Control 
+- Ingeniería de Control (WIP - Legacy)
 - Oficina Técnica (2024/25)
 
 8 Cuatri (2023/24):
@@ -66,4 +65,3 @@
 ---------------------------
 - Protecciones Eléctricas
 - Sistemas Eléctricos de Potencia (WIP)
-- Cálculo y Diseño de Subestaciones (WIP)
