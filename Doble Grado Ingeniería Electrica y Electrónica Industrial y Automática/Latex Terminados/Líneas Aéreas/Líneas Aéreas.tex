@@ -1,0 +1,234 @@
+\documentclass[12pt,a4paper]{article}
+% Set the font (output) encodings
+\usepackage[T1]{fontenc}% Permite el uso de fuentes modernas
+\usepackage{fontspec}
+% Spanish-specific commands
+\usepackage[spanish]{babel}
+\usepackage[a4paper, margin=3cm]{geometry} % Cambiar márgenes
+\setlength{\parindent}{0pt} % elimna sangría para todo el documento
+\usepackage{listings} % Paquete para incluir código fuente
+\usepackage{amsmath}  % Para formato matemático, si es necesario
+\usepackage{amssymb}  % Para \mathbb{N}
+\usepackage{booktabs} % Para líneas de tabla más profesionales
+\usepackage{enumitem} % Control de espacio en listas
+\usepackage[hidelinks]{hyperref} %referencias del índice invisibles
+\usepackage{xcolor}   % Paquete para manejar colores
+\usepackage{graphicx} %LaTeX package to import graphics
+\graphicspath{{imágenes/}}% configuring the graphicx package
+\usepackage{float} %imagenes
+\usepackage{array}          % Mejora el control de tablas
+\usepackage{tabularx} % Asegúrate de incluir este paquete en el preámbulo de tu documento LaTeX
+\usepackage{makecell}
+\usepackage[table]{xcolor}  % Soporte para colores en tablas
+\usepackage{changepage} % Permite modificar márgenes localmente
+\usepackage{circuitikz}
+\usepackage{multirow}
+\usepackage{fancybox}
+\usepackage{mdframed}
+
+\begin{document}	
+	\begin{titlepage} % portada
+		\centering
+		\vspace*{2cm} % Espaciado vertical antes del título
+		{\Huge \textbf{Líneas Aéreas de Alta Tensión}}\\[1cm] % Título del documento en letra grande y negrita
+		\vfill % Espaciado flexible
+		\vspace*{2cm} % Espaciado vertical después del título
+	\end{titlepage}
+
+\section{Formulario.}
+\subsection{Parámetros eléctricos de la línea.}
+\subsubsection{Resistencia.}	
+A la temperatura de 20 °C:
+\[
+\boxed{R_{cc20°C} = \frac{\rho_{20°C}}{S} \quad (\Omega/km)}
+\]
+- \( S \), sección (mm²)
+
+- \( \rho_{Cu} \) resistividad del cobre, \( 17.241 \, (\Omega \cdot mm^2/km) \)
+
+- \( \rho_{Al} \) resistividad del aluminio, \( 28.264 \, (\Omega \cdot mm^2/km) \)
+\vspace{0.2cm}
+
+Para una temperatura \(\theta\) cualquiera:
+\[
+\boxed{R_{cc\theta} = R_{cc20°C} \cdot [1 + \alpha \cdot (\theta - 20)]}
+\]
+\[
+\alpha_{20°Cu} = 0.00393 \, ^\circ C^{-1} \qquad \alpha_{20°Al} = 0.00403 \, ^\circ C^{-1}
+\]
+Resistencia en CA:
+\[
+\boxed{R_{ca} \approx R_{cc\theta} (1 + Y_s) = R_{ccc} \left( 1 + 7.5 \cdot f^2 \cdot d^4 \cdot 10^{-7} \right) \quad (\Omega / km)}
+\]
+\subsubsection{Reactancia inductiva serie.}
+\[
+\boxed{X = \omega \cdot L_k \cdot l \quad (2)}
+\]
+Expresión general para la inductancia \textbf{por fase} de una línea se expresa:
+\[
+\boxed{L_k = 2 \cdot 10^{-4} \ln \frac{DMG}{RMG'} \quad (H / km)}
+\]
+Siendo:\\
+- \( DMG \), la distancia media geométrica.\\
+- \( RMG' \), el radio medio geométrico.
+\[ 
+\boxed{RMG' = \sqrt[n]{e^{-1/4} \cdot r \cdot n \cdot \left( \frac{\Delta}{2 \cdot \sin(\pi / n)} \right)^{n-1}}}
+\]
+\begin{enumerate}
+	\item Líneas de simple circuito simplex (un conductor por fase).
+	\[
+	\boxed{	L_k = 2 \cdot 10^{-4} \cdot \ln \frac{DMG}{r'} \quad (H/km)}
+	\]
+	\[
+	\boxed{DMG = \sqrt[3]{D_{12} \cdot D_{23} \cdot D_{31}}}
+	\]
+	\[
+	\boxed{r' = e^{-1/4} \cdot r \quad \text{siendo \( r \), el radio del conductor}}
+	\]
+	\[
+	\boxed{X = \omega \cdot L_k \cdot l \quad (\Omega)}
+	\]
+	\item Líneas de simple circuito dúplex (2 conductores por fase).
+	\[
+	\boxed{	L_k = 2 \cdot 10^{-4} \, \text{ln} \frac{DMG}{RMG'} \quad (H / km)}
+	\]
+	\[
+	\boxed{	DMG = \sqrt[3]{D_{12} \cdot D_{23} \cdot D_{31}}}
+	\]
+	\[
+	\boxed{	RMG = \sqrt{r' \cdot \Delta}}
+	\]
+	\[
+	\boxed{r' = e^{-1/4} \cdot r \quad \text{siendo \( r \), el radio del conductor}}
+	\]
+	\[
+	\boxed{	X = \omega \cdot L_k \cdot l \quad (\Omega)}
+	\]
+	\item Líneas de doble circuito simplex (un conductor por fase).
+	\[
+	\boxed{	L_k = 2 \cdot 10^{-4} \cdot \ln \left(\frac{DMG_{ff}}{DMG_f'}\right) \quad (H/km)}
+	\]
+	La inductancia por circuito sería: $\boxed{2 \cdot L_k}$ 
+	\[
+	\boxed{DMG_{ff} = \sqrt[3]{(D_{12}\cdot D_{12'}\cdot D_{1'2}\cdot D_{1'2'})^\frac{1}{4} \cdot (D_{23}\cdot D_{23'}\cdot D_{2'3}\cdot D_{2'3'})^\frac{1}{4} \cdot (D_{31}\cdot D_{31'}\cdot D_{3'1}\cdot D_{3'1'})^\frac{1}{4}}} 
+	\]
+	\[
+	\boxed{DMG_f = \sqrt[6]{\left( r' \cdot D_{11'} \right) \cdot \left( r' \cdot D_{22'} \right) \cdot \left( r' \cdot D_{33'} \right)}}
+	\]
+	\[
+	\boxed{	r' = e^{-1/4} \cdot r \quad \text{siendo } r, \text{ el radio del conductor.}}
+	\]
+	\[
+	\boxed{	X = \omega \cdot L_k \cdot l \quad (\Omega)}
+	\]
+	\item Líneas de doble circuito duplex (dos conductores por fase).
+	\[
+	\boxed{	L_k = 2 \cdot 10^{-4} \cdot \ln \left(\frac{DMG_{ff}}{DMG_f'}\right) \quad (H/km)}
+	\]
+	La inductancia por circuito sería: $\boxed{2 \cdot L_k}$ 	
+	\[
+	\boxed{DMG_{ff} = \sqrt[3]{(D_{12}\cdot D_{12'}\cdot D_{1'2}\cdot D_{1'2'})^\frac{1}{4} \cdot (D_{23}\cdot D_{23'}\cdot D_{2'3'})^\frac{1}{4} \cdot (D_{31}\cdot D_{31'}\cdot D_{3'1}\cdot D_{3'1'})^\frac{1}{4}}} 
+	\]
+	\[
+	\boxed{	DMG_f' = \left(RMG'\right)^{1/2} \cdot \left(D_{11'} \cdot D_{22'} \cdot D_{33'}\right)^{1/6}}
+	\]
+	\[
+	\boxed{	RMG' = \sqrt{r'\cdot \Delta}  \quad \text{con} \quad r' = e^{-1/4} \cdot r \quad \text{siendo } r, \text{ el radio del conductor.}}
+	\]
+	\[
+	\boxed{	X = \omega \cdot L_k \cdot l \quad (\Omega)}
+	\]
+\end{enumerate}
+\subsubsection{Susceptancia capacitiva paralelo (S/km).}
+\[
+\boxed{	 B = \frac{1}{X_c} \cdot 1 = \frac{1}{\frac{1}{\omega \cdot C_k}} \cdot 1 = \omega \cdot C_k \cdot 1 \quad (S)}
+\]
+Expresión general para la inductancia \textbf{por fase} de una línea se expresa:
+\[
+\boxed{	C_k = \frac{0.0556 \cdot 10^{-6}}{\ln \left( \frac{DMG}{RMG} \right)} \quad \left( \frac{F}{km} \right)}
+\]
+Siendo: \\
+- DMG, la distancia media geométrica entre ejes de fases (m). \\
+- RMG', el radio medio geométrico del conductor (m).
+\[
+\boxed{	RMG = \sqrt[n]{r \cdot n \left( \frac{\Delta}{2 \cdot \sin(\pi / n)} \right)^{n-1}}}
+\]
+\begin{enumerate}
+	\item Líneas de simple circuito simplex (un conductor por fase).
+	\[
+	\boxed{	C_k = \frac{0,0556 \cdot 10^{-6}}{\ln \frac{DMG}{r}} \left( \frac{F}{\text{km}} \right)}
+	\]
+	\[
+	\boxed{	DMG = \sqrt[3]{D_{12} \cdot D_{23} \cdot D_{31}} \quad \text{siendo \( r \), el radio del conductor}}
+	\]
+	\[
+	\boxed{	B = \omega \cdot C_k \cdot l \quad (S)}
+	\]
+	\item Líneas de simple circuito duplex (dos conductores por fase).
+	\[
+	\boxed{	C_k = \frac{0,0556 \cdot 10^{-6}}{\ln \frac{DMG}{RMG}} \left( \frac{F}{km} \right)}
+	\]
+	\[
+	\boxed{	DMG = \sqrt[3]{D_{12} \cdot D_{23} \cdot D_{31}}}
+	\]
+	\[
+	\boxed{	RMG = \sqrt{r \cdot \Delta} \quad \text{siendo \( r \), el radio del conductor}}
+	\]
+	\[
+	\boxed{	B = \omega \cdot C_k \cdot l \quad (S)}
+	\]
+	\item Líneas de doble circuito simplex (un conductor por fase).
+	\[
+	\boxed{	C_k = \frac{0,0556 \cdot 10^{-6}}{\ln \frac{DMG_{ff}}{DMG_f}} \left( \frac{F}{km} \right)}
+	\]
+	La capacidad de un solo circuito sería: $\boxed{\frac{C_k}{2}}$
+	\[
+	\boxed{DMG_{ff} = \sqrt[3]{(D_{12}\cdot D_{12'}\cdot D_{1'2}\cdot D_{1'2'})^\frac{1}{4} \cdot (D_{23}\cdot D_{23'}\cdot D_{2'3'})^\frac{1}{4} \cdot (D_{31}\cdot D_{31'}\cdot D_{3'1}\cdot D_{3'1'})^\frac{1}{4}}} 
+	\]
+	\[
+	\boxed{DMG_f = \left[ \left( r \cdot D_{11'} \right) \left( r \cdot D_{22'} \right) \cdot \left( r \cdot D_{33'} \right) \right]^{1/6} \quad \text{siendo \( r \), el radio del conductor}}
+	\]
+	\[
+	\boxed{B = \omega \cdot C_k \cdot l \quad (S)}
+	\]
+	\item Líneas de doble circuito duplex (dos conductores por fase).
+	\[
+	\boxed{	C_k = \frac{0,0556 \cdot 10^{-6}}{\ln \frac{DMG_{ff}}{DMG_f}} \left( \frac{F}{km} \right)}
+	\]
+	La capacidad de un solo circuito sería: $\boxed{\frac{C_k}{2}}$
+	\[
+	\boxed{DMG_{ff} = \sqrt[3]{(D_{12}\cdot D_{12'}\cdot D_{1'2}\cdot D_{1'2'})^\frac{1}{4} \cdot (D_{23}\cdot D_{23'}\cdot D_{2'3'})^\frac{1}{4} \cdot (D_{31}\cdot D_{31'}\cdot D_{3'1}\cdot D_{3'1'})^\frac{1}{4}}} 
+	\]
+	\[
+	\boxed{	DMG_f = (RMG)^{1/2} \cdot (D_{11'} \cdot D_{22'} \cdot D_{33'})^{1/6}}
+	\]
+	\[
+	\boxed{	RMG = \sqrt{r \cdot \Delta} \quad \text{siendo } r, \text{ el radio del conductor.}}
+	\]
+	\[
+	\boxed{	B = \omega \cdot C_k \cdot 1 \quad (S)}
+	\]
+\end{enumerate}
+\subsubsection{Conductancia (S/km).}	
+Se define la conductancia por unidad de longitud como la inversa de la resistencia de aislamiento.
+\[
+\boxed{G_k = \frac{1}{R_{\text{ais}}} \left( \frac{S}{\text{km}} \right)}
+\]
+Para líneas de tensión superior a 132 kV, el valor de la conductancia es del orden:
+
+- Tiempo seco:  
+\[
+\boxed{G = 1 \times 10^8 - 10 \times 10^8 \, \text{S/km}}
+\]
+- Tiempo húmedo:  
+\[
+\boxed{G' = 10 \times 10^8 - 30 \times 10^8 \, \text{S/km}}
+\]
+La pérdida de potencia, por fase, originada por el paso de la corriente de fuga, a través de la resistencia del aislamiento es:
+\[
+\boxed{P_{\text{ais}} = R_{\text{ais}} \cdot I_{\text{fuga}}^2 = R_{\text{ais}} \cdot \left( \frac{U/\sqrt{3}}{R_{\text{ais}}} \right)^2 = \frac{U^2}{3} \cdot G_k \cdot 10^6 \left( \frac{W}{\text{km}} \right) \quad \text{siendo } U \text{ kV, y } G_k \, (\text{S/km})}
+\]
+
+
+	
+\end{document}	

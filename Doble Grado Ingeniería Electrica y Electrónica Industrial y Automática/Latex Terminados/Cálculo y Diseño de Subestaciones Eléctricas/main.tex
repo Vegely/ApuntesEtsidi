@@ -1,0 +1,140 @@
+% Documento tipo libro
+\documentclass[10pt]{book}
+
+% Idioma y acentos
+\usepackage[spanish, es-tabla]{babel}
+
+% Paquetes útiles
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{makecell}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows,decorations.markings}
+\usetikzlibrary{babel}
+\usepackage{float}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usetikzlibrary{pgfplots.groupplots}
+\usepackage{blochsphere}
+\usepackage[scr]{rsfso}
+\newcommand{\Laplace}{\mathscr{L}}
+\usepackage{mathtools}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{makecell}
+\usetikzlibrary{patterns}
+
+% Paquetes de maquetación
+\usepackage{appendix}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tabularx} 
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{enumitem}
+\setlist[itemize]{label=\textbullet}
+\usepackage[font=small, justification=centering]{caption}
+\usepackage{setspace}
+
+
+% Fuente
+\usepackage{helvet}
+\usepackage{lmodern}
+\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{tgpagella}
+\usepackage[
+    left = \flqq{},% 
+    right = \frqq{},% 
+    leftsub = \flq{},% 
+    rightsub = \frq{} %
+]{dirtytalk}
+\usepackage{url}
+\urlstyle{same}
+
+% Tamaño y márgenes
+\usepackage[a4paper, top=3cm, bottom=3cm, left=2.5cm, right=2.5cm, marginparwidth = 1.75cm]{geometry}
+
+% Estilo de capítulos y títulos
+\newfontfamily\headingfont{Arial}
+\setcounter{secnumdepth}{4}
+\titleformat*{\section}{\Large\bfseries\headingfont}
+\titleformat*{\subsection}{\large\bfseries\headingfont}
+\titleformat*{\subsubsection}{\normalsize\bfseries\headingfont}
+\titleformat{\chapter}[display]{\bfseries\headingfont\flushright}
+{
+    \flushright\fontsize{130}{60}\selectfont\thechapter
+    \vspace{-1.5cm}
+    \rule[0ex]{\linewidth}{1.2pt}
+    \vspace{-2.75cm}
+}
+{10pt}
+{\bfseries\fontsize{25}{27}\selectfont{}}
+\titlespacing*{\chapter}{0pt}{1cm}{10ex} % indent / full vertical displacement / vspace after
+
+% Estilo de encabezados
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyfoot[C]{\thepage\headingfont}
+\fancyhead[R]{\nouppercase{\rightmark}}
+
+% Parámetros del documento
+\hypersetup
+{
+    pdftitle={Apuntes de Cálculo y Diseño de Subestaciones Eléctricas - Adrián Teixeira de Uña - 2025},
+    pdfsubject={Subestaciones},
+    pdfauthor={Adrián Teixeira de Uña},
+    pdfkeywords={Subestaciones},
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=blue,
+}
+
+% Título y autor
+\title{Apuntes de Cálculo y Diseño de Subestaciones Eléctricas}
+\author{Adrián Teixeira de Uña}
+\date{2025}
+
+% Document
+\begin{document}
+    \maketitle
+	% Elementos antes del trabajo en sí
+	\frontmatter
+		% Capítulos (si procede)
+
+		% Índice
+		\tableofcontents
+		\addcontentsline{toc}{chapter}{Índice}
+		
+		\listoffigures % Índice de figuras.
+		\listoftables % Índice de tablas.
+	
+	% Parte descriptiva del trabajo
+	\mainmatter
+		% Capítulos
+        \pagestyle{fancy}
+        \normalsize
+        \include{capitulos/tema1/tema1}
+		\include{capitulos/tema2}
+		\include{capitulos/tema3}
+		\include{capitulos/tema4}
+		\include{capitulos/tema5}
+		\include{capitulos/tema6}
+		\include{capitulos/tema7}
+		\include{capitulos/tema8}
+
+% Fin del documento
+\end{document}

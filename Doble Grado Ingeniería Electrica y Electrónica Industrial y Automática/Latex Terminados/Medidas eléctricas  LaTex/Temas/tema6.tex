@@ -1,0 +1,1486 @@
+\section{Tema 6. Medida de potencia y energía.}
+	\subsection{Generalidades.}
+		\subsubsection{Necesidad de medir la potencia activa.}
+			La potencia está asociada a multitud de dispositivos y procesos, por lo que su medida se realiza tanto en laboratorios como en industrias:
+			\begin{itemize}
+				\item Para evaluar la generación, el consumo y el rendimiento de todo tipo de máquinas.
+				\item Para determinar la capacidad de producción, transporte de líneas, de suministro a usuarios, etc.
+			\end{itemize}
+			
+			En principio, debe entenderse por “potencia” sólo la realmente generada o consumida (activa). Aunque ahora no se mencione, más adelante se tratará la medida de la “potencia reactiva”.
+		
+		\subsubsection{Formas de medir la potencia.}
+		\textbf{\textit{Corriente continua:}} se obtiene como el producto de la tensión por la intensidad. Puede determinarse con un vatímetro o un voltímetro y un amperímetro.
+		
+		
+		\textbf{\textit{Corriente alterna:}} viene dada por el producto escalar de los fasores de tensión e intensidad. Su medida requiere un vatímetro (en general no es posible con un voltímetro y amperímetro).
+		
+		
+		\begin{figure}[H]
+			\begin{minipage}{0.5\textwidth}
+				\begin{figure}[H]
+					\centering
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\ctikzset{resistor=european};
+						\draw [](4.25,16.75) to[short, -o] (3.75,16.75) ;
+						\draw [](4.25,14) to[short, -o] (3.75,14) ;
+						\draw  (5.25,16.75) circle (0.5cm) node {\normalsize W} ;
+						\draw [](5.25,17.25) to[short] (5.25,17.75);
+						\draw[] (5.25,17.75) to[short] (4.25,17.75);
+						\draw [](4.25,17.75) to[short] (4.25,16.75);
+						\draw [](4.25,16.75) to[short] (4.75,16.75);
+						\draw [](5.25,16.25) to[short] (5.25,14);
+						\draw (6.75,16.75) to[rmeter, t=V] (6.75,14);
+						\draw (6.75,16.75) to[rmeter, t=A] (8.75,16.75);
+						\draw (8.75,16.75) to[R,l={ \normalsize Z}] (8.75,14);
+						\draw[] (8.75,14) to[short] (4.25,14);
+						\draw [](5.75,16.75) to[short] (6.75,16.75);
+						\node at (6.75,16.75) [circ] {};
+						\node at (6.75,14) [circ] {};
+						\draw [-latex] (6.75,16.5) -- (6.75,16)node[pos=0.5,left]{$I_V$};
+						\draw [-latex] (8.75,16.5) -- (8.75,16)node[pos=0.5,left]{$I_Z$};
+						\draw [-latex] (5.25,15.5) -- (5.25,15)node[pos=0.5,left]{$I_{W-V}$};
+						\draw [-latex] (8.25,15.75) -- (8.25,14.75)node[pos=0.5,left]{$U_Z$};
+						\draw [short] (4.25,14.5) -- (4.25,13.25)node[pos=1,left]{$P$};
+						\draw [-latex] (4.25,14.5) -- (5,14.5);
+						\draw [short] (7.5,14.5) -- (7.5,13.25)node[pos=1,left]{$P_Z$};
+						\draw [-latex] (7.5,14.5) -- (8.25,14.5);
+						\node at (4.25,16.75) [circ] {};
+						\node [font=\normalsize] at (7.75,17.5) {\textit{\textbf{Z altas}}};
+					\end{circuitikz}
+				\end{figure}
+			\end{minipage}%
+			\begin{minipage}{0.5\textwidth}
+				\begin{figure}[H]
+					\centering
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\ctikzset{resistor=european};
+						\draw [](4.25,11.25) to[short, -o] (3.75,11.25) ;
+						\draw [](4.25,8.5) to[short, -o] (3.75,8.5) ;
+						\draw  (5,11.25) circle (0.5cm) node {\normalsize W} ;
+						\draw [](5,11.75) to[short] (5,12.25);
+						\draw[] (6,12.25) to[short] (5,12.25);
+						\draw [](6,12.25) to[short] (6,11.25);
+						\draw [](4.25,11.25) to[short] (4.5,11.25);
+						\draw [](5,10.75) to[short] (5,8.5);
+						\draw (7.75,11.25) to[rmeter, t=V] (7.75,8.5);
+						\draw (5.75,11.25) to[rmeter, t=A] (7.75,11.25);
+						\draw (8.75,11.25) to[R,l={ \normalsize Z}] (8.75,8.5);
+						\draw[] (8.75,8.5) to[short] (4.25,8.5);
+						\draw [](7.75,11.25) to[short] (8.75,11.25);
+						\node at (7.75,11.25) [circ] {};
+						\node at (7.75,8.5) [circ] {};
+						\draw [-latex] (7.75,11) -- (7.75,10.5)node[pos=0.5,left]{$I_V$};
+						\draw [-latex] (8.75,11) -- (8.75,10.5)node[pos=0.5,left]{$I_Z$};
+						\draw [-latex] (5,10) -- (5,9.5)node[pos=0.5,left]{$I_{W-V}$};
+						\draw [-latex] (9.75,10.25) -- (9.75,9.25)node[pos=0.5,right]{$U_Z$};
+						\draw [short] (4,9) -- (4,7.75)node[pos=1,left]{$P$};
+						\draw [-latex] (4,9) -- (4.75,9);
+						\draw [short] (8,9) -- (8,7.75)node[pos=1,left]{$P_Z$};
+						\draw [-latex] (8,9) -- (8.6,9);
+						\node at (4,11.25) [circ] {};
+						\node [font=\normalsize] at (7.75,12) {\textit{\textbf{Z pequeñas}}};
+						\draw[] (5.75,11.25) to[short] (5.5,11.25);
+						\node at (6,11.25) [circ] {};
+						\draw [dashed] (5,12.25) -- (4,12.25);
+						\draw [dashed] (4,12.25) -- (4,11.25);
+					\end{circuitikz}
+				\end{figure}
+			\end{minipage}
+		\end{figure}
+		
+		\[P_Z = W - P_W - P_A - P_V \approx W\]
+		
+		
+		$P_W$, $P_A$ y $P_V$ son las correcciones debidas al consumo de los equipos, normalmente consideradas nulas por ser despreciables frente al consumo total de la carga.
+		
+			
+		\subsubsection{Vatímetros.}
+			Disponen de sensores o captadores para las señales de intensidad y tensión. En los aparatos analógicos son bobinas.
+			
+			
+			A semejanza de lo que ocurre en el montaje corto y largo de resistencias, uno de los dos captadores siempre causa un error de inserción.
+			
+			\begin{figure}[H]
+				\centering
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\draw [, dashed] (7.25,16) circle (2cm);
+						\draw (6.25,17) to[L ] (6.25,15);
+						\draw (5.25,16) to[L ] (7.25,16);
+						\draw (8.25,17) to[R] (8.25,15);
+						\draw (7.25,16) to[R] (9.25,16);
+						\draw [](6.25,17) to[short] (8.25,17);
+						\draw [](5.25,16) to[short, -o] (4.75,16) ;
+						\draw [](6.25,13.75) to[short, o-] (6.25,14.25) ;
+						\draw [](8.25,13.75) to[short, o-] (8.25,14.25) ;
+						\draw [](9.25,16) to[short, -o] (9.75,16) ;
+						\draw [](6.25,15) to[short] (6.25,14.5);
+						\draw [](6.25,14.5) to[short] (6.25,14.25);
+						\draw [](8.25,15) to[short] (8.25,14.25);
+						\node [font=\normalsize] at (4.75,16.25) {*};
+						\node [font=\normalsize] at (6,13.75) {*};
+						\node [font=\normalsize] at (4.75,15.625) {k};
+						\node [font=\normalsize] at (6.5,13.75) {u};
+						\node [font=\normalsize] at (8.5,13.75) {v};
+						\node [font=\normalsize] at (10,16) {l};
+					\end{circuitikz}
+			\end{figure}
+			
+			Al borne $k$ le corresponde el sentido entrante de la corriente y al $u$ el punto de mayor potencial. Son \textbf{terminales homólogos}.
+			
+			
+			En corriente alterna el campo y la constante de medida lo determina el producto $U\cdot I$ y el $\cosphi$ para el que fue calibrado:
+			\[CM_W = V_{max}\cdot I_{max}\cdot \cosphi_{max}\]
+			\[K_W = \dfrac{V_{max}\cdot I_{max}\cdot \cosphi_{max}}{n_{divisiones}}\]
+			
+			
+			Si se supera alguno de los valores límite, tanto de tensión como de intensidad, el aparato no lo indica, por lo que conviene conectar también un amperímetro en serie y un voltímetro en paralelo para ir verificando que el aparato funciona dentro de los campos de medida.
+			
+			
+			Los vatímetros analógicos suelen estar calibrados a $\cosphi = 1$. Cuando es para un $\cosphi < 1$ se dice que es un vatímetro de \textbf{factor de potencia acortado}.
+		
+		\subsubsection{Conexiones básicas de vatímetros.}
+			\begin{figure}[H]
+				\centering
+				\scalebox{.6}{
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\ctikzset{resistor=european};
+						\draw  (7.75,3.75) circle (0.5cm) node {\normalsize W} ;
+						\draw (9.75,4.75) to[R] (9.75,2.75);
+						\draw [](8.25,3.75) to[short] (8.75,3.75);
+						\draw[] (7.25,3.75) to[short] (6.75,3.75);
+						\draw [](7.75,4.25) to[short] (7.75,4.75);
+						\draw [](7.75,4.75) to[short] (9.75,4.75);
+						\draw [](7.75,3.25) to[short] (7.75,2.75);
+						\draw [](6.75,3.75) to[short] (6.75,2.75);
+						\draw [](8.75,3.75) to[short] (8.75,2.75);
+						\node [font=\normalsize] at (7,4) {*};
+						\node [font=\normalsize] at (7.5,3) {*};
+						\draw [, dashed] (6.25,5) rectangle  (10.25,2.5);
+						\draw (6.75,-1) to[rmeter, t=A] (5,-1);
+						\draw (7.75,-0.5) to[rmeter, t=V] (7.75,-2.25);
+						\draw [](5,-1) to[short, -o] (4.75,-1) node[left] {A};
+						\draw [](7.75,-2.25) to[short, -o] (4.75,-2.25) node[left] {N};
+						\draw[] (6.75,-1) to[short] (6.5,-1);
+						\draw [](6.75,2.75) to[short] (7.75,2.75);
+						\draw [](6.75,2.75) to[short] (6.75,-1);
+						\draw [](7.75,2.75) to[short] (7.75,-0.5);
+						\node at (6.75,2.75) [circ] {};
+						\node at (7.75,2.75) [circ] {};
+						\node at (8.75,2.75) [circ] {};
+						\node at (9.75,2.75) [circ] {};
+						\draw [](8.75,2.75) to[short] (8.75,-1);
+						\draw [](8.75,-1) to[short] (10.25,-1);
+						\draw [](9.75,2.75) to[short] (9.75,-2.25);
+						\draw [](7.75,-2.25) to[short] (10.25,-2.25);
+						\draw [](10.25,-1) to[short, -o] (10.75,-1) ;
+						\draw [](10.25,-2.25) to[short, -o] (10.75,-2.25) ;
+						\node at (9.75,-2.25) [circ] {};
+						\node at (7.75,-2.25) [circ] {};
+						\node [font=\normalsize] at (7.75,5.25) {\textit{\textbf{Directa}}};
+						\draw  (15,3.75) circle (0.5cm) node {\normalsize W} ;
+						\draw (17,4.75) to[R] (17,2.75);
+						\draw [](15.5,3.75) to[short] (16,3.75);
+						\draw[] (14.5,3.75) to[short] (14,3.75);
+						\draw [](15,4.25) to[short] (15,4.75);
+						\draw [](15,4.75) to[short] (17,4.75);
+						\draw [](15,3.25) to[short] (15,2.75);
+						\draw [](14,3.75) to[short] (14,2.75);
+						\draw [](16,3.75) to[short] (16,2.75);
+						\node [font=\normalsize] at (14.25,4) {*};
+						\node [font=\normalsize] at (14.75,3) {*};
+						\draw [, dashed] (13.5,5) rectangle  (17.5,2.5);
+						\draw [](14,-1) to[short, -o] (12.5,-1) node[left] {A};
+						\draw [](15,2.75) to[short] (15,1.75);
+						\node at (14,2.75) [circ] {};
+						\node at (15,2.75) [circ] {};
+						\node at (16,2.75) [circ] {};
+						\node at (17,2.75) [circ] {};
+						\draw [](16,2.75) to[short] (16,-0.25);
+						\draw [](16,-1) to[short, -o] (18,-1) ;
+						\node [font=\normalsize] at (15,5.25) {\textit{\textbf{Semidirecta}}};
+						\draw (16,-0.25) to[L] (14,-0.25);
+						\draw (14,-1) to[L ] (16,-1);
+						\draw (14,1.5) to[rmeter, t=A] (14,-0.25);
+						\draw [](14,2.75) to[short] (14,1.5);
+						\draw[] (15,1.75) to[short] (13.25,1.75);
+						\draw [](13.25,1.75) to[short] (13.25,-1);
+						\node at (13.25,-1) [circ] {};
+						\draw [](15,1.75) to[short] (16.5,1.75);
+						\draw (16.5,1.75) to[rmeter, t=V] (16.5,-2.25);
+						\draw [](17,2.75) to[short] (17,-2.25);
+						\draw [](15,-2.25) to[short, -o] (12.5,-2.25) node[left] {N};
+						\draw (16,0.75) to (15.5,0.75) node[ground]{};
+						\node at (16,0.75) [circ] {};
+						\draw [](15,-2.25) to[short, -o] (18,-2.25) ;
+						\node at (17,-2.25) [circ] {};
+						\node at (16.5,-2.25) [circ] {};
+						\node at (15,1.75) [circ] {};
+					\end{circuitikz}
+				}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\scalebox{.6}{
+				\begin{circuitikz}
+					\tikzstyle{every node}=[font=\normalsize]
+					\ctikzset{resistor=european};
+					\node [font=\normalsize] at (24,5.25) {\textit{\textbf{Indirecta}}};
+					\draw (25,-0.25) to[L] (23,-0.25);
+					\draw (23,-1) to[L ] (25,-1);
+					\draw (23,1.5) to[rmeter, t=A] (23,-0.25);
+					\draw [](23,2.75) to[short] (23,1.5);
+					\node at (22,-2.25) [circ] {};
+					\draw [](24,-2.25) to[short, -o] (19.75,-2.25) node[left] {N};
+					\draw [](24,-2.25) to[short, -o] (27,-2.25) ;
+					\node at (25,1.25) [circ] {};
+					\draw (20.25,-0.25) to[L ] (22,-0.25);
+					\draw (22,0.5) to[L] (20.25,0.5);
+					\node at (20.25,-1) [circ] {};
+					\draw [](22,-0.25) to[short] (22,-2.25);
+					\draw [](20.25,-0.25) to[short] (20.25,-1);
+					\draw[] (24,2) to[short] (20.25,2);
+					\draw [](20.25,2) to[short] (20.25,0.5);
+					\draw [](22,0.5) to[short] (22,1.5);
+					\draw [](22,1.5) to[short] (26,1.5);
+					\draw [](26,1.5) to[short] (26,2.75);
+					\draw (22,1.25) to[rmeter, t=V] (20.25,1.25);
+					\node at (20.25,1.25) [circ] {};
+					\node at (22,1.25) [circ] {};
+					\draw [dashed] (22,1.25) -- (25,1.25);
+					\draw (24.25,1.25) to (24.25,0.75) node[ground]{};
+					\node at (24.25,1.25) [circ] {};
+					\draw [](23,-1) to[short, -o] (19.75,-1) node[left] {A};
+					\draw [](24,2.75) to[short] (24,2);
+					\node at (23,2.75) [circ] {};
+					\node at (24,2.75) [circ] {};
+					\node at (25,2.75) [circ] {};
+					\node at (26,2.75) [circ] {};
+					\draw [](25,2.75) to[short] (25,-0.25);
+					\draw [](25,-1) to[short, -o] (27,-1) ;
+					\draw  (24,3.75) circle (0.5cm) node {\normalsize W} ;
+					\draw (26,4.75) to[R] (26,2.75);
+					\draw [](24.5,3.75) to[short] (25,3.75);
+					\draw[] (23.5,3.75) to[short] (23,3.75);
+					\draw [](24,4.25) to[short] (24,4.75);
+					\draw [](24,4.75) to[short] (26,4.75);
+					\draw [](24,3.25) to[short] (24,2.75);
+					\draw [](23,3.75) to[short] (23,2.75);
+					\draw [](25,3.75) to[short] (25,2.75);
+					\node [font=\normalsize] at (23.25,4) {*};
+					\node [font=\normalsize] at (23.75,3) {*};
+					\draw [, dashed] (22.5,5) rectangle  (26.5,2.5);
+				\end{circuitikz}
+			}
+			\end{figure}
+			
+			\[K_{ind} = K_W \cdot K_I \cdot K_V\]
+	
+	\subsection{Medida de potencia activa en c.a. trifásica.}
+		\subsubsection{Interés por la medida de P en c.a. III.}
+			El objetivo principal es medir la \textbf{potencia total} del sistema trifásico, no la de cada fase.
+			
+			
+			Los aparatos necesarios, su conexión e incluso sus características pueden verse condicionadas por el tipo de receptor (con o sin neutro, equilibrado o desequilibrado).
+			
+			
+			El equipo de medida debe optimizarse al máximo (menor número posible de aparatos, tipo de éstos, etc.).
+			
+			
+			En general, se necesitan tantos vatímetros monofásicos como fases tiene el sistema, aunque bajo ciertas condiciones ese número puede ser menor (Teorema de Blondel).
+			
+		\subsubsection{Medida de P en todo tipo de sistemas III.}
+			\subsubsubsection{Con un vatímetro trifásico o 3 monofásicos.}
+				Es la forma más general de medir potencia y energía. La potencia total consumida es la suma de la que transporta cada fase. Si falta el neutro también es posible la medida, ya que los tres circuitos de tensión quedan conectados en estrella y forman un neutro artificial.
+				
+				\[P_T \approx W_A + W_B + W_C\]
+				
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\ctikzset{resistor=european}
+							\draw  (7.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw [, dashed] (6.5,18.25) rectangle  (15,14.25);
+							\draw (7.75,16.5) to[R] (7.75,14.5);
+							\draw [](8.25,17) to[short] (8.75,17);
+							\draw[] (7.25,17) to[short] (6.75,17);
+							\draw [](7.75,17.5) to[short] (7.75,18);
+							\draw [](7.75,16.5) to[short] (7.75,16);
+							\draw [](6.75,17) to[short] (6.75,16);
+							\draw [](8.75,17) to[short] (8.75,16);
+							\node [font=\normalsize] at (7,17.25) {*};
+							\node [font=\normalsize] at (7.5,16.25) {*};
+							\draw [](6.75,14.5) to[short] (7.75,14.5);
+							\node at (7.75,14.5) [circ] {};
+							\draw [](6.75,13) to[short, -o] (5.75,13) node[left] {A};
+							\draw [](6.75,12.5) to[short, -o] (5.75,12.5) node[left] {B};
+							\draw [](6.75,12) to[short, -o] (5.75,12) node[left] {C};
+							\draw [](6.75,13.75) to[short] (6.75,13);
+							\draw [](8.75,16) to[short] (8.75,15.25);
+							\draw  (10.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw (10.75,16.5) to[R] (10.75,14.5);
+							\draw [](11.25,17) to[short] (11.75,17);
+							\draw[] (10.25,17) to[short] (9.75,17);
+							\draw [](10.75,17.5) to[short] (10.75,18);
+							\draw [](10.75,16.5) to[short] (10.75,16);
+							\draw [](9.75,17) to[short] (9.75,16);
+							\draw [](11.75,17) to[short] (11.75,16);
+							\node [font=\normalsize] at (10,17.25) {*};
+							\node [font=\normalsize] at (10.5,16.25) {*};
+							\draw [](9.75,14.5) to[short] (10.75,14.5);
+							\node at (10.75,14.5) [circ] {};
+							\draw [](11.75,16) to[short] (11.75,15.25);
+							\draw  (13.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw (13.75,16.5) to[R] (13.75,14.5);
+							\draw [](14.25,17) to[short] (14.75,17);
+							\draw[] (13.25,17) to[short] (12.75,17);
+							\draw [](13.75,17.5) to[short] (13.75,18);
+							\draw [](13.75,16.5) to[short] (13.75,16);
+							\draw [](12.75,17) to[short] (12.75,16);
+							\draw [](14.75,17) to[short] (14.75,16);
+							\node [font=\normalsize] at (13,17.25) {*};
+							\node [font=\normalsize] at (13.5,16.25) {*};
+							\draw [](12.75,14.5) to[short] (13.75,14.5);
+							\node at (13.75,14.5) [circ] {};
+							\draw [](14.75,16) to[short] (14.75,15.25);
+							\draw [](6.75,16) to[short] (6.75,13.75);
+							\draw [](8.75,15.25) to[short] (8.75,13);
+							\draw [](9.75,15.75) to[short] (9.75,12.5);
+							\draw [](9.75,15.75) to[short] (9.75,16);
+							\draw [](11.75,15.25) to[short] (11.75,12.5);
+							\draw [](12.75,16) to[short] (12.75,12);
+							\draw [](14.75,15.25) to[short] (14.75,12);
+							\draw [](7.75,18) to[short] (13.75,18);
+							\node at (10.75,18) [circ] {};
+							\draw [](8.75,13) to[short] (15,13);
+							\draw [](6.75,12.5) to[short] (9.75,12.5);
+							\draw [](11.75,12.5) to[short] (15,12.5);
+							\draw [](6.75,12) to[short] (12.75,12);
+							\draw [](14.75,12) to[short] (15,12);
+							\node at (6.75,14.5) [circ] {};
+							\node at (9.75,14.5) [circ] {};
+							\node at (12.75,14.5) [circ] {};
+							\node at (8.75,14.5) [circ] {};
+							\node at (14.75,14.5) [circ] {};
+							\node at (11.75,14.5) [circ] {};
+							\draw [](15,13) to[short, -o] (16,13) ;
+							\draw [](15,12.5) to[short, -o] (16,12.5) ;
+							\draw [](15,12) to[short, -o] (16,12) ;
+							\draw [](6.25,11.5) to[short, -o] (5.75,11.5) node[left] {N};
+							\draw [](6.25,11.5) to[short, -o] (16,11.5) ;
+							\draw [](13.75,18) to[short] (15.5,18);
+							\draw [](15.5,18) to[short] (15.5,11.5);
+							\node at (15.5,11.5) [circ] {};
+							\node at (13.75,18) [circ] {};
+						\end{circuitikz}
+					}
+				\end{figure}
+			
+			\subsubsubsection{Vatímetro trifásico en conexión semidirecta.}
+				Pueden ser tres vatímetros monofásicos:
+				\[P_T = P_A + P_B + P_C\]
+				\[P_T = K_I\cdot(W_A + W_B + W_C)\]
+				
+				
+				También es posible la medida sin neutro: las tres impedancias de los circuitos de tensión forman una estrella equilibrada con un neutro artificial.
+				
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\ctikzset{resistor=european}
+							\draw  (7.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw [, dashed] (6.5,18.25) rectangle  (15,14.25);
+							\draw (7.75,16.5) to[R] (7.75,14.5);
+							\draw [](8.25,17) to[short] (8.75,17);
+							\draw[] (7.25,17) to[short] (6.75,17);
+							\draw [](7.75,17.5) to[short] (7.75,18);
+							\draw [](6.75,17) to[short] (6.75,16);
+							\draw [](8.75,17) to[short] (8.75,16);
+							\node [font=\normalsize] at (7,17.25) {*};
+							\node [font=\normalsize] at (7.5,16.25) {*};
+							\node at (7.75,14.5) [circ] {};
+							\draw [](6.75,11.5) to[short, -o] (5.75,11.5) node[left] {A};
+							\draw [](6.75,11) to[short, -o] (5.75,11) node[left] {B};
+							\draw [](6.75,10.5) to[short, -o] (5.75,10.5) node[left] {C};
+							\draw [](8.75,16) to[short] (8.75,15.25);
+							\draw  (10.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw (10.75,16.5) to[R] (10.75,14.5);
+							\draw [](11.25,17) to[short] (11.75,17);
+							\draw[] (10.25,17) to[short] (9.75,17);
+							\draw [](10.75,17.5) to[short] (10.75,18);
+							\draw [](9.75,17) to[short] (9.75,16);
+							\draw [](11.75,17) to[short] (11.75,16);
+							\node [font=\normalsize] at (10,17.25) {*};
+							\node [font=\normalsize] at (10.5,16.25) {*};
+							\node at (10.75,14.5) [circ] {};
+							\draw [](11.75,16) to[short] (11.75,15.25);
+							\draw  (13.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw (13.75,16.5) to[R] (13.75,14.5);
+							\draw [](14.25,17) to[short] (14.75,17);
+							\draw[] (13.25,17) to[short] (12.75,17);
+							\draw [](13.75,17.5) to[short] (13.75,18);
+							\draw [](12.75,17) to[short] (12.75,16);
+							\draw [](14.75,17) to[short] (14.75,16);
+							\node [font=\normalsize] at (13,17.25) {*};
+							\node [font=\normalsize] at (13.5,16.25) {*};
+							\node at (13.75,14.5) [circ] {};
+							\draw [](14.75,16) to[short] (14.75,15.25);
+							\draw [](6.75,16) to[short] (6.75,13.75);
+							\draw [](9.75,15.75) to[short] (9.75,16);
+							\draw [](7.75,18) to[short] (13.75,18);
+							\node at (10.75,18) [circ] {};
+							\draw [](8.75,11.5) to[short] (15,11.5);
+							\draw [](6.75,11) to[short] (9.75,11);
+							\draw [](11.75,11) to[short] (15,11);
+							\draw [](6.75,10.5) to[short] (12.75,10.5);
+							\draw [](14.75,10.5) to[short] (15,10.5);
+							\node at (6.75,14.5) [circ] {};
+							\node at (9.75,14.5) [circ] {};
+							\node at (12.75,14.5) [circ] {};
+							\node at (8.75,14.5) [circ] {};
+							\node at (14.75,14.5) [circ] {};
+							\node at (11.75,14.5) [circ] {};
+							\draw [](15,11.5) to[short, -o] (16,11.5) ;
+							\draw [](15,11) to[short, -o] (16,11) ;
+							\draw [](15,10.5) to[short, -o] (16,10.5) ;
+							\draw [](6.25,10) to[short, -o] (5.75,10) node[left] {N};
+							\draw [](6.25,10) to[short, -o] (16,10) ;
+							\draw [](13.75,18) to[short] (15.5,18);
+							\draw [](15.5,16.5) to[short] (15.5,10);
+							\node at (15.5,10) [circ] {};
+							\node at (13.75,18) [circ] {};
+							\draw [](8.75,15.25) to[short] (8.75,14.5);
+							\draw [](9.75,15.75) to[short] (9.75,14.5);
+							\draw [](11.75,15.25) to[short] (11.75,14.5);
+							\draw [](12.75,16) to[short] (12.75,14.5);
+							\draw [](14.75,15) to[short] (14.75,14.5);
+							\draw [](14.75,15) to[short] (14.75,15.25);
+							\draw (8.75,12.75) to[L] (6.75,12.75);
+							\draw (11.75,12.75) to[L] (9.75,12.75);
+							\draw (14.75,12.75) to[L] (12.75,12.75);
+							\draw (6.75,12) to[L ] (8.75,12);
+							\draw (9.75,12) to[L ] (11.75,12);
+							\draw (12.75,12) to[L ] (14.75,12);
+							\draw [](6.75,13.5) to[short] (6.75,13);
+							\draw [](6.75,13.75) to[short] (6.75,12.75);
+							\draw [](8.75,14.5) to[short] (8.75,12.75);
+							\draw [](9.75,14.5) to[short] (9.75,12.75);
+							\draw [](11.75,14.5) to[short] (11.75,12.75);
+							\draw [](12.75,14.5) to[short] (12.75,12.75);
+							\draw [](14.75,14.5) to[short] (14.75,12.75);
+							
+							\draw [](6.75,12) to[short] (6.75,11.5);
+							\draw [](8.75,11.75) to[short] (8.75,11.5);
+							\draw [](8.75,11.5) to[short] (8.75,11.75);
+							\draw [](8.75,12) to[short] (8.75,11.75);
+							\draw [](9.75,12) to[short] (9.75,11);
+							\draw [](11.75,12) to[short] (11.75,11);
+							\draw [](12.75,12) to[short] (12.75,10.5);
+							\draw [](14.75,12) to[short] (14.75,10.5);
+							\draw [](15.5,16.5) to[short] (15.5,18);
+							\draw [](7.75,14.5) to[short] (7.75,13.75);
+							\draw[] (7.75,13.75) to[short] (6.25,13.75);
+							\draw [](6.25,13.75) to[short] (6.25,11.5);
+							\draw [](10.75,14.5) to[short] (10.75,13.75);
+							\draw [](13.75,14.5) to[short] (13.75,13.75);
+							\draw[] (10.75,13.75) to[short] (9.25,13.75);
+							\draw [](9.25,13.75) to[short] (9.25,11);
+							\draw[] (13.75,13.75) to[short] (12.25,13.75);
+							\draw [](12.25,13.75) to[short] (12.25,10.5);
+							\node at (6.25,11.5) [circ] {};
+							\node at (9.25,11) [circ] {};
+							\node at (12.25,10.5) [circ] {};
+							\draw [dashed] (14.75,13.25) -- (6,13.25);
+							\draw (6,13.25) to (5.75,13.25) node[ground]{};
+							\node at (8.75,13.25) [circ] {};
+							\node at (11.75,13.25) [circ] {};
+							\node at (14.75,13.25) [circ] {};
+						\end{circuitikz}
+					}
+				\end{figure}
+			
+			\newpage
+			\subsubsubsection{Vatímetro trifásico en conexión indirecta.}
+				Esta conexión es la usual para medidas en alta tensión.
+				\[P_T = P_A + P_B + P_C\]
+				\[P_T \approx K_{IA}\cdot K_{VA}\cdot W_A + K_{IB}\cdot K_{VB}\cdot W_B + K_{IC}\cdot K_{VC}\cdot W_C\]
+				
+				
+				También es posible medir sin neutro. Las tensiones se pueden medir conectando en "T" sólo 2 transformadores de tensión, ahorrando así un equipo.
+			
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\ctikzset{resistor=european};
+							\draw  (7.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw [, dashed] (6.5,18.25) rectangle  (15,14.25);
+							\draw (7.75,16.5) to[R] (7.75,14.5);
+							\draw [](8.25,17) to[short] (8.75,17);
+							\draw[] (7.25,17) to[short] (6.75,17);
+							\draw [](7.75,17.5) to[short] (7.75,18);
+							\draw [](7.75,16.5) to[short] (7.75,16);
+							\draw [](6.75,17) to[short] (6.75,16);
+							\draw [](8.75,17) to[short] (8.75,16);
+							\node [font=\normalsize] at (7,17.25) {*};
+							\node [font=\normalsize] at (7.5,16.25) {*};
+							\node at (7.75,14.5) [circ] {};
+							\draw [](6.75,11.5) to[short, -o] (-2.25,11.5) node[left] {A};
+							\draw [](6.75,11) to[short, -o] (-2.25,11) node[left] {B};
+							\draw [](6.75,10.5) to[short, -o] (-2.25,10.5) node[left] {C};
+							\draw [](8.75,16) to[short] (8.75,15.25);
+							\draw  (10.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw (10.75,16.5) to[R] (10.75,14.5);
+							\draw [](11.25,17) to[short] (11.75,17);
+							\draw[] (10.25,17) to[short] (9.75,17);
+							\draw [](10.75,17.5) to[short] (10.75,18);
+							\draw [](10.75,16.5) to[short] (10.75,16);
+							\draw [](9.75,17) to[short] (9.75,16);
+							\draw [](11.75,17) to[short] (11.75,16);
+							\node [font=\normalsize] at (10,17.25) {*};
+							\node [font=\normalsize] at (10.5,16.25) {*};
+							\node at (10.75,14.5) [circ] {};
+							\draw [](11.75,16) to[short] (11.75,15.25);
+							\draw  (13.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw (13.75,16.5) to[R] (13.75,14.5);
+							\draw [](14.25,17) to[short] (14.75,17);
+							\draw[] (13.25,17) to[short] (12.75,17);
+							\draw [](13.75,17.5) to[short] (13.75,18);
+							\draw [](13.75,16.5) to[short] (13.75,16);
+							\draw [](12.75,17) to[short] (12.75,16);
+							\draw [](14.75,17) to[short] (14.75,16);
+							\node [font=\normalsize] at (13,17.25) {*};
+							\node [font=\normalsize] at (13.5,16.25) {*};
+							\node at (13.75,14.5) [circ] {};
+							\draw [](14.75,16) to[short] (14.75,15.25);
+							\draw [](6.75,16) to[short] (6.75,13.75);
+							\draw [](9.75,15.75) to[short] (9.75,16);
+							\draw [](7.75,18) to[short] (13.75,18);
+							\node at (10.75,18) [circ] {};
+							\draw [](8.75,11.5) to[short] (15,11.5);
+							\draw [](6.75,11) to[short] (9.75,11);
+							\draw [](11.75,11) to[short] (15,11);
+							\draw [](6.75,10.5) to[short] (12.75,10.5);
+							\draw [](14.75,10.5) to[short] (15,10.5);
+							\node at (6.75,14.5) [circ] {};
+							\node at (9.75,14.5) [circ] {};
+							\node at (12.75,14.5) [circ] {};
+							\node at (8.75,14.5) [circ] {};
+							\node at (14.75,14.5) [circ] {};
+							\node at (11.75,14.5) [circ] {};
+							\draw [](15,11.5) to[short, -o] (16,11.5) ;
+							\draw [](15,11) to[short, -o] (16,11) ;
+							\draw [](15,10.5) to[short, -o] (16,10.5) ;
+							\draw [](6.25,10) to[short, -o] (-2.25,10) node[left] {N};
+							\draw [](6.25,10) to[short, -o] (16,10) ;
+							\draw [](8.75,15.25) to[short] (8.75,14.5);
+							\draw [](9.75,15.75) to[short] (9.75,14.5);
+							\draw [](11.75,15.25) to[short] (11.75,14.5);
+							\draw [](12.75,16) to[short] (12.75,14.5);
+							\draw [](14.75,15) to[short] (14.75,14.5);
+							\draw [](14.75,15) to[short] (14.75,15.25);
+							\draw (8.75,12.75) to[L] (6.75,12.75);
+							\draw (11.75,12.75) to[L] (9.75,12.75);
+							\draw (14.75,12.75) to[L] (12.75,12.75);
+							\draw (6.75,12) to[L ] (8.75,12);
+							\draw (9.75,12) to[L ] (11.75,12);
+							\draw (12.75,12) to[L ] (14.75,12);
+							\draw [](6.75,13.5) to[short] (6.75,13);
+							\draw [](6.75,13.75) to[short] (6.75,12.75);
+							\draw [](8.75,14.5) to[short] (8.75,12.75);
+							\draw [](9.75,14.5) to[short] (9.75,12.75);
+							\draw [](11.75,14.5) to[short] (11.75,12.75);
+							\draw [](12.75,14.5) to[short] (12.75,12.75);
+							\draw [](14.75,14.5) to[short] (14.75,12.75);
+							
+							\draw [](6.75,12) to[short] (6.75,11.5);
+							\draw [](8.75,11.75) to[short] (8.75,11.5);
+							\draw [](8.75,11.5) to[short] (8.75,11.75);
+							\draw [](8.75,12) to[short] (8.75,11.75);
+							\draw [](9.75,12) to[short] (9.75,11);
+							\draw [](11.75,12) to[short] (11.75,11);
+							\draw [](12.75,12) to[short] (12.75,10.5);
+							\draw [](14.75,12) to[short] (14.75,10.5);
+							\draw [](10.75,14.5) to[short] (10.75,13.75);
+							\draw [](13.75,14.5) to[short] (13.75,13.75);
+							\draw (-1,12) to[L ] (1,12);
+							\draw (1.5,12) to[L ] (3.5,12);
+							\draw (4,12) to[L ] (6,12);
+							\draw [](-1,12) to[short] (-1,11.5);
+							\draw [](1,12) to[short] (1,10);
+							\draw [](1.5,12) to[short] (1.5,11);
+							\draw [](3.5,12) to[short] (3.5,10);
+							\draw [](4,12) to[short] (4,10.5);
+							\draw [](6,12) to[short] (6,10);
+							\node at (-1,11.5) [circ] {};
+							\node at (1,10) [circ] {};
+							\node at (1.5,11) [circ] {};
+							\node at (3.5,10) [circ] {};
+							\node at (4,10.5) [circ] {};
+							\node at (6,10) [circ] {};
+							\draw (1,12.75) to[L] (-1,12.75);
+							\draw (3.5,12.75) to[L] (1.5,12.75);
+							\draw (6,12.75) to[L] (4,12.75);
+							\draw[] (7.75,14) to[short] (-1,14);
+							\draw [](-1,13.75) to[short] (-1,12.75);
+							\draw [](7.75,14.5) to[short] (7.75,14);
+							\draw [](-1,14) to[short] (-1,13.75);
+							\draw [](1.5,12.75) to[short] (1.5,13.75);
+							\draw [](1.5,13.75) to[short] (10.75,13.75);
+							\draw [](4,12.75) to[short] (4,13.5);
+							\draw [](4,13.5) to[short] (13.75,13.5);
+							\draw [](13.75,13.5) to[short] (13.75,13.75);
+							\draw [](6,12.75) to[short] (6,13.25);
+							\draw[] (6,13.25) to[short] (1,13.25);
+							\draw [](1,13.25) to[short] (1,12.75);
+							\draw [](3.5,13.25) to[short] (3.5,12.75);
+							\node at (3.5,13.25) [circ] {};
+							\node at (1,13.25) [circ] {};
+							\draw [](1,13.25) to[short] (1,18);
+							\draw[] (7.75,18) to[short] (1,18);
+							\node at (7.75,18) [circ] {};
+							\draw [dashed] (6,13.25) -- (14.75,13.25);
+							\node at (6,13.25) [circ] {};
+							\node at (8.75,13.25) [circ] {};
+							\node at (11.75,13.25) [circ] {};
+							\node at (14.75,13.25) [circ] {};
+							\draw (14.75,13.25) to (15.25,13.25) node[ground]{};
+						\end{circuitikz}
+					}
+				\end{figure}
+				
+			\subsubsubsection{Dos vatímetros en conexión semidirecta.}
+				Este esquema permmite medir la potencia de todo tipo de receptores trifásicos, pero \textbf{requiere conexión al neutro} y que \textbf{las tensiones de fase estén equilibradas}.
+				
+				
+				Si no existe neutro puede crearse uno artificial. Este esquema puede usarse en conexión indirecta.
+				
+				
+				Se basa en restar fasores de corriente secundarios:
+				\[P_T = K_I \cdot (\vec U_A\cdot \vec I_{A2} + \vec U_B\cdot \vec I_{B2} + \vec U_C\cdot \vec I_{C2})\]
+				
+				Si $\vec U_B = -(\vec U_A + \vec U_C)$:
+				\[P_T = K_I\cdot (\vec U_A \cdot (\vec I_{A2} - \vec I_{B2}) + \vec U_C\cdot (\vec I_{C2} - \vec I_{B2})) = K_I\cdot (\vec U_A\cdot \vec I_1 + \vec U_C\cdot \vec I_2)\]
+			
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\draw  (13.25,17.75) circle (0.5cm) node {$\large W_1$} ;
+						\draw  (17,17.75) circle (0.5cm) node {$\large W_2$} ;
+						
+						\draw [](11,15.75) to[short] (19.5,15.75);%A
+						\draw [](11,14.5) to[short] (19.5,14.5);%B
+						\draw [](11,13.25) to[short] (19.5,13.25);%C
+						\draw [](11,12) to[short] (19.5,12);%N
+						
+						\draw [](13.25,17.25) to[short] (13.25,16.75);
+						\draw [](13.25,16.75) to[short] (17,16.75);
+						\draw [](17,16.75) to[short] (17,17.25);
+						\draw [] (14.25,16.75) -- (14.25,12);
+						\node at (14.25,16.75) [circ] {};
+						\node at (14.25,12) [circ] {};
+						\node [font=\normalsize] at (19.75,12) {N};
+						\node [font=\normalsize] at (19.75,13.25) {C};
+						\node [font=\normalsize] at (19.75,14.5) {B};
+						\node [font=\normalsize] at (19.75,15.75) {A};
+						\draw (14,15.75) to[L,l={ \normalsize $T_A$}] (12.5,15.75);
+						\draw (15.75,14.5) to[L,l={ \normalsize $T_B$}] (14.75,14.5);
+						\draw (17.5,13.25) to[L,l={ \normalsize $T_C$}] (16.5,13.25);
+						
+						\draw [](12,16.25) to[short] (12,17.75);
+						\draw [-latex](12,16.25) -- (12,17)node[pos=1, right]{$I_{A2}$};
+						
+						\draw [](12,17.75) to[short] (12.75,17.75);
+						\draw [](18.25,16.25) to[short] (18.25,17.75);
+						\draw [-latex](18.25,17.75) -- (18.25,17)node[pos=1, left]{$I_{C2}$};
+						
+						\draw[] (18.25,17.75) to[short] (17.5,17.75);
+						\draw [](18.25,17.75) to[short] (18.25,18.75);
+						\draw[] (18.25,18.75) to[short] (12,18.75);
+						\draw [-latex](12,18.75) -- (15.25,18.75)node[pos=1, above]{$I_{B2}$};
+						\draw [](12,18.75) to[short] (12,17.75);
+						\node at (12,17.75) [circ] {};
+						\node at (18.25,17.75) [circ] {};
+						\draw [](13.25,18.25) to[short] (13.25,19);
+						\draw[] (13.25,19) to[short] (11.75,19);
+						\draw [](11.75,19) to[short] (11.75,15.75);
+						\draw [](17,18.25) to[short] (17,19);
+						\draw [](17,19) to[short] (18.5,19);
+						\draw [](18.5,19) to[short] (18.5,13.25);
+						\node at (18.5,13.25) [circ] {};
+						\node at (11.75,15.75) [circ] {};
+						\draw [](12.825,15.75) to[short] (12.825,16.25);
+						\draw (12,16.25) to[short] (12.825,16.25);
+						\draw (13.675,15.75) to[short] (13.675,16.25);
+						
+						\draw (13.75,17.75) to[short] (14.825,17.75);
+						\draw [-latex](13.75,17.75) -- (14.25,17.75)node[pos=1, above]{$I_1$};
+						\draw (14.825,17.75) to[short] (14.825,16.25);
+						\draw (13.675,16.25) to[short] (14.825,16.25);
+						\node at (14.825,16.25) [circ] {};
+						
+						\draw (14.825,14.5) to[short] (14.825,16.25);
+						\draw (15.675,14.5) to[short] (15.675,16.25);
+						\draw (16.5,17.75) to[short] (15.675,17.75);
+						\draw [-latex](15.675,17.75) -- (16.2,17.75)node[pos=1, above]{$I_2$};
+						\draw (15.675,16.25) to[short] (15.675,17.75);
+						\draw (15.675,16.25) to[short] (16.56,16.25);
+						\node at (15.675,16.25) [circ] {};
+						
+						\draw (16.56,13.25) to[short] (16.56,16.25);
+						\draw (17.425,13.25) to[short] (17.425,16.25);
+						\draw (17.425,16.25) to[short] (18.25,16.25);
+					\end{circuitikz}
+				}
+				\end{figure}
+			
+		\subsubsection{Medida de P en sistemas III sin neutro.}
+			\subsubsubsection{Método de los dos vatímetros o conexión Aron.}
+				Es una consecuencia del Teorema de Blondel: para medir la potencia total de un sistema de $n$ conductores de alimentación activos basta con $n-1$ vatímetros.
+				
+				
+				Es válido para sistemas sin neutro y en todos los casos en los que por dicho conductor no circule corriente.
+				
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw  (10,16) circle (0.5cm) node {\normalsize W} ;
+							\draw [short] (9,16) -- (9.5,16);
+							\draw [short] (10.5,16) -- (12.75,16);
+							\draw [short] (10,16.5) -- (10,17);
+							\draw [short] (10,17) -- (9,17);
+							\draw [short] (9,17) -- (9,16);
+							\draw [short] (9,14.5) -- (11.25,14.5);
+							\draw [short] (10.75,14.5) -- (10.75,15.5);
+							\draw [short] (10.75,15.5) -- (11.75,15.5);
+							\draw [short] (11.75,15.5) -- (11.75,15);
+							\draw [short] (9,13) -- (12.75,13);
+							\draw  (11.75,14.5) circle (0.5cm) node {\normalsize W} ;
+							\draw [short] (12.25,14.5) -- (12.75,14.5);
+							\draw [](9,16) to[short, -o] (8.5,16) node[left] {A};
+							\draw [](9,14.5) to[short, -o] (8.5,14.5) node[left] {B};
+							\draw [](9,13) to[short, -o] (8.5,13) node[left] {C};
+							\draw [](12.75,13) to[short, -o] (13.25,13) ;
+							\draw [](12.75,14.5) to[short, -o] (13.25,14.5) ;
+							\draw [](12.75,16) to[short, -o] (13.25,16) ;
+							\draw [](10,15.5) to[short] (10,13);
+							\draw [](11.75,14) to[short] (11.75,13);
+							\draw  (17.75,13) circle (0.5cm) node {\normalsize W} ;
+							\draw [short] (16.75,13) -- (16.75,14);
+							\draw [short] (16.75,14) -- (17.75,14);
+							\draw [short] (17.75,14) -- (17.75,13.5);
+							\draw [short] (18.25,13) -- (18.75,13);
+							\node at (9,16) [circ] {};
+							\node at (10.75,14.5) [circ] {};
+							\node at (10,13) [circ] {};
+							\draw  (16,16) circle (0.5cm) node {\normalsize W} ;
+							\draw [short] (15,16) -- (15.5,16);
+							\draw [short] (16.5,16) -- (18.75,16);
+							\draw [short] (16,16.5) -- (16,17);
+							\draw [short] (16,17) -- (15,17);
+							\draw [short] (15,17) -- (15,16);
+							\draw [short] (15,14.5) -- (18.25,14.5);
+							\draw [short] (15,13) -- (17.25,13);
+							\draw [short] (18.25,14.5) -- (18.75,14.5);
+							\draw [](15,16) to[short, -o] (14.5,16) node[left] {A};
+							\draw [](15,14.5) to[short, -o] (14.5,14.5) node[left] {B};
+							\draw [](15,13) to[short, -o] (14.5,13) node[left] {C};
+							\draw [](18.75,13) to[short, -o] (19.25,13) ;
+							\draw [](18.75,14.5) to[short, -o] (19.25,14.5) ;
+							\draw [](18.75,16) to[short, -o] (19.25,16) ;
+							\draw [](16,15.5) to[short] (16,14.5);
+							\node at (15,16) [circ] {};
+							\node at (16,14.5) [circ] {};
+							\node at (11.75,13) [circ] {};
+							\draw [](17.75,12.5) to[short] (17.75,12);
+							\draw [](17.75,12) to[short] (18.75,12);
+							\draw [](18.75,12) to[short] (18.75,14.5);
+							\node at (18.75,14.5) [circ] {};
+							\node at (16.75,13) [circ] {};
+							\draw  (24.25,13) circle (0.5cm) node {\normalsize W} ;
+							\draw [short] (23.25,13) -- (23.25,14);
+							\draw [short] (23.25,14) -- (24.25,14);
+							\draw [short] (24.25,14) -- (24.25,13.5);
+							\draw [short] (23.25,13) -- (23.75,13);
+							\draw [short] (21,16) -- (21.5,16);
+							\draw [short] (21.5,16) -- (24.75,16);
+							\draw [short] (22.5,14.5) -- (24.25,14.5);
+							\draw [short] (21,13) -- (23.25,13);
+							\draw [short] (24.25,14.5) -- (24.75,14.5);
+							\draw [](21,16) to[short, -o] (20.5,16) node[left] {A};
+							\draw [](21,14.5) to[short, -o] (20.5,14.5) node[left] {B};
+							\draw [](21,13) to[short, -o] (20.5,13) node[left] {C};
+							\draw [](24.75,13) to[short, -o] (25.75,13) ;
+							\draw [](24.75,14.5) to[short, -o] (25.75,14.5) ;
+							\draw [](24.75,16) to[short, -o] (25.75,16) ;
+							\draw [](24.25,12.5) to[short] (24.25,12);
+							\draw [](24.25,12) to[short] (25.25,12);
+							\draw [](25.25,12) to[short] (25.25,16);
+							\node at (25.25,16) [circ] {};
+							\node at (23.25,13) [circ] {};
+							\draw  (22,14.5) circle (0.5cm) node {\normalsize W} ;
+							\draw [short] (22,15) -- (22,15.5);
+							\node [font=\normalsize] at (21.75,15.75) {};
+							\node [font=\normalsize] at (21.25,15.25) {};
+							\node at (21,14.5) [circ] {};
+							\draw [](21,14.5) to[short] (21.5,14.5);
+							\draw[] (22,15.5) to[short] (21,15.5);
+							\draw [](21,15.5) to[short] (21,14.5);
+							\draw [](22,14) to[short] (22,13.5);
+							\draw [](22,13.5) to[short] (23,13.5);
+							\draw [](23,13.5) to[short] (23,16);
+							\node at (23,16) [circ] {};
+						\end{circuitikz}
+					}%
+				\end{figure}
+				
+				En el primer caso:
+				\[P_T = \vec U_{AC}\cdot \vec I_A + \vec U_{BC}\cdot \vec I_B = W_A + W_B\]
+			
+			\subsubsubsection{Esquemas de vatímetros trifásicos tipo Aron.}
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\ctikzset{resistor=european}
+							\draw  (7.75,5.5) circle (0.5cm) node {\normalsize W} ;
+							\draw (7.75,5) to[R] (7.75,3);
+							\draw [](8.25,5.5) to[short] (8.75,5.5);
+							\draw[] (7.25,5.5) to[short] (6.75,5.5);
+							\draw [](7.75,6) to[short] (7.75,6.5);
+							\draw [](7.75,5) to[short] (7.75,4.5);
+							\draw [](6.75,5.5) to[short] (6.75,4.5);
+							\draw [](8.75,5.5) to[short] (8.75,4.5);
+							\node [font=\normalsize] at (7,5.75) {*};
+							\node [font=\normalsize] at (7.5,4.75) {*};
+							\node at (7.75,3) [circ] {};
+							\draw [](6.75,0) to[short, -o] (5,0) node[left] {A};
+							\draw [](6.75,-0.5) to[short, -o] (5,-0.5) node[left] {B};
+							\draw [](6.75,-1) to[short, -o] (5,-1) node[left] {C};
+							\draw [](8.75,4.5) to[short] (8.75,3.75);
+							\draw  (10.75,5.5) circle (0.5cm) node {\normalsize W} ;
+							\draw (10.75,5) to[R] (10.75,3);
+							\draw [](11.25,5.5) to[short] (11.75,5.5);
+							\draw[] (10.25,5.5) to[short] (9.75,5.5);
+							\draw [](10.75,6) to[short] (10.75,6.5);
+							\draw [](10.75,5) to[short] (10.75,4.5);
+							\draw [](9.75,5.5) to[short] (9.75,4.5);
+							\draw [](11.75,5.5) to[short] (11.75,4.5);
+							\node [font=\normalsize] at (10,5.75) {*};
+							\node [font=\normalsize] at (10.5,4.75) {*};
+							\node at (10.75,3) [circ] {};
+							\draw [](11.75,4.5) to[short] (11.75,3.75);
+							\draw [](6.75,4.5) to[short] (6.75,2.25);
+							\draw [](9.75,4.25) to[short] (9.75,4.5);
+							\draw [](7.75,6.5) to[short] (10.75,6.5);
+							\draw [](8.75,0) to[short] (12.75,0);
+							\draw [](6.75,-0.5) to[short] (9.75,-0.5);
+							\draw [](11.75,-0.5) to[short] (12.75,-0.5);
+							\draw [](6.75,-1) to[short] (12.75,-1);
+							\node at (6.75,3) [circ] {};
+							\node at (9.75,3) [circ] {};
+							\node at (8.75,3) [circ] {};
+							\node at (11.75,3) [circ] {};
+							\draw [](12.75,0) to[short, -o] (13,0) ;
+							\draw [](12.75,-0.5) to[short, -o] (13,-0.5) ;
+							\draw [](12.75,-1) to[short, -o] (13,-1) ;
+							\draw [](8.75,3.75) to[short] (8.75,3);
+							\draw [](9.75,4.25) to[short] (9.75,3);
+							\draw [](11.75,3.75) to[short] (11.75,3);
+							\draw (8.75,1.25) to[L] (6.75,1.25);
+							\draw (11.75,1.25) to[L] (9.75,1.25);
+							\draw (6.75,0.5) to[L ] (8.75,0.5);
+							\draw (9.75,0.5) to[L ] (11.75,0.5);
+							\draw [](6.75,2) to[short] (6.75,1.5);
+							\draw [](6.75,2.25) to[short] (6.75,1.25);
+							\draw [](8.75,3) to[short] (8.75,1.25);
+							\draw [](9.75,3) to[short] (9.75,1.25);
+							\draw [](11.75,3) to[short] (11.75,1.25);
+							
+							\draw [](6.75,0.5) to[short] (6.75,0);
+							\draw [](8.75,0.25) to[short] (8.75,0);
+							\draw [](8.75,0) to[short] (8.75,0.25);
+							\draw [](8.75,0.5) to[short] (8.75,0.25);
+							\draw [](9.75,0.5) to[short] (9.75,-0.5);
+							\draw [](11.75,0.5) to[short] (11.75,-0.5);
+							\draw [](10.75,3) to[short] (10.75,2.25);
+							\draw [](7.75,3) to[short] (7.75,2.5);
+							\node at (8.75,1.75) [circ] {};
+							\node at (11.75,1.75) [circ] {};
+							\draw[] (10.75,2.25) to[short] (9.25,2.25);
+							\draw [](9.25,2.25) to[short] (9.25,-0.5);
+							\draw [](7.75,2.5) to[short] (7.75,2.25);
+							\draw[] (7.75,2.25) to[short] (6.25,2.25);
+							\draw [](6.25,2.25) to[short] (6.25,0);
+							\node at (6.25,0) [circ] {};
+							\node at (9.25,-0.5) [circ] {};
+							\draw[] (7.75,6.5) to[short] (5.75,6.5);
+							\draw [](5.75,6.5) to[short] (5.75,-1);
+							\node at (5.75,-1) [circ] {};
+							\node at (7.75,6.5) [circ] {};
+							\draw (11.75,1.75) to (12.25,1.75) node[ground]{};
+							\draw [dashed] (8.75,1.75) -- (11.75,1.75);
+							\draw [, dashed] (6.5,6.75) rectangle  (12,2.75);
+							\draw  (-1.5,5.5) circle (0.5cm) node {\normalsize W} ;
+							\draw (-1.5,5) to[R] (-1.5,3);
+							\draw [](-1,5.5) to[short] (-0.5,5.5);
+							\draw[] (-2,5.5) to[short] (-2.5,5.5);
+							\draw [](-1.5,6) to[short] (-1.5,6.5);
+							\draw [](-1.5,5) to[short] (-1.5,4.5);
+							\draw [](-2.5,5.5) to[short] (-2.5,4.5);
+							\draw [](-0.5,5.5) to[short] (-0.5,4.5);
+							\node [font=\normalsize] at (-2.25,5.75) {*};
+							\node [font=\normalsize] at (-1.75,4.75) {*};
+							\node at (-1.5,3) [circ] {};
+							\draw [](-2.5,0) to[short, -o] (-4.25,0) node[left] {A};
+							\draw [](-2.5,-0.5) to[short, -o] (-4.25,-0.5) node[left] {B};
+							\draw [](-2.5,-1) to[short, -o] (-4.25,-1) node[left] {C};
+							\draw [](-0.5,4.5) to[short] (-0.5,3.75);
+							\draw  (1.5,5.5) circle (0.5cm) node {\normalsize W} ;
+							\draw (1.5,5) to[R] (1.5,3);
+							\draw [](2,5.5) to[short] (2.5,5.5);
+							\draw[] (1,5.5) to[short] (0.5,5.5);
+							\draw [](1.5,6) to[short] (1.5,6.5);
+							\draw [](1.5,5) to[short] (1.5,4.5);
+							\draw [](0.5,5.5) to[short] (0.5,4.5);
+							\draw [](2.5,5.5) to[short] (2.5,4.5);
+							\node [font=\normalsize] at (0.75,5.75) {*};
+							\node [font=\normalsize] at (1.25,4.75) {*};
+							\node at (1.5,3) [circ] {};
+							\draw [](2.5,4.5) to[short] (2.5,3.75);
+							\draw [](-2.5,4.5) to[short] (-2.5,2.25);
+							\draw [](0.5,4.25) to[short] (0.5,4.5);
+							\draw [](-1.5,6.5) to[short] (1.5,6.5);
+							\draw [](-0.5,0) to[short] (3.5,0);
+							\draw [](-2.5,-0.5) to[short] (0.5,-0.5);
+							\draw [](2.5,-0.5) to[short] (3.5,-0.5);
+							\draw [](-2.5,-1) to[short] (3.5,-1);
+							\node at (-2.5,3) [circ] {};
+							\node at (0.5,3) [circ] {};
+							\node at (-0.5,3) [circ] {};
+							\node at (2.5,3) [circ] {};
+							\draw [](3.5,0) to[short, -o] (3.75,0) ;
+							\draw [](3.5,-0.5) to[short, -o] (3.75,-0.5) ;
+							\draw [](3.5,-1) to[short, -o] (3.75,-1) ;
+							\draw [](-0.5,3.75) to[short] (-0.5,3);
+							\draw [](0.5,4.25) to[short] (0.5,3);
+							\draw [](2.5,3.75) to[short] (2.5,3);
+							\draw [](-2.5,2) to[short] (-2.5,1.5);
+							\draw [](-2.5,2.25) to[short] (-2.5,0.5);
+							\draw [](-0.5,3) to[short] (-0.5,0.5);
+							\draw [](0.5,3) to[short] (0.5,0.5);
+							\draw [](2.5,3) to[short] (2.5,0.5);
+							
+							\draw [](-2.5,0.5) to[short] (-2.5,0);
+							\draw [](-0.5,0.25) to[short] (-0.5,0);
+							\draw [](-0.5,0) to[short] (-0.5,0.25);
+							\draw [](-0.5,0.5) to[short] (-0.5,0.25);
+							\draw [](0.5,0.5) to[short] (0.5,-0.5);
+							\draw [](2.5,0.5) to[short] (2.5,-0.5);
+							\draw[] (1.5,3) to[short] (0.5,3);
+							\draw[] (-1.5,3) to[short] (-2.5,3);
+							\draw[] (-1.5,6.5) to[short] (-3.5,6.5);
+							\draw [](-3.5,6.5) to[short] (-3.5,-1);
+							\node at (-3.5,-1) [circ] {};
+							\node at (-1.5,6.5) [circ] {};
+							\draw [, dashed] (-2.75,6.75) rectangle  (2.75,2.75);
+						\end{circuitikz}
+					}%
+				\end{figure}
+				
+				Conexión semidirecta:
+				\[P_T = K_I (W_1 + W_2)\]
+			
+		\newpage
+		\subsubsection{Medida de P en sistemas III equilibrados con neutro.}
+			\subsubsubsection{Medida con un vatímetro monofásico.}
+				\begin{figure}[H]
+					\begin{minipage}{0.7\textwidth}
+						En este caso la potencia total es 3 veces la de una cualquiera de las fases:
+						\[P_F = W - P_W\]
+						
+						Si la potencia que disipa el vatímetro es despreciable:
+						\[P_T = 3\cdot P_F \approx 3\cdot W\]
+						
+						
+						Si no existe neutro hay que crear uno artificial.
+					\end{minipage}%
+					\begin{minipage}{0.3\textwidth}
+						\begin{figure}[H]
+							\centering
+							\scalebox{.6}{
+								\begin{circuitikz}
+									\tikzstyle{every node}=[font=\normalsize]
+									\draw  (10,16) circle (0.5cm) node {\normalsize W} ;
+									\draw [short] (9,16) -- (9.5,16);
+									\draw [short] (10.5,16) -- (11,16);
+									\draw [short] (10,16.5) -- (10,17);
+									\draw [short] (10,17) -- (9,17);
+									\draw [short] (9,17) -- (9,16);
+									\draw [short] (9,15) -- (11.25,15);
+									\draw [short] (9,14) -- (11.25,14);
+									\draw [](9,16) to[short, -o] (8.5,16) node[left] {A};
+									\draw [](9,15) to[short, -o] (8.5,15) node[left] {B};
+									\draw [](9,14) to[short, -o] (8.5,14) node[left] {C};
+									\draw [](11.25,14) to[short, -o] (11.5,14) ;
+									\draw [](11.25,15) to[short, -o] (11.5,15) ;
+									\draw [](11,16) to[short, -o] (11.5,16) ;
+									\draw [](10,15.5) to[short] (10,13);
+									\node at (9,16) [circ] {};
+									\node at (10,13) [circ] {};
+									\draw [](9,13) to[short, -o] (8.5,13) node[left] {N};
+									\draw [](11,13) to[short, -o] (11.5,13) ;
+									\draw [](9,13) to[short] (11,13);
+								\end{circuitikz}
+							}%
+						\end{figure}
+					\end{minipage}
+				\end{figure}
+			
+	\subsection{Medida de la potencia reactiva en c.a. trifásica.}
+		\subsubsection{Medida de la potencia reactiva.}
+			Esta potencia aparece en los circuitos sonetidos a tensiones e intensidades variables en el tiempo y en los que existen elementos que almacenan energía.
+			
+			
+			El aparato para su medida es el varímetro. Internamiente difiere de un vatímetro, pero su conexión es idéntica.
+			
+			
+			En corriente alterna sinusoidal monofásica su lectura es proporcional al módulo del \textbf{producto vectorial} de los fasores que tiene aplicados:
+			\[Q = U\cdot I \cdot \sin (\vec U, \vec I)\]
+			\[Q_Z = U_Z\cdot I_Z \cdot \sin \varphi_Z\]
+		
+		\subsubsection{Medida de Q en sistemas III.}
+			Admite las mismas conexiones y esquemas que la potencia activa con vatímetros: se pueden utilizar varímetros monofásicos, trifásicos, método de los dos varímetros, etc.
+			
+			
+			Con vatímetros también puede medirse reactiva. Esta opción limita el uso de varímetros, luego no compensa tener aparatos distintos para medir lo mismo. Además, como la reactiva puede ser positiva o negativa, al utilizar vatímetros hay que \textbf{tener en cuenta la secuencia de fases}.
+		
+		\subsubsection{Medida de Q en sistemas III equilibrados.}
+			\subsubsubsection{Con uno o dos vatímetros.}
+				Se puede medir la reactiva:
+				\begin{itemize}
+					\item Mediante \textbf{un sólo vatímetro}, adecuadamente conectado.
+					\item Utilizando el \textbf{método de los dos vatímetros}, interpretando las lecturas.
+				\end{itemize}
+				
+				
+				En ambos casos hay que prestar atención a la secuencia de fases, ya que esta determina el signo de la reactiva, junto con la conexión de los vatímetros.
+				
+				
+				Estas características permiten determinar el carácter del circuito cuya potencia se mide a partir de las lecturas de los aparatos.
+			
+			\subsubsubsection{Con un vatímetro monofásico.}
+				Si la secuencia de fases es directa:
+				
+				\begin{figure}[H]
+					\begin{minipage}{0.3\textwidth}
+						\begin{figure}[H]
+							\centering
+							\scalebox{.8}{
+								\begin{circuitikz}
+									\tikzstyle{every node}=[font=\normalsize]
+									\draw  (10,16) circle (0.5cm) node {\normalsize W} ;
+									\draw [short] (9,16) -- (9.5,16);
+									\draw [short] (10.5,16) -- (11,16);
+									\draw [short] (10,16.5) -- (10,17);
+									\draw [short] (10,17) -- (9,17);
+									\draw [short] (9,17) -- (9,15);
+									\draw [short] (9,15) -- (11.25,15);
+									\draw [short] (9,14) -- (11.25,14);
+									\draw [](9,16) to[short, -o] (8.5,16) node[left] {A};
+									\draw [](9,15) to[short, -o] (8.5,15) node[left] {B};
+									\draw [](9,14) to[short, -o] (8.5,14) node[left] {C};
+									\draw [](11.25,14) to[short, -o] (11.5,14) ;
+									\draw [](11.25,15) to[short, -o] (11.5,15) ;
+									\draw [](11,16) to[short, -o] (11.5,16) ;
+									\draw [](10,15.5) to[short] (10,14);
+									\node at (9,15) [circ] {};
+									\node at (10,14) [circ] {};
+								\end{circuitikz}
+							}%
+						\end{figure}
+					\end{minipage}%
+					\begin{minipage}{0.7\textwidth}
+						\[W_A = \vec I_A\cdot \vec U_{BC}\]
+						\[W_A = U_L\cdot I_L\cdot \cos(\vec U_{BC}, \vec I_A)\]
+						
+						Luego:
+						\[W_A = U_L \cdot I_L \cdot \sin \varphi\]
+						\[Q = \sqrt{3}\cdot W_A\]
+					\end{minipage}
+				\end{figure}
+				
+				Las otras dos posibilidades son:
+				\[Q_T = \sqrt{3}W_B = \sqrt{3}W_C\]
+				
+				
+				Donde:
+				\[W_B = \vec I_B\cdot \vec U_{CA}\qquad W_C = \vec I_C\cdot \vec U_{AB}\]
+				
+				
+				Si cambia la secuencia de fases el signo de $Q$ cambia.
+				
+				\begin{figure}[H]
+					\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, -latex] (5.5,16) -- (5.5,19.75)node[pos=1,above]{$U_A$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, -latex] (5.5,16) -- (9.25,14.25)node[pos=0.5,above]{$U_B$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, -latex] (5.5,16) -- (2,14.25)node[pos=0.5,above]{$U_C$};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, -latex] (5.5,16) -- (7,17.25)node[pos=1,right]{$I_A$};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, -latex] (5.5,16) -- (6,14.25)node[pos=0.5,left]{$I_B$};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, -latex] (5.5,16) -- (3.5,16.5)node[pos=0.5,above]{$I_C$};
+							\draw [-latex] (5.5,16) -- (10.5,16)node[pos=1,above]{$U_{BC}$};
+							\draw (5.5,16.5) arc (90:40:0.5)node[pos=0.7,above]{$\varphi$};
+						\end{circuitikz}
+				\end{figure}
+			
+		\subsubsection{Medida de Q en todo tipo de sistemas III.}
+			\subsubsubsection{Con varímetros.}
+				Hay que medir la potencia reactiva de cada fase (con neutro) o utilizar el método de los dos varímetros (sin neutro).
+				
+			\subsubsubsection{Con 3 vatímetros.}
+				En el signo de $Q$ influye la secuencia de fases. Si es directa:
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+						\begin{circuitikz}
+					\tikzstyle{every node}=[font=\normalsize]
+					\ctikzset{resistor=european}
+					\draw  (7.75,17) circle (0.5cm) node {\normalsize W} ;
+					\draw (7.75,16.5) to[R] (7.75,14.5);
+					\draw [](8.25,17) to[short] (8.75,17);
+					\draw[] (7.25,17) to[short] (6.75,17);
+					\draw [](7.75,17.5) to[short] (7.75,18);
+					\draw [](6.75,17) to[short] (6.75,16);
+					\draw [](8.75,17) to[short] (8.75,16);
+					\node [font=\normalsize] at (7,17.25) {*};
+					\node [font=\normalsize] at (7.5,16.25) {*};
+					\node at (7.75,14.5) [circ] {};
+					\draw [](8.75,16) to[short] (8.75,15.25);
+					\draw  (10.75,17) circle (0.5cm) node {\normalsize W} ;
+					\draw (10.75,16.5) to[R] (10.75,14.5);
+					\draw [](10.75,14.5) to[short] (10.75,12);
+					\draw [](11.25,17) to[short] (11.75,17);
+					\draw[] (10.25,17) to[short] (9.75,17);
+					\draw [](10.75,17.5) to[short] (10.75,18);
+					\draw [](9.75,17) to[short] (9.75,16);
+					\draw [](11.75,17) to[short] (11.75,16);
+					\node [font=\normalsize] at (10,17.25) {*};
+					\node [font=\normalsize] at (10.5,16.25) {*};
+					\node at (10.75,12) [circ] {};
+					\draw [](11.75,16) to[short] (11.75,15.25);
+					\draw  (13.75,17) circle (0.5cm) node {\normalsize W} ;
+					\draw (13.75,16.5) to[R] (13.75,14.5);
+					\draw [](14.25,17) to[short] (14.75,17);
+					\draw[] (13.25,17) to[short] (12.75,17);
+					\draw [](13.75,17.5) to[short] (13.75,18);
+					\draw [](12.75,17) to[short] (12.75,16);
+					\draw [](14.75,17) to[short] (14.75,16);
+					\node [font=\normalsize] at (13,17.25) {*};
+					\node [font=\normalsize] at (13.5,16.25) {*};
+					\node at (13.75,14.5) [circ] {};
+					\draw [](14.75,16) to[short] (14.75,15.25);
+					\draw [](9.75,15.75) to[short] (9.75,16);
+					\draw [](8.75,13) to[short] (15,13);
+					\draw [](6.75,12.5) to[short] (9.75,12.5);
+					\draw [](11.75,12.5) to[short] (15,12.5);
+					\draw [](6.75,12) to[short] (12.75,12);
+					\draw [](14.75,12) to[short] (15,12);
+					\node at (6.75,14.5) [circ] {};
+					\node at (9.75,14.5) [circ] {};
+					\node at (12.75,14.5) [circ] {};
+					\node at (8.75,14.5) [circ] {};
+					\node at (14.75,14.5) [circ] {};
+					\node at (11.75,14.5) [circ] {};
+					\draw [](15,13) to[short, -o] (16,13) ;
+					\draw [](15,12.5) to[short, -o] (16,12.5) ;
+					\draw [](15,12) to[short, -o] (16,12) ;
+					\draw [](8.75,15.25) to[short] (8.75,14.5);
+					\draw [](9.75,15.75) to[short] (9.75,14.5);
+					\draw [](11.75,15.25) to[short] (11.75,14.5);
+					\draw [](12.75,16) to[short] (12.75,14.5);
+					\draw [](14.75,15) to[short] (14.75,14.5);
+					\draw [](14.75,15) to[short] (14.75,15.25);
+					
+					\draw [](8.75,13.25) to[short] (8.75,13);
+					\draw [](8.75,13) to[short] (8.75,13.25);
+					\draw [](8.75,13.5) to[short] (8.75,13.25);
+					\draw [](9.75,13.5) to[short] (9.75,12.5);
+					\draw [](11.75,13.5) to[short] (11.75,12.5);
+					\draw [](12.75,13.5) to[short] (12.75,12);
+					\draw [](14.75,13.5) to[short] (14.75,12);
+					
+					\draw [](6.75,14.5) to[short] (6.75,16);
+					\draw [](6.75,14.5) to[short] (6.75,13);
+					\draw[] (6.75,13) to[short] (6.25,13);
+					\draw[] (6.75,12.5) to[short] (6.25,12.5);
+					\draw[] (6.75,12) to[short] (6.5,12);
+					\draw[] (6.5,12) to[short] (6.25,12);
+					\draw [](8.75,14.5) to[short] (8.75,13.5);
+					\draw [](9.75,14.5) to[short] (9.75,13.5);
+					\draw [](11.75,14.5) to[short] (11.75,13.5);
+					\draw [](12.75,14.5) to[short] (12.75,13.5);
+					\draw [](14.75,14.5) to[short] (14.75,13.5);
+					\draw [](7.75,14.5) to[short] (7.75,12.5);
+					\draw [](7.75,18) to[short] (9.25,18);
+					\draw [](9.25,18) to[short] (9.25,14.5);
+					\draw [](10.75,14.5) to[short] (10.75,13);
+					\draw [](10.75,18) to[short] (12.25,18);
+					\draw [](12.25,18) to[short] (12.25,14.5);
+					\draw [](13.75,14.5) to[short] (13.75,13);
+					\draw [](13.75,18) to[short] (15.25,18);
+					\draw [](15.25,18) to[short] (15.25,14.5);
+					\node at (13.75,13) [circ] {};
+					\node at (15.25,12.5) [circ] {};
+					\node at (12.25,13) [circ] {};
+					\node at (9.25,12) [circ] {};
+					\node at (7.75,12.5) [circ] {};
+					\draw [](9.25,12) to[short] (9.25,14.5);
+					\draw [](12.25,13) to[short] (12.25,14.5);
+					\draw [](15.25,12.5) to[short] (15.25,14.5);
+					\draw [](6.25,13) to[short, -o] (6,13) node[left] {A};
+					\draw [](6.25,12.5) to[short, -o] (6,12.5) node[left] {B};
+					\draw [](6.25,12) to[short, -o] (6,12) node[left] {C};
+					\draw [, dashed] (6.5,18.25) rectangle  (15,14.25);
+				\end{circuitikz}
+					}%
+				\end{figure}
+				
+				En un sistema equilibrado los 3 vatímetros marcarían el mismo valor, por lo que sólo haría falta uno (caso anterior).
+				
+				
+				La demostración del valor leído por cada vatímetro es la que se muestra a continuación:
+				\[Q_T = \vec U_A \times \vec I_A + \vec U_B \times \vec I_B + \vec U_C \times \vec I_C\]
+				
+				
+				Si la secuencia es directa:
+				\[\vec U_A \times \vec I_A = U_F\cdot I_A\cdot \sin (\theta_{U_A} - \theta_{I_A})\]
+				\[\vec U_A \times \vec I_A = \dfrac{\vec U_{BC} \cdot \vec I_A}{\sqrt{3}}\qquad\vec U_B \times \vec I_B = \dfrac{\vec U_{CA} \cdot \vec I_B}{\sqrt{3}}\qquad\vec U_C \times \vec I_C = \dfrac{\vec U_{AB} \cdot \vec I_C}{\sqrt{3}}\]
+				
+				
+				Sustituyendo:
+				\[Q_T = \dfrac{W_A+W_B+W_C}{\sqrt{3}}\]
+			
+			\subsubsubsection{Con 2 vatímetros en conexión semidirecta.}
+				\[Q_T = K_I\cdot (\vec U_A\times \vec I_{A2} +\vec U_B\times \vec I_{B2} + \vec U_C\times \vec I_{C2})\]
+				
+				
+				Si la secuencia de fases es directa:
+				\[\vec U_A\times \vec I_{A2} = \dfrac{\vec U_{BC}\cdot \vec I_{A2}}{\sqrt{3}}\qquad\vec U_B\times \vec I_{B2} = \dfrac{\vec U_{CA}\cdot \vec I_{B2}}{\sqrt{3}}\qquad\vec U_C\times \vec I_{C2} = \dfrac{\vec U_{AB}\cdot \vec I_{C2}}{\sqrt{3}}\]
+				
+				
+				Si $\vec U_{CA} = -(\vec U_{AB} + \vec U_{BC})$, $\vec I_1 = \vec I_{A2} - \vec I_{B2}$ e $\vec I_2 = \vec I_{C2} - \vec I_{B2}$ resulta:
+				\[Q_T = \dfrac{K_I}{\sqrt{3}}(\vec U_{BC}\cdot \vec I_1 + \vec U_{AB}\cdot \vec I_2)\]
+				
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\draw  (13.25,17.75) circle (0.5cm) node {$\large W_1$} ;
+						\draw  (17,17.75) circle (0.5cm) node {$\large W_2$} ;
+						
+						\draw [-latex](12,16.25) -- (12,17)node[pos=1, right]{$I_{A2}$};
+						\draw [-latex](12,18.75) -- (15.25,18.75)node[pos=1, above]{$I_{B2}$};
+						\draw [-latex](18.25,17.75) -- (18.25,17)node[pos=1, left]{$I_{C2}$};
+						\draw [-latex](13.75,17.75) -- (14.25,17.75)node[pos=1, above]{$I_1$};
+						\draw [-latex](15.675,17.75) -- (16.2,17.75)node[pos=1, above]{$I_2$};
+						
+						\draw [](11,15.75) to[short] (19.5,15.75);
+						\draw [](11,14.5) to[short] (19.5,14.5);
+						\draw [](11,13.25) to[short] (19.5,13.25);
+						\draw [](11,12) to[short] (19.5,12);
+						\draw [](13.25,17.25) to[short] (13.25,16.75);
+						\draw [](13.25,16.75) to[short] (14.25,16.75);
+						\draw [](17,14.5) to[short] (17,17.25);
+						\node at (17,14.5) [circ] {};
+						\draw [] (14.25,16.75) -- (14.25,13.25);
+						\node at (14.25,13.25) [circ] {};
+						\node [font=\normalsize] at (19.75,12) {N};
+						\node [font=\normalsize] at (19.75,13.25) {C};
+						\node [font=\normalsize] at (19.75,14.5) {B};
+						\node [font=\normalsize] at (19.75,15.75) {A};
+						\draw (14,15.75) to[L,l={ \normalsize $T_A$}] (12.5,15.75);
+						\draw (15.75,14.5) to[L,l={ \normalsize $T_B$}] (14.75,14.5);
+						\draw (17.5,13.25) to[L,l={ \normalsize $T_C$}] (16.5,13.25);
+						\draw [](12,16.25) to[short] (12,17.75);
+						\draw [](12,17.75) to[short] (12.75,17.75);
+						\draw [](18.25,16.25) to[short] (18.25,17.75);
+						\draw[] (18.25,17.75) to[short] (17.5,17.75);
+						\draw [](18.25,17.75) to[short] (18.25,18.75);
+						\draw[] (18.25,18.75) to[short] (12,18.75);
+						\draw [](12,18.75) to[short] (12,17.75);
+						\node at (12,17.75) [circ] {};
+						\node at (18.25,17.75) [circ] {};
+						\draw [](13.25,18.25) to[short] (13.25,19);
+						\draw[] (13.25,19) to[short] (11.75,19);
+						\draw [](11.75,19) to[short] (11.75,14.5);
+						\draw [](17,18.25) to[short] (17,19);
+						\draw [](17,19) to[short] (18.5,19);
+						\draw [](18.5,19) to[short] (18.5,15.75);
+						\node at (18.5,15.75) [circ] {};
+						\node at (11.75,14.5) [circ] {};
+						\draw [](12.825,15.75) to[short] (12.825,16.25);
+						\draw (12,16.25) to[short] (12.825,16.25);
+						\draw (13.675,15.75) to[short] (13.675,16.25);
+						
+						\draw (13.75,17.75) to[short] (14.825,17.75);
+						\draw (14.825,17.75) to[short] (14.825,16.25);
+						\draw (13.675,16.25) to[short] (14.825,16.25);
+						\node at (14.825,16.25) [circ] {};
+						
+						\draw (14.825,14.5) to[short] (14.825,16.25);
+						\draw (15.675,14.5) to[short] (15.675,16.25);
+						\draw (16.5,17.75) to[short] (15.675,17.75);
+						\draw (15.675,16.25) to[short] (15.675,17.75);
+						\draw (15.675,16.25) to[short] (16.56,16.25);
+						\node at (15.675,16.25) [circ] {};
+						
+						\draw (16.56,13.25) to[short] (16.56,16.25);
+						\draw (17.425,13.25) to[short] (17.425,16.25);
+						\draw (17.425,16.25) to[short] (18.25,16.25);
+					\end{circuitikz}
+				}
+				\end{figure}
+			
+		\subsubsection{Medida de Q en sistemas III sin neutro.}
+			\subsubsubsection{Modalidad con dos vatímetros.}
+				Se parte de un desarrollo similar al de la conexión Aron. Se crea un neutro artificial, ya que se necesitan las tensiones de fase.
+				
+				
+				En secuencia directa:
+				\[Q_T = \sqrt{3}(\vec U_A\cdot \vec I_C - \vec U_C\cdot I_A) \Rightarrow Q_T = \sqrt{3}(W_C - W_A)\]
+				
+				
+				En secuencia inversa:
+				\[Q_T = -\sqrt{3}(\vec U_A\cdot \vec I_C - \vec U_C\cdot I_A) \Rightarrow Q_T = \sqrt{3}(W_A - W_C)\]
+				
+				
+				Demostración para secuencia directa:
+				\[Q_T = \vec U_A \times \vec I_A + \vec U_B \times \vec I_B + \vec U_C \times \vec I_C\]
+				
+				
+				Como no existe neutro: $\vec I_B = -(\vec I_A + \vec I_C)$. Sustituyendo en $Q_T$:
+				\[Q_T = \vec U_{AB}\times \vec I_A + \vec U_{CB}\times \vec I_C\]
+				
+				
+				Pero
+				\[\vec U_{AB}\times \vec I_A = -\sqrt{3}\cdot \vec U_C\cdot \vec I_A\]
+				\[\vec U_{CB}\times \vec I_C = \sqrt{3}\cdot \vec U_A\cdot \vec I_C\]
+				
+				
+				Luego resulta
+				\[Q_T = \sqrt{3}(\vec U_A\cdot \vec I_C - \vec U_C\cdot I_A) = \sqrt{3}(W_C - W_A)\]
+				
+				\begin{figure}[H]
+					\centering
+					\scalebox{.6}{
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\ctikzset{resistor=european}
+							\draw  (7.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw (7.75,16.5) to[R] (7.75,14.5);
+							\draw [](8.25,17) to[short] (8.75,17);
+							\draw[] (7.25,17) to[short] (6.75,17);
+							\draw [](7.75,17.5) to[short] (7.75,18);
+							\draw [](6.75,17) to[short] (6.75,16);
+							\draw [](8.75,17) to[short] (8.75,16);
+							\node [font=\normalsize] at (7,17.25) {*};
+							\node [font=\normalsize] at (7.5,16.25) {*};
+							\node at (7.75,14.5) [circ] {};
+							\draw [](8.75,16) to[short] (8.75,15.25);
+							\draw  (10.75,17) circle (0.5cm) node {\normalsize W} ;
+							\draw (10.75,16.5) to[R] (10.75,14.5);
+							\draw [](11.25,17) to[short] (11.75,17);
+							\draw[] (10.25,17) to[short] (9.75,17);
+							\draw [](10.75,17.5) to[short] (10.75,18);
+							\draw [](9.75,17) to[short] (9.75,16);
+							\draw [](11.75,17) to[short] (11.75,16);
+							\node [font=\normalsize] at (10,17.25) {*};
+							\node [font=\normalsize] at (10.5,16.25) {*};
+							\node at (10.75,14.5) [circ] {};
+							\draw [](11.75,16) to[short] (11.75,15.25);
+							\draw [](9.75,15.75) to[short] (9.75,16);
+							\draw [](6.75,12.5) to[short] (11.75,12.5);
+							\draw [](6.75,12) to[short] (9.75,12);
+							\node at (6.75,14.5) [circ] {};
+							\node at (9.75,14.5) [circ] {};
+							\node at (8.75,14.5) [circ] {};
+							\node at (11.75,14.5) [circ] {};
+							\draw [](11.75,13) to[short, -o] (12.75,13) ;
+							\draw [](11.75,12.5) to[short, -o] (12.75,12.5) ;
+							\draw [](11.75,12) to[short, -o] (12.75,12) ;
+							\draw [](8.75,15.25) to[short] (8.75,14.5);
+							\draw [](9.75,15.75) to[short] (9.75,14.5);
+							\draw [](11.75,15.25) to[short] (11.75,14.5);
+							
+							\draw [](8.75,13.25) to[short] (8.75,13);
+							\draw [](8.75,13) to[short] (8.75,13.25);
+							\draw [](8.75,13.5) to[short] (8.75,13.25);
+							\draw [](9.75,13.5) to[short] (9.75,12);
+							\draw [](11.75,13.5) to[short] (11.75,12);
+							
+							\draw [](6.75,14.5) to[short] (6.75,16);
+							\draw [](6.75,14.5) to[short] (6.75,13);
+							\draw[] (6.75,13) to[short] (6.25,13);
+							\draw[] (6.75,12.5) to[short] (6.25,12.5);
+							\draw[] (6.75,12) to[short] (6.5,12);
+							\draw[] (6.5,12) to[short] (6.25,12);
+							\draw [](8.75,14.5) to[short] (8.75,13.5);
+							\draw [](9.75,14.5) to[short] (9.75,13.5);
+							\draw [](11.75,14.5) to[short] (11.75,13.5);
+							\draw [](7.75,18) to[short] (9.25,18);
+							\draw [](9.25,18) to[short] (9.25,14.5);
+							\draw [](10.75,14.5) to[short] (10.75,13);
+							\draw [](9.25,18) to[short] (10.75,18);
+							\node at (10.75,13) [circ] {};
+							\node at (9.25,12.5) [circ] {};
+							\node at (7.75,12) [circ] {};
+							\draw [](9.25,12.5) to[short] (9.25,14.5);
+							\draw [](6.25,13) to[short, -o] (6,13) node[left] {A};
+							\draw [](6.25,12.5) to[short, -o] (6,12.5) node[left] {B};
+							\draw [](6.25,12) to[short, -o] (6,12) node[left] {C};
+							\draw [, dashed] (6.5,18.25) rectangle  (12,14.25);
+							\draw [](7.75,14.5) to[short] (7.75,12);
+							\node at (9.25,18) [circ] {};
+							
+							\draw[] (11.75,13) to[short] (8.75,13);
+						\end{circuitikz}
+					}%
+				\end{figure}
+			
+	\subsection{Medida de la energía.}
+		\subsubsection{Objetivo de la medida de la energía.}
+			El objetivo suele ser económico, para facturar el consumo. También tiene como finalidad realizar balances energéticos de las instalaciones, para estudiar su viabilidad y asegurar el suministro por parte de los generadores disponibles.
+			
+			
+			La diferencia entre medir potencia y energía radica en incorporar el tiempo como variable de integración en el aparato de medida:
+			\[E(t) = \int_{t_1}^{t_2}p(t)\,dt\]
+		
+		\subsubsection{Equipos para la medida de la energía.}
+			Los contadores analógicos eran vatímetros con una especie de motor cuya velocidad de giro era proporcional a la potencia consumida.
+			
+			
+			Los contadores digitales muestrean la potencia y la multiplican por el tiempo de muestreo, sumándose los resultados para dar la energía consumida.
+			
+			
+			Todos los esquemas vistos para los vatímetros son aplicables a contadores. 
+			
+			
+			Los contadores monofásicos sólo se utlilizan para medir energía en instalaciones alimentadas con dos conductores. En instalaciones trifásicas siempre se usan contadores trifásicos.

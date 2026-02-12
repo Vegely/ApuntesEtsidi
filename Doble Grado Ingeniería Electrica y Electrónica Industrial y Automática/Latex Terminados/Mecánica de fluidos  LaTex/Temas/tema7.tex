@@ -1,0 +1,550 @@
+\chapter{Fluidoestática.}
+\section{Introducción.}
+	\begin{figure}[H]
+		\begin{minipage}{0.5\textwidth}
+			\begin{figure}[H]
+				\centering
+				\begin{circuitikz}
+					\tikzstyle{every node}=[font=\normalsize]
+					\draw [->, >=Stealth] (7.25,12.75) -- (7.25,17.5)node[pos=1,left]{$\vec k$};
+					\draw [->, >=Stealth] (7.25,12.75) -- (12,12.75)node[pos=1,above]{$\vec j$};
+					\draw [->, >=Stealth] (7.25,12.75) -- (6.5,12)node[pos=1,left]{$\vec i$};
+					\draw  (8.75,16.25) rectangle (9.25,15.75);
+					\draw [short] (9.25,15.75) -- (9.5,16);
+					\draw [short] (9.5,16) -- (9.5,16.5)node[pos=0.5,right]{dV};
+					\draw [short] (9.5,16.5) -- (9,16.5);
+					\draw [short] (9,16.5) -- (8.75,16.25);
+					\draw [short] (9.25,16.25) -- (9.5,16.5);
+					\draw [dashed] (9,16.5) -- (9,16);
+					\draw [dashed] (9,16) -- (8.75,15.75);
+					\draw [dashed] (9,16) -- (9.5,16);
+					\draw [->, >=Stealth] (7.25,12.75) -- (9,16)node[pos=0.3,right]{$\vec r$};
+					\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (9,16) -- (8,17)node[pos=1,above]{$\vec k'$};
+					\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (9,16) -- (10,17)node[pos=1,right]{$\vec j'$};
+					\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (9,16) -- (9,14.75)node[pos=1,right]{$\vec i'$};
+					\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (8.75,15.25) .. controls (9.25,15) and (9.5,15.25) .. (9.75,15.75) node[pos=0.8,right]{$\Omega \vec \omega$};
+					\draw [ color={rgb,255:red,0; green,128; blue,0}, ->, >=Stealth] (9,16) -- (11.5,16)node[pos=1,above]{$\vec v$};
+					\draw [dashed] (9,17.25) .. controls (8.25,17) and (8.25,16.75) .. (8,16.25);
+					\draw [dashed] (8,16.25) .. controls (8,15.75) and (7.75,15.75) .. (8,14.75);
+					\draw [dashed] (8,14.75) .. controls (8.25,14.25) and (8.25,14.25) .. (9,14);
+					\draw [dashed] (9,14) .. controls (9.75,13.75) and (10,13.75) .. (10.25,14.5);
+					\draw [dashed] (10.25,14.5) .. controls (10.5,15.25) and (10.75,15.5) .. (10.25,16.5);
+					\draw [dashed] (10.25,16.5) .. controls (9.75,16.75) and (10,17.25) .. (9,17.25);
+				\end{circuitikz}
+				
+				
+			\end{figure}
+		\end{minipage}
+		\begin{minipage}{0.5\textwidth}
+			Cuando un fluido es estático, al menos respecto a algún sólido rígido:
+			\[\vec v \text{ y } \Omega \vec \omega = 0 \text{ en un cierto sólido rígido.}\]
+			
+			Fluido incompresible (sistema general):
+			\[			
+			\left\{
+			\begin{matrix}
+				\vec \nabla \cdot \vec v = 0\\
+				\rho \dfrac{\partial \vec v}{\partial t} + \rho (\vec v \cdot \vec \nabla)\cdot \vec v = - \vec \nabla P + \mu \vec \nabla^2 \vec v + \vec f_v
+			\end{matrix}
+			\right.
+			\]
+			Sistema de referencia tal que $\vec v = 0$:
+			\[0 = -\vec \nabla P + \vec f_v\]
+		\end{minipage}
+	\end{figure}
+
+	
+	
+	\[\vec f_v = \rho \vec g 
+	- \rho \left(
+	\red{\underbrace{\black \vec a_0 + \vec \Omega_{rot} \times (\vec \Omega_{rot} \times \vec r)}_{\text{Componente inercial}}} \black
+	+ 
+	\red{\underbrace{\black 2\,\vec \Omega_{rot}\times \vec v}_{\text{Fuerzas de coriolis (0)}}} \black
+	+ 
+	\red{\underbrace{\black \dfrac{d\vec \Omega_{rot}}{dt}\times \vec r)}_{\text{Fuerzas por ac. angular}}} \black \right)
+	\]
+	
+	
+	Donde $\vec \Omega_{rot}$ es la velocidad angular del sistema móvil, donde $\vec v = 0$. Se deduce entonces que:
+	\[\vec f_v = -\rho \vec \nabla U \Rightarrow \vec \nabla \times \vec f_v = 0\]
+	\[U = U_{\vec g} + U_{\vec a_0} + U_{\vec \Omega_{rot}} + U_{d\vec \Omega_{rot}/dt}\]
+	
+	Condiciones de existencia de las componentes del potencial $U$:
+	\[
+	\left.
+	\begin{matrix}
+		\exists \, U_{\vec a_0} \Longleftrightarrow \vec a_0 = cte \\
+		\exists \, U_{\vec \Omega_{rot}} \Longleftrightarrow \vec \Omega_{rot} = cte
+	\end{matrix}
+	\right\}
+	\nexists \, U_{d\vec \Omega_{rot}/dt} : \text{Cond. necesaria pero no suficiente para que haya fluidoestática.}
+	\]
+	\[U_{\vec g} = -\vec g \cdot \vec r \qquad U_{\vec a_0} = \vec a_0 \cdot \vec r \qquad U_{\vec \Omega_{rot}}=-\dfrac{1}{2}\left|\vec \Omega_{rot}\times \vec r\right|^2\]
+	
+	
+	Por tanto
+	\[0 = -\vec \nabla P - \rho \vec \nabla U \Rightarrow (P + \rho U) = 0 \Rightarrow (P + \rho U) = cte\]
+	
+	
+	Esta constante puede depender paramétricamente del tiempo si la variación dinámica es suficientemente lenta:
+	
+	\[(P + \rho U) = c(t)\]
+	
+	Se distinguen, pues, varios casos según las componentes que forman el potencial $U$.
+	
+	\section{Estudio de casos prácticos según las componentes del potencial $U$}.
+		\subsection{Componente gravitatoria.}
+			\begin{figure}[H]
+				\begin{minipage}{0.3\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [short] (10.25,16.25) -- (10.25,14);
+							\draw [short] (10.25,14) -- (12,14);
+							\draw [short] (12,14) -- (12,16.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, short] (10.25,15.75) -- (12,15.75);
+							\node at (11.25,16) [circ, color={rgb,255:red,0; green,128; blue,0}] {};
+							\node [font=\normalsize, color={rgb,255:red,0; green,128; blue,0}] at (11.25,16.25) {$P_a$};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (10.75,14) -- (10.75,14.75)node[pos=1,right]{$\vec k$};
+							\draw [<->, >=Stealth] (9.75,15.75) -- (9.75,14)node[pos=0.5,left]{$z_s$};
+							\draw [->, >=Stealth] (10.5,17) -- (10.5,16.5)node[pos=0.5,left]{$\vec g$};
+						\end{circuitikz}
+						
+						
+					\end{figure}
+				\end{minipage}
+				\begin{minipage}{0.7\textwidth}
+					Se desea hallar $P(z)$. Se conoce: \[\vec r = x\vec i + z \vec k\qquad\qquad(P + \rho U) = c(t)\] 
+					\[U = U_{\vec g} = -\vec g \cdot \vec r = -(-g\vec k) = gz\]
+					
+					
+					Si $z = z(s)$:
+					\[P(z = z_s) + \rho g z_s = c(t)\]
+				\end{minipage}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\begin{minipage}{0.5\textwidth}
+					Pero $P(z = z_s) = P_a$, luego
+					\[P+\rho gz = P_a + \rho g z_s \Rightarrow P(z) = P_a + \rho g(z_s - z)\]
+				\end{minipage}
+				\begin{minipage}{0.5\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [->, >=Stealth] (11.5,14) -- (11.5,16.75)node[pos=1,left]{P};
+							\draw [->, >=Stealth] (11.5,14) -- (14.5,14)node[pos=1,below]{z};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, short] (11.5,14) -- (14,16.25);
+							\draw [dashed] (14,16.25) -- (11.5,16.25)node[pos=1,left]{$P_a$};
+							\draw [dashed] (14,16.25) -- (14,14)node[pos=1,below]{$z_s$};
+						\end{circuitikz}
+						
+						
+					\end{figure}
+				\end{minipage}
+			\end{figure}
+		
+		
+		\subsection{Componente gravitatoria y aceleración constante.}
+			\begin{figure}[H]
+				\centering
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\draw [short] (6.25,15.25) -- (8.75,15.25);
+						\draw [short] (8.75,16.5) -- (8.75,15.25);
+						\draw [short] (6.25,16.5) -- (6.25,15.25);
+						\draw [short] (6.25,16.5) -- (6.25,17.25);
+						\draw [short] (8.75,16.5) -- (8.75,17.25);
+						\draw [short] (8.75,15.25) -- (9.25,15.75);
+						\draw [short] (9.25,15.75) -- (9.25,17.75);
+						\draw [short] (9.25,17.75) -- (8.75,17.25);
+						\draw [short] (9.25,17.75) -- (6.75,17.75);
+						\draw [short] (6.75,17.75) -- (6.25,17.25);
+						\draw [short] (6.25,17.25) -- (8.75,17.25);
+						\draw [short] (6.75,15.25) .. controls (6.75,15) and (7.25,15) .. (7.25,15.25);
+						\draw [short] (8,15.25) .. controls (8,15) and (8.5,15) .. (8.5,15.25);
+						\draw [<->, >=Stealth] (8.75,16.75) -- (9.25,17.25)node[pos=1,right]{$L_t$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (6.25,16.25) -- (8.75,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (8.75,16.25) -- (9.25,16.75);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (9.25,16.75) -- (6.75,16.75);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (6.75,16.75) -- (6.25,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (6,16.5) -- (6.5,16.5);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (9.5,16.5) -- (9,16.5)node[pos=0,right]{$L_d$};
+						\draw [short] (6.75,17.75) -- (6.75,17.25);
+						\draw [dashed] (6.75,17.25) -- (6.75,15.75);
+						\draw [dashed] (6.75,15.75) -- (6.25,15.25);
+						\draw [dashed] (6.75,15.75) -- (9.25,15.75);
+						\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (9,15.75) -- (10,15.75)node[pos=1,right]{$\vec a_0$};
+						\draw [<->, >=Stealth] (5.75,17.25) -- (5.75,15.25)node[pos=0.5,left]{$H_0$};
+						\node [font=\normalsize] at (7.75,18) {$P_a$};
+						\draw [->, >=Stealth] (6.25,18.25) -- (6.25,17.75)node[pos=0.5,left]{$\vec g$};
+						\draw [->, >=Stealth] (11.25,16.5) -- (12,16.5);
+						\draw [short] (13.25,15.25) -- (15.75,15.25);
+						\draw [short] (15.75,16.5) -- (15.75,15.25);
+						\draw [short] (13.25,16.5) -- (13.25,15.25);
+						\draw [short] (13.25,16.5) -- (13.25,17.25);
+						\draw [short] (15.75,16.5) -- (15.75,17.25);
+						\draw [short] (15.75,15.25) -- (16.25,15.75);
+						\draw [short] (16.25,15.75) -- (16.25,17.75);
+						\draw [short] (16.25,17.75) -- (15.75,17.25);
+						\draw [short] (16.25,17.75) -- (13.75,17.75);
+						\draw [short] (13.75,17.75) -- (13.25,17.25);
+						\draw [short] (13.25,17.25) -- (15.75,17.25);
+						\draw [short] (13.75,15.25) .. controls (13.75,15) and (14.25,15) .. (14.25,15.25);
+						\draw [short] (15,15.25) .. controls (15,15) and (15.5,15) .. (15.5,15.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (13.25,16.75) .. controls (14.75,16.5) and (14.25,15.75) .. (15.75,15.75);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (15.75,15.75) -- (16.25,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (13.75,17.25) -- (13.25,16.75);
+						\draw [short] (13.75,17.75) -- (13.75,17.25);
+						\draw [dashed] (13.75,17.25) -- (13.75,15.75);
+						\draw [dashed] (13.75,15.75) -- (13.25,15.25);
+						\draw [dashed] (13.75,15.75) -- (16.25,15.75);
+						\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (16,15.75) -- (17,15.75)node[pos=1,right]{$\vec a_0$};
+						\node [font=\normalsize] at (14.75,18) {$P_a$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (13.75,17.25) .. controls (15.25,17) and (14.75,16.25) .. (16.25,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,0}, ->, >=Stealth] (14.5,15.25) -- (14.5,16.25)node[pos=1,right]{z(x)};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (13.25,15.25) -- (13.25,16)node[pos=1,left]{z};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (13.25,15.25) -- (14,15.25)node[pos=1,above]{x};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (13.25,15.25) -- (12.85,14.85)node[pos=1,left]{y};
+					\end{circuitikz}
+				
+				
+			\end{figure}
+			
+			\[U = U_{\vec g} + U_{\vec a_0}\qquad U_{\vec g} = - \vec g \cdot \vec r = gz\qquad U_{\vec a_0} = \vec a_0 \cdot \vec r = a_0x\]			
+			
+			\begin{figure}[H]
+				\begin{minipage}{0.6\textwidth}
+					Por tanto se deduce que:
+					\[P + \rho U = c(t) \Rightarrow P + \rho (gz + a_0x) = c(t)\]
+					
+					
+					Si igualamos la presión en la interfase a la presión atmosférica:
+					\begin{equation} \label{eq:1}
+						\underbrace{P(z = z_s(x))}_{P_a} + \rho g z_s(x) + \rho a_0x = c(t)
+					\end{equation}
+					
+					
+					Si $z = z_s (x = 0)$:
+					\begin{equation} \label{eq:2}
+						\underbrace{P(z = z_s(x = 0))}_{P_a} + \rho g z_s(x = 0) + \rho a_0x = c(t)
+					\end{equation}
+				\end{minipage}
+				\begin{minipage}{0.4\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [short] (13.25,15.25) -- (15.75,15.25);
+							\draw [short] (15.75,16.5) -- (15.75,15.25);
+							\draw [short] (13.25,16.5) -- (13.25,15.25);
+							\draw [short] (13.25,16.5) -- (13.25,17.25);
+							\draw [short] (15.75,16.5) -- (15.75,17.25);
+							\draw [short] (15.75,15.25) -- (16.25,15.75);
+							\draw [short] (16.25,15.75) -- (16.25,17.75);
+							\draw [short] (16.25,17.75) -- (15.75,17.25);
+							\draw [short] (16.25,17.75) -- (13.75,17.75);
+							\draw [short] (13.75,17.75) -- (13.25,17.25);
+							\draw [short] (13.25,17.25) -- (15.75,17.25);
+							\draw [short] (13.75,15.25) .. controls (13.75,15) and (14.25,15) .. (14.25,15.25);
+							\draw [short] (15,15.25) .. controls (15,15) and (15.5,15) .. (15.5,15.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (13.25,16.75) .. controls (13.75,16.5) and (15.25,15.75) .. (15.75,15.75);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (15.75,15.75) -- (16.25,16.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (13.75,17.25) -- (13.25,16.75);
+							\draw [short] (13.75,17.75) -- (13.75,17.25);
+							\draw [dashed] (13.75,17.25) -- (13.75,15.75);
+							\draw [dashed] (13.75,15.75) -- (13.25,15.25);
+							\draw [dashed] (13.75,15.75) -- (16.25,15.75);
+							\node [font=\normalsize] at (14.75,18) {$P_a$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (13.75,17.25) .. controls (14.25,17) and (15.75,16.25) .. (16.25,16.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,0}, ->, >=Stealth] (14,15.25) -- (14,16.4)node[pos=1.05,right]{$z(x)$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (13.25,15.25) -- (13.25,16)node[pos=1,left]{z};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (13.25,15.25) -- (14,15.25)node[pos=0.7,above]{x};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (13.25,15.25) -- (13,15)node[pos=0.5,left]{y};
+						\end{circuitikz}
+						
+						
+					\end{figure}
+				\end{minipage}
+			\end{figure}
+			
+			Restando \eqref{eq:1} - \eqref{eq:2}:
+			\[\rho g z_s(x) + \rho a_0x - \rho gz_s(x=0) = 0\]
+			\[z_s (x) = z_s(x=0) - \dfrac{a_0}{g}x\]
+			
+			El volumen se conserva, luego
+			\[\dfrac{v_0}{L_t} = H_0 L_d = \int_{\frac{-L_d}{2}}^{\frac{L_d}{2}} z_s(x)\,dx = \int_{\frac{-L_d}{2}}^{\frac{L_d}{2}} \left[z_s(x=0) - \dfrac{a_0}{g}x\right]dx =
+			z_s(x=0)\cdot L_d - \left. \dfrac{a_0}{2g}x^2\right|_{-\frac{L_d}{2}}^{\frac{L_d}{2}}\]
+			
+			
+			$\left. \dfrac{a_0}{2g}x^2\right|_{-\frac{L_d}{2}}^{\frac{L_d}{2}} = 0$, luego
+			\[H_0 L_d = z_s(x=0)\cdot L_d \Rightarrow z_s(x=0) = H_0\]
+			\[z_s(x) = H_0 - \dfrac{a_0}{g}x\]
+			
+		\subsection{Componente gravitatoria y rotativa.}
+			\begin{figure}[H]
+				\begin{minipage}{0.3\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [short] (12.25,16.25) -- (12.25,13.75);
+							\draw [short] (12.25,13.75) -- (14.25,13.75);
+							\draw [short] (14.25,13.75) -- (14.25,16.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, short] (12.25,15.75) -- (14.25,15.75);
+							\node [font=\normalsize] at (13.25,16.25) {$P_a$};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (13.25,13.75) -- (13.25,14.75)node[pos=1,above]{$\vec \Omega_{rot}$};
+							\draw [ color={rgb,255:red,0; green,128; blue,0}, ->, >=Stealth] (13.25,13.75) -- (13.75,13.75)node[pos=1,above]{$\vec e_r$};
+							\draw [ color={rgb,255:red,0; green,128; blue,0}, ->, >=Stealth] (13.25,13.75) -- (13.25,14.25)node[pos=1,left]{$\vec k$};
+							\draw [<->, >=Stealth] (12,16.25) -- (12,13.75)node[pos=0.5,left]{$H_{dep}$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (14.5,15.75) -- (14.5,13.75)node[pos=0.5,right]{$H_0$};
+						\end{circuitikz}
+						
+						
+					\end{figure}
+				\end{minipage}
+				\begin{minipage}{0.7\textwidth}
+					\[P+\rho U = c(t) \qquad U = U_{\vec g} + U_{\vec \Omega_{rot}}\qquad \vec \Omega_{rot} = \Omega_{rot}\vec k\]
+					\[U_{\vec \Omega_{rot}}=-\dfrac{1}{2}\left|\vec \Omega_{rot}\times \vec r\right|^2 = -\dfrac{1}{2}\Omega^2 r^2 \sin^290^\circ = - \dfrac{1}{2}\Omega^2 r^2\]
+					\[U = gz - \dfrac{1}{2}\Omega^2 r^2\]
+				\end{minipage}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\begin{minipage}{0.6\textwidth}
+					\[P+\rho gz - \rho \dfrac{1}{2}\Omega_{rot}^2r^2=c(t)\]
+					\[P(z=z_s(r)) + \rho g z_s(r) - \rho  \dfrac{1}{2}\Omega_{rot}^2r^2=c(t)\]
+					\[P(z=z_s(r=0)) + \rho g z_s(r=0) - \rho  \dfrac{1}{2}\Omega_{rot}^2r^2=c(t)\]
+					\[\rho g (z_s(r) - z_s(r=0)) - \rho  \dfrac{1}{2}\Omega_{rot}^2r^2=0\]
+					\[z_s(r)=z_s(r=0)+\dfrac{1}{2g}\Omega_{rot}^2r^2\]
+					
+					
+					El volumen se conserva si no se pierde volumen:
+					\[H_{max} = H_{min} + \dfrac{1}{2g}\Omega_{rot}^2r^2\]
+					
+				\end{minipage}
+				\begin{minipage}{0.4\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [short] (12.25,16.25) -- (12.25,13.75);
+							\draw [short] (12.25,13.75) -- (14.25,13.75);
+							\draw [short] (14.25,13.75) -- (14.25,16.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, short] (12.25,15.75) .. controls (13,15) and (13.75,15.25) .. (14.25,15.75);
+							\node [font=\normalsize] at (13.25,16.25) {$P_a$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (14.5,15.75) -- (14.5,13.75)node[pos=0.5,right]{$H_{max}$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (13.25,15.25) -- (13.25,13.75)node[pos=0.5,right]{$H_{min}$};
+						\end{circuitikz}
+					\end{figure}
+					\begin{figure}[H]
+						\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [short] (12.25,16.25) -- (12.25,13.75);
+							\draw [short] (12.25,13.75) -- (14.25,13.75);
+							\draw [short] (14.25,13.75) -- (14.25,16.25)node[pos=0,below]{R};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, short] (12.25,15.75) .. controls (13,15) and (13.75,15.25) .. (14.25,15.75);
+							\node [font=\normalsize] at (13.25,16.25) {$P_a$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (14.5,15.25) -- (14.5,13.75)node[pos=0.5,right]{$z_s(r=0)$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.5,15.25) -- (13.25,15.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.5,13.75) -- (14.25,13.75);
+							\node [font=\normalsize] at (13.25,13.5) {$0$};
+						\end{circuitikz}
+					\end{figure}
+				\end{minipage}
+			\end{figure}
+			
+			\[V_0 = H_0\pi R^2 = \int_0^R z_s(r)2\pi r\,dr = \int_0^R(z_s(r=0) - \dfrac{1}{2g}\Omega_{rot}^2r^2)2\pi r\,dr = z_s(r=0)\pi R^2 + \dfrac{\pi}{4g}\Omega_{rot}^2r^4\]
+			\[z_s(r=0)=\dfrac{V_0}{\pi R^2} - \dfrac{1}{4g}\Omega_{rot}^2 R^2 = H_0 - \dfrac{1}{4g}\Omega_{rot}^2 R^2\]
+			
+			
+			Casos según los valores de $H_{min}$ y $H_{max}$:
+			\begin{enumerate}
+				\item $\mathbf{H_{min} > 0 \text{ y } H_{max} < H_{dep}:}$ no se derrama líquido ni el punto mínimo toca el fondo del recipiente.
+				
+				\item $\mathbf{H_{min} < 0 \text{ y } H_{max} < H_{dep}:}$ no se derrama líquido pero el punto mínimo toca el fondo del recipiente. El punto donde toca el fondo es $r*$ tal que $z_s(r=r*)=0$.
+				
+				\begin{figure}[H]
+					\centering
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\draw [short] (12.25,16.25) -- (12.25,13.75);
+						\draw [short] (12.25,13.75) -- (14.25,13.75);
+						\draw [short] (14.25,13.75) -- (14.25,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, short] (12.25,15.75) .. controls (13,12.425) and (13.5,12.425) .. (14.25,15.75);
+						\node [font=\normalsize] at (13.25,16.25) {$P_a$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (14.5,13.25) -- (14.5,13.75)node[pos=0.5,right]{$z_s(r=0)$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.5,13.25) -- (13.25,13.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.5,13.75) -- (14.25,13.75);
+					\end{circuitikz}
+				\end{figure}
+				
+				\item $\mathbf{H_{min} > 0 \text{ y } H_{max} > H_{dep}:}$ se derrama líquido pero el punto mínimo no toca el fondo del recipiente. El punto de derrame es $r*$ tal que $z_s(r=r*) = H_{dep}$, y el volumen perdido es
+				\[V_{perd} = \int_{r*}^R \dfrac{1}{2g}\Omega_{rot}^2r^2\cdot 2\pi r\,dr\]
+				
+				
+				Sin embargo, el $V_0\neq V_{z_s,\,real}$, luego el $H_{min}$ nuevo será el equivalente a un recipiente con $H_{min} > 0 \text{ y } H_{max} < H_{dep}$ (caso 1), donde el volumen nuevo será menor al antiguo.
+				\begin{figure}[H]
+					\centering
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\draw [short] (12.25,16.25) -- (12.25,13.75);
+						\draw [short] (12.25,13.75) -- (14.25,13.75);
+						\draw [short] (14.25,13.75) -- (14.25,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, short] (12.25,17) .. controls (13,14) and (13.5,14) .. (14.25,17);
+						\node [font=\normalsize] at (13.25,16.25) {$P_a$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (14.5,14.75) -- (14.5,13.75)node[pos=0.5,right]{$z_{s,\,virt}(r=0)$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.5,14.75) -- (13.25,14.75);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.5,13.75) -- (14.25,13.75);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (12.25,16.25) -- (12.25,17);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.25,16.25) -- (14.25,17);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.25,16.25) -- (14,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (12.25,16.25) -- (12.5,16.25);
+						\draw [->, >=Stealth] (15.25,15.25) -- (16,15.25);
+						\draw [short] (17,16.25) -- (17,13.75);
+						\draw [short] (17,13.75) -- (19,13.75);
+						\draw [short] (19,13.75) -- (19,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, short] (17,15.75) .. controls (17.75,13.75) and (18.25,13.75) .. (19,15.75);
+						\node [font=\normalsize] at (18,16.25) {$P_a$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (19.25,14.25) -- (19.25,13.75)node[pos=0.5,right]{$z_{s,\,real}(r=0)$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (19.25,14.25) -- (18,14.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (19.25,13.75) -- (19,13.75);
+					\end{circuitikz}
+				\end{figure}
+				
+				\item $\mathbf{H_{min} < 0 \text{ y } H_{max} > H_{dep}:}$
+				\begin{figure}[H]
+					\centering
+					\begin{circuitikz}
+						\tikzstyle{every node}=[font=\normalsize]
+						\draw [short] (12.25,16.25) -- (12.25,13.75);
+						\draw [short] (12.25,13.75) -- (14.25,13.75);
+						\draw [short] (14.25,13.75) -- (14.25,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, short] (12.25,17) .. controls (13.25,12) and (13.25,12) .. (14.25,17);
+						\node [font=\normalsize] at (13.25,16.25) {$P_a$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (14.5,13.25) -- (14.5,13.75)node[pos=0.5,right]{$z_s(r=0)$};
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.5,13.25) -- (13.25,13.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.5,13.75) -- (14.25,13.75);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (12.25,16.25) -- (12.25,17);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.25,16.25) -- (14.25,17);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (14.25,16.25) -- (14.15,16.25);
+						\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (12.25,16.25) -- (12.35,16.25);
+					\end{circuitikz}
+				\end{figure}
+			\end{enumerate}
+
+	\section{Casos prácticos.}
+		\subsection{Compuerta en una tubería.}
+			Sea el sistema de la figura. Hallar la presión en el centro de gravedad de la compuerta. $cg\equiv\text{centro de gravedad}$, $cp\equiv\text{centro de presiones}$.
+
+			\begin{figure}[H]
+				\begin{minipage}{0.5\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [short] (12,13.5) -- (17,13.5);
+							\draw [short] (17,13.5) -- (12,16);
+							\node at (13.5,15.25) [circ] {};
+							\node at (15.5,14.25) [circ] {};
+							
+							\draw [short] (12,16) -- (17,16);
+							\draw [short] (16,14) .. controls (16,14) and (15.75,13.85) .. (15.75,13.5)node[pos=0.5,left]{$\alpha$};
+							\draw [short] (12,16) .. controls (11.25,14.75) and (12.75,14.5) .. (12,13.5);
+							\draw [short] (12,14.75) .. controls (11.75,14.25) and (11.75,14) .. (12,13.5);
+							\draw [short] (17,16) .. controls (17.75,14.75) and (16.25,14.5) .. (17,13.5);
+							\draw [short] (17,14.75) .. controls (17.25,14.25) and (17.25,14) .. (17,13.5);
+							\draw [dashed] (12,14.75) .. controls (12.25,15.25) and (12.25,15.5) .. (12,16);
+							\draw [dashed] (17,16) .. controls (16.75,15.5) and (16.75,15.25) .. (17,14.75);
+							\draw [short] (15.5,14.25) -- (13.25,9.75);
+							\draw [short] (13.5,15.25) -- (11.25,10.75);
+							\draw [short] (11.75,11.75) -- (13.25,9.75);
+							\draw [short] (11.75,11.75) -- (14.25,11.75);
+							
+							\draw [ color={rgb,255:red,0; green,128; blue,0}, short] (13.0625,11.125) -- (14.8125,14.625)node[pos=0,right]{$c_p$};
+							\node at (13.0625,11.125) [circ, color={rgb,255:red,0; green,128; blue,0}] {};
+							
+							\node at (14.8125,14.625) [circ, color={rgb,255:red,0; green,128; blue,0}] {};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (12.75,11.25) -- (10.75,12.25)node[pos=1,left]{y};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (12.75,11.25) -- (13.5,12.75)node[pos=1,left]{x};
+							\node at (14.5,14.75) [circ, color={rgb,255:red,255; green,128; blue,0}] {};
+							\draw [ color={rgb,255:red,255; green,128; blue,0}, dashed] (14.5,14.75) -- (12.75,11.25);
+							\node at (12.75,11.25) [circ, color={rgb,255:red,255; green,128; blue,0}] {};
+							\node [font=\normalsize, color={rgb,255:red,255; green,128; blue,0}] at (12.75,11) {$c_g$};
+							\draw [ color={rgb,255:red,192; green,192; blue,192}, short] (13.25,9.75) -- (13.75,9.5);
+							\draw [ color={rgb,255:red,192; green,192; blue,192}, short] (14.25,11.75) -- (14.75,11.5);
+							\draw [ color={rgb,255:red,192; green,192; blue,192}, short] (13.75,10.75) -- (14.25,10.5);
+							\draw [ color={rgb,255:red,192; green,192; blue,192}, <->, >=Stealth] (13.75,9.5) -- (14.25,10.5)node[pos=0.5,right]{H/2};
+							\draw [ color={rgb,255:red,192; green,192; blue,192}, <->, >=Stealth] (14.25,10.5) -- (14.75,11.5)node[pos=0.5,right]{H/2};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (15.25,15.5) -- (14.8125,14.625)node[pos=0,right]{$\vec F$};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (14.8125,14.625) -- (15.3125,14.375)node[pos=0.5,below]{$\vec s$};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, <->, >=Stealth] (17.5,16) -- (17.5,14.5)node[pos=0.5,right]{h};
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (17.5,14.5) -- (14.8125,14.625);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, dashed] (17.5,16) -- (17,16);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (16.5,15.75) -- (13.5,15.75);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (16.5,15.25) -- (14.5,15.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (16.5,14.75) -- (15.25,14.75);
+						\end{circuitikz}
+					\end{figure}
+				\end{minipage}
+				\begin{minipage}{0.5\textwidth}
+					\[s\cdot \sin \alpha = h = y_{cg} - y\]
+					\[M_{cg} = F\cdot d_{cp-cg} =
+					\oiint_A(P_a+\rho gh)y\,dA =\]
+					\[=\oiint_AP_ay\,dA (0\text{, no genera momento respecto de }cg) +\] \[+\oiint_A -\rho g \sin \alpha y^2\,dA =
+					-\rho g\sin \alpha I_{xx}^{cg}
+					\]
+					
+					\[F = \oiint_A P \,dA = \oiint_A P(y)\,dA = P(y_{cg})A\]
+					\[P(y_{cg}) = \dfrac{1}{A}\oiint_A P(y)\,dA\]
+				\end{minipage}
+			\end{figure}
+			
+			$I_{xx}^{cg}$ es el momento del área triangular de la distribución de presiones. Esta distribución tiene como centro de presiones el centro de gravedad el baricentro del triángulo, y el momento de su área es el producto del área por la distancia entre el punto a calcular y su centro de gravedad.
+
+		\subsection{Compuerta circular.}
+			\begin{figure}[H]
+				\begin{minipage}{0.3\textwidth}
+					\begin{figure}[H]
+						\centering
+						\begin{circuitikz}
+							\tikzstyle{every node}=[font=\normalsize]
+							\draw [short] (11.25,13) -- (11.25,16.25);
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (11.25,12.25) -- (12,12.25)node[pos=1,above]{x};
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (11.25,12.25) -- (11.25,13)node[pos=1,right]{z};
+							\draw [short] (11.25,15.25) -- (14.5,15.25);
+							\draw [short] (14.5,15.25) -- (14.5,12.25)node[pos=0,right]{$S_2$};
+							\node at (14.5,15.25) [circ] {};
+							\draw [short] (11.25,16.25) -- (13.5,16.25)node[pos=1,above]{$S_1$};
+							\draw [ color={rgb,255:red,0; green,128; blue,0}, short] (13.5,16.25) -- (13.5,15.25);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth] (13.75,12.25) -- (13.75,15.6)node[pos=0.5,left]{$h(z)$};
+							\draw [short] (12,12.25) -- (14.5,12.25);
+							\draw [color={rgb,255:red,0; green,128; blue,0}](14.5,15.25) arc (-90:-180:1);
+							\draw [ color={rgb,255:red,0; green,128; blue,255}, ->, >=Stealth, dashed] (11.5,15.5) -- (13.6,15.5)node[pos=0.5,above]{Fluido};
+							
+							\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth](13.75,15.6) -- (13.25,15.1)node[pos=1,left]{$\vec n$};
+						\end{circuitikz}
+					\end{figure}
+				\end{minipage}
+				\begin{minipage}{0.7\textwidth}
+					$\vec n$ no es constante.
+					\[\vec F = \oiint_A -P \bar{\bar I}\vec n\,dA \equiv \text{fuerza que ejerce el líquido sobre la compuerta}\]
+					
+					
+					Conservación de la cantidad de movimiento en forma integral ($\vec v = \vec 0$)
+					\[\dfrac{d}{dt}\iiint_{V_c} \rho \vec v\,dV + \oiint_{S_c} \rho \vec v (\vec v - \vec v_c)\vec n\,dS = \iiint_{V_c} \vec f_v\,dV + \oiint_{S_c}-P\bar{\bar I} + \bar{\bar \tau}_v\vec n\,dA\]
+				\end{minipage}
+			\end{figure}
+
+			$\bar{\bar \tau}_v = 0$ porque depende de $\vec v$, luego
+			\[0 = \iiint_{V_c} \vec f_v\,dV + \oiint_{S_c}-P\bar{\bar I}\vec n\,dS = \rho g V_{c,\,total} + \iint_{S_1} - P\bar{\bar I}\vec n\,dS + \iint_{S_2} - P\bar{\bar I}\vec n\,dS + \iint_{S_{comp}} - P\bar{\bar I}\vec n\,dS\]
+
+
+			Pero $$\iint_{S_{comp}} - P\bar{\bar I}\vec n\,dS = -\vec F_{liq\rightarrow comp}$$
+			
+			
+			Luego
+			\[\vec F_{liq\rightarrow comp} = \rho g V_{c,\,total} + \iint_{S_1} - P\bar{\bar I}\vec n\,dS + \iint_{S_2} - P\bar{\bar I}\vec n\,dS\]
